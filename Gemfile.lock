@@ -71,6 +71,8 @@ GEM
       activesupport (= 3.1.0.beta1)
       bundler (~> 1.0)
       railties (= 3.1.0.beta1)
+    rails3-generators (0.17.4)
+      railties (>= 3.0.0)
     railties (3.1.0.beta1)
       actionpack (= 3.1.0.beta1)
       activesupport (= 3.1.0.beta1)
@@ -103,6 +105,7 @@ DEPENDENCIES
   coffee-script
   jquery-rails
   rails (= 3.1.0.beta1)
+  rails3-generators
   sass
   sqlite3
   therubyracer-heroku (= 0.8.1.pre3)

@@ -49,5 +49,12 @@ module MochaRails
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    config.generators do |g|
+      g.stylesheets false
+      g.test_framework :shoulda
+      g.fallbacks[:shoulda] = :test_unit
+      g.fixture_replacement :factory_girl
+    end
   end
 end

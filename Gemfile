@@ -28,4 +28,7 @@ gem 'therubyracer-heroku', '0.8.1.pre3'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+
 end
+
+gem 'rails3-generators', :group => :development
