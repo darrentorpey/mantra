@@ -5,12 +5,12 @@
 start_game = ->
   AssetManager.queueDownload '/assets/earth.png'
   AssetManager.queueDownload '/assets/alien.png'
-  AssetManager.downloadAll init_gameboard
+  AssetManager.downloadAll   init_gameboard
 
 init_gameboard = ->
   console.log 'Initializing game board...'
 
-  @gb = new GameBoard
+  @gb = new EvilAliens
 
   new Earth @gb
   new Alien @gb, @gb.canvas.width, Math.random() * Math.PI * 180

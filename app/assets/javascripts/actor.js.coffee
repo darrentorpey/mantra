@@ -7,7 +7,7 @@ class Actor
 
     Actor.count++
     console.log "[new] Actor [#{Actor.count}]"
-    gb.add_entity this
+    gb.addEntity this
 
   # Prototype properties
   breed: -> new Actor if @is_alive

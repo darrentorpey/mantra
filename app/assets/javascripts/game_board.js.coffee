@@ -3,8 +3,7 @@ class GameBoard
     @canvas ?= GameBoard.create_canvas()
     @context = @canvas.getContext("2d")
     @entities = [];
-    @lastUpdateTimestamp = null;
-    @deltaTime = null;
+    @timer = new Timer
 
     @surfaceWidth = null;
     @surfaceHeight = null;
@@ -18,7 +17,7 @@ class GameBoard
     @halfSurfaceWidth  = @surfaceWidth/2;
     @halfSurfaceHeight = @surfaceHeight/2;
 
-  add_entity: (entity) ->
+  addEntity: (entity) ->
     @entities.push entity
 
   # Move coordinate system to center of canvas
@@ -47,16 +46,12 @@ class GameBoard
     @context.restore()
 
   loop: ->
-    now = Date.now();
-    @deltaTime = now - @lastUpdateTimestamp
+    @clock_tick = @timer.tick()
     @update()
     @draw()
-    # console.log now
-    @lastUpdateTimestamp = now
 
   start: ->
     console.log 'Starting game:'
-    @lastUpdateTimestamp = Date.now()
     # var that = this;
     gameLoop = () =>
       @loop()
@@ -77,3 +72,10 @@ class GameBoard
       )
       .prependTo('body')
       .get(0)
+
+class EvilAliens extends GameBoard
+  update: ->
+    if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
+      @addEntity new Alien(this, @canvas.width, Math.random() * Math.PI * 180)
+      @last_alien_addded_at = @timer.game_time
+    super()
