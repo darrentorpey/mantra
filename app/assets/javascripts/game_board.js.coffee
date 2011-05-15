@@ -26,14 +26,25 @@ class GameBoard
     @context.translate @canvas.width/2, @canvas.height/2
 
   update: ->
-    # loop through all entities, calling update()
+    # Update every entity that isn't ready to be removed from the game world
     for entity in @entities
-      entity.update()
+      entity.update() unless entity.remove_from_world
 
-  draw: ->
-    # loop through all entities, calling draw()
+    # Remove the entities that are ready to be removed from the game world
+    for i in [@entities.length - 1...0]
+      @entities.splice i, 1 if @entities[i].remove_from_world
+
+  draw: (callback) ->
+    @context.clearRect 0, 0, @canvas.width, @canvas.height
+    @context.save()
+    @translate_to_center()
+
     for entity in @entities
       entity.draw @context
+
+    callback() if callback
+
+    @context.restore()
 
   loop: ->
     now = Date.now();

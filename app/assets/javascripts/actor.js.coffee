@@ -1,6 +1,10 @@
 class Actor
-  constructor: (@sprite) ->
+  constructor: (@game, @sprite, coords = { x: 0, y: 0 }) ->
+    @x = coords.x
+    @y = coords.y
     @is_alive = true
+    @remove_from_world = false
+
     Actor.count++
     console.log "[new] Actor [#{Actor.count}]"
     gb.add_entity this
@@ -14,8 +18,13 @@ class Actor
   update: ->
     null
 
-  draw: ->
-    null
+  draw: (context) ->
+    if @showOutlines && @radius
+      context.beginPath();
+      context.strokeStyle = "green";
+      context.arc(@x, @y, @radius, 0, Math.PI*2, false);
+      context.stroke();
+      context.closePath();
 
   drawSpriteCentered: (ctx) ->
     # console.log 'drawSpriteCentered'
