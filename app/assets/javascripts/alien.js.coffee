@@ -12,7 +12,7 @@ class Alien extends Actor
     super()
 
   draw: (context) ->
-    @drawSpriteCentered context
+    @drawSpriteCenteredRotated context
     super context
 
   setCoords: ->

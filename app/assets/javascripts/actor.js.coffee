@@ -6,7 +6,7 @@ class Actor
     @remove_from_world = false
 
     Actor.count++
-    console.log "[new] Actor [#{Actor.count}]"
+    # console.log "[new] Actor [#{Actor.count}]"
     gb.addEntity this
 
   # Prototype properties
@@ -32,6 +32,13 @@ class Actor
     y = @y - @sprite.height/2
     # ctx.drawImage @sprite, x, y
     gb.context.drawImage(@sprite, x, y)
+
+  drawSpriteCenteredRotated: (context) ->
+    context.save()
+    context.translate @x, @y
+    context.rotate @angle + Math.PI/2
+    context.drawImage @sprite, -@sprite.width/2, -@sprite.height/2
+    context.restore()
 
   # Class-level properties
   @count: 0
