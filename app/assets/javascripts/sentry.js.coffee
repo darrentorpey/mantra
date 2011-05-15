@@ -13,6 +13,8 @@ class Sentry extends Actor
       @x = (Math.cos(@angle) * @distanceFromEarthCenter)
       @y = (Math.sin(@angle) * @distanceFromEarthCenter)
 
+    @shoot() if @game.click
+
     super()
 
   draw: (context) ->
@@ -23,3 +25,7 @@ class Sentry extends Actor
     context.restore()
 
     super context
+
+  shoot: ->
+    bullet = new Bullet @game, @x, @y, @angle, @game.click
+    @game.addEntity bullet

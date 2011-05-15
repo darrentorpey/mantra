@@ -9,12 +9,6 @@ class Actor
     # console.log "[new] Actor [#{Actor.count}]"
     gb.addEntity this
 
-  # Prototype properties
-  breed: -> new Actor if @is_alive
-  die: ->
-    Actor.count-- if @is_alive
-    @is_alive = false
-
   update: ->
     null
 
@@ -27,10 +21,8 @@ class Actor
       context.closePath();
 
   drawSpriteCentered: (ctx) ->
-    # console.log 'drawSpriteCentered'
     x = @x - @sprite.width/2
     y = @y - @sprite.height/2
-    # ctx.drawImage @sprite, x, y
     gb.context.drawImage(@sprite, x, y)
 
   drawSpriteCenteredRotated: (context) ->
@@ -51,11 +43,10 @@ class Actor
     offscreenCtx.drawImage image, -(image.width/2), -(image.height/2)
     offscreenCanvas
 
-  # Class-level properties
+  outsideScreen: ->
+    (@x > @game.halfSurfaceWidth || @x < -(@game.halfSurfaceWidth) || @y > @game.halfSurfaceHeight || @y < -(@game.halfSurfaceHeight))
+
   @count: 0
-  @makeTrouble: ->
-    console.log "@count #{@count}"
-    # console.log ('I am an actor!' for i in [1..@count]).join(' ')
 
 class SpaceShip extends Actor
   enjoy: ->
