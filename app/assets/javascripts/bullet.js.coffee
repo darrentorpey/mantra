@@ -7,6 +7,9 @@ class Bullet extends Actor
   update: ->
     if @outsideScreen()
       @remove_from_world = true
+    else if Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
+      @game.addEntity new BulletExplosion(@game, @explodesAt.x, @explodesAt.y)
+      @remove_from_world = true
     else
       @x = @radial_distance * Math.cos(@angle)
       @y = @radial_distance * Math.sin(@angle)
