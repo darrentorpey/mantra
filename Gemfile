@@ -28,7 +28,8 @@ gem 'therubyracer-heroku', '0.8.1.pre3'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-
+  gem 'shoulda'
+  gem 'factory_girl'
 end
 
 gem 'rails3-generators', :group => :development
