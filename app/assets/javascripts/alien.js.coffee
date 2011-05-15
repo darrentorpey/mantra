@@ -1,6 +1,6 @@
 class Alien extends Actor
   constructor: (game, @radial_distance, @angle) ->
-    super game, AssetManager.getAsset('/assets/alien.png')
+    super game, @rotateAndCache(AssetManager.getAsset('/assets/alien.png'))
     @radius = @sprite.height/2
     @speed = 200
     @setCoords()
@@ -12,7 +12,7 @@ class Alien extends Actor
     super()
 
   draw: (context) ->
-    @drawSpriteCenteredRotated context
+    @drawSpriteCentered context
     super context
 
   setCoords: ->
