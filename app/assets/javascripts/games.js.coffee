@@ -7,6 +7,7 @@ start_game = ->
   AssetManager.queueDownload '/assets/sentry.png'
   AssetManager.queueDownload '/assets/bullet-single.png'
   AssetManager.queueDownload '/assets/explosion.png'
+  AssetManager.queueDownload '/assets/alien-explosion.png'
   AssetManager.downloadAll   init_gameboard
 
 init_gameboard = ->

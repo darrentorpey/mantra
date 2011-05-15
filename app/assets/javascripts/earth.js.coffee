@@ -8,3 +8,5 @@ class Earth extends Actor
   draw: (ctx) ->
     gb.context.drawImage(@sprite, @x - @sprite.width/2, @y - @sprite.height/2)
     super ctx
+
+  @RADIUS = 67

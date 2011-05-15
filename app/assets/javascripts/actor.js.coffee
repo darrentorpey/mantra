@@ -13,7 +13,7 @@ class Actor
     null
 
   draw: (context) ->
-    if @showOutlines && @radius
+    if @game.showOutlines && @radius
       context.beginPath();
       context.strokeStyle = "green";
       context.arc(@x, @y, @radius, 0, Math.PI*2, false);
