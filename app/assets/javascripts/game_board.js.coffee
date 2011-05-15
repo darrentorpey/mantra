@@ -9,13 +9,14 @@ class GameBoard
     @surfaceHeight = null;
     @halfSurfaceWidth = null;
     @halfSurfaceHeight = null;
+    @init()
 
-  init: (context) ->
-    @context           = context;
-    @surfaceWidth      = @context.canvas.width;
-    @surfaceHeight     = @context.canvas.height;
-    @halfSurfaceWidth  = @surfaceWidth/2;
-    @halfSurfaceHeight = @surfaceHeight/2;
+  init: ->
+    @surfaceWidth      = @canvas.width
+    @surfaceHeight     = @canvas.height
+    @halfSurfaceWidth  = @surfaceWidth/2
+    @halfSurfaceHeight = @surfaceHeight/2
+    @startInput()
 
   addEntity: (entity) ->
     @entities.push entity
@@ -49,6 +50,7 @@ class GameBoard
     @clock_tick = @timer.tick()
     @update()
     @draw()
+    @click = null
 
   start: ->
     console.log 'Starting game:'
@@ -57,6 +59,22 @@ class GameBoard
       @loop()
       requestAnimFrame gameLoop, @context.canvas
     gameLoop()
+
+  startInput: ->
+    getXandY = (e) =>
+      x = e.clientX - @canvas.getBoundingClientRect().left - (@canvas.width/2)
+      y = e.clientY - @canvas.getBoundingClientRect().top - (@canvas.height/2)
+      { x: x, y: y }
+
+    @canvas.addEventListener('click', (e) =>
+      @click = getXandY(e)
+      e.stopPropagation()
+      e.preventDefault()
+    , false)
+
+    @canvas.addEventListener('mousemove', (e) =>
+      @mouse = getXandY(e)
+    , false)
 
   @create_canvas: ->
     $('<canvas>')
@@ -74,6 +92,11 @@ class GameBoard
       .get(0)
 
 class EvilAliens extends GameBoard
+  start: ->
+    @sentry = new Sentry this
+    @earth = new Earth this
+    super
+
   update: ->
     if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
       @addEntity new Alien(this, @canvas.width, Math.random() * Math.PI * 180)
