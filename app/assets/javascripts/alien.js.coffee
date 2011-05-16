@@ -26,6 +26,7 @@ class Alien extends Actor
   explode: ->
     @remove_from_world = true
     @game.addEntity new AlienExplosion(@game, @x, @y)
+    AssetManager.getSound('/assets/alien_boom.mp3').play()
 
   hitPlanet: ->
     distance_squared = ((@x * @x) + (@y * @y))

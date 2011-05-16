@@ -29,3 +29,4 @@ class Sentry extends Actor
   shoot: ->
     bullet = new Bullet @game, @x, @y, @angle, @game.click
     @game.addEntity bullet
+    AssetManager.getSound('/assets/bullet.mp3').play()

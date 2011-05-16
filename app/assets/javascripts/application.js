@@ -19,3 +19,4 @@ soundManager.url = '/assets/';
 soundManager.flashVersion = 9;
 soundManager.debugFlash = false;
 soundManager.debugMode = false;
+soundManager.defaultOptions.volume = 33

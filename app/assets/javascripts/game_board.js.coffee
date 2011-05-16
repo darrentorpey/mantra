@@ -100,6 +100,8 @@ class EvilAliens extends GameBoard
   start: ->
     @sentry = new Sentry this
     @earth = new Earth this
+    @addEntity @sentry
+    @addEntity @earth
     super
 
   update: ->

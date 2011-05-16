@@ -5,10 +5,6 @@ class Actor
     @is_alive = true
     @remove_from_world = false
 
-    Actor.count++
-    # console.log "[new] Actor [#{Actor.count}]"
-    gb.addEntity this
-
   update: ->
     null
 

@@ -11,11 +11,11 @@ class AssetManager
   @queueSound: (id, path) ->
     @soundsQueue.push { id: id, path: path }
 
-  @isDone: ->
-    (@downloadQueue.length + @soundsQueue.length) == (this.successCount + this.errorCount)
+  @isDone: =>
+    (@downloadQueue.length + @soundsQueue.length) == (@successCount + @errorCount)
 
   @downloadAll: (callback) ->
-    callback() if @isDone
+    callback() if @downloadQueue.length == 0 && @soundsQueue.length == 0
 
     @downloadSounds callback
 
@@ -52,12 +52,12 @@ class AssetManager
       console.log('SM2 did not start');
 
   @downloadSound: (id, path, callback) ->
-    @cache[path] = soundManager.createSound(
+    manager = @
+    @cache[path] = soundManager.createSound
       id: id,
       autoLoad: true,
       url: path,
       onload: ->
         console.log(this.url + ' is loaded')
-        that.successCount += 1
-        callback() if @isDone()
-    )
+        manager.successCount += 1
+        callback() if manager.isDone()
