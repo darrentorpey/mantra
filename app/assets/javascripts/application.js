@@ -14,3 +14,8 @@ window.requestAnimFrame = (function(){
             window.setTimeout(callback, 1000 / 60);
           };
 })();
+
+soundManager.url = '/assets/';
+soundManager.flashVersion = 9;
+soundManager.debugFlash = false;
+soundManager.debugMode = false;

@@ -8,6 +8,7 @@ class Bullet extends Actor
     if @outsideScreen()
       @remove_from_world = true
     else if Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
+      AssetManager.getSound('/assets/bullet_boom.mp3').play()
       @game.addEntity new BulletExplosion(@game, @explodesAt.x, @explodesAt.y)
       @remove_from_world = true
     else

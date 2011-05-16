@@ -8,6 +8,9 @@ start_game = ->
   AssetManager.queueDownload '/assets/bullet-single.png'
   AssetManager.queueDownload '/assets/explosion.png'
   AssetManager.queueDownload '/assets/alien-explosion.png'
+  AssetManager.queueSound    'alien-boom',  '/assets/alien_boom.mp3'
+  AssetManager.queueSound    'bullet-boom', '/assets/bullet_boom.mp3'
+  AssetManager.queueSound    'bullet',      '/assets/bullet.mp3'
   AssetManager.downloadAll   init_gameboard
 
 init_gameboard = ->
