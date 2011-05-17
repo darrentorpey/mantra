@@ -5,6 +5,8 @@ class EvilAliens extends GameBoard
     super()
 
   start: ->
+    console.log 'EvilAliens start...'
+    console.log @
     @sentry = new Sentry this
     @earth = new Earth this
     @addEntity @sentry

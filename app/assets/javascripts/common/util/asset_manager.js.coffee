@@ -5,7 +5,7 @@ class AssetManager
   @downloadQueue = []
   @soundsQueue   = []
 
-  @queueDownload: (path) ->
+  @queueImage: (path) ->
     @downloadQueue.push path
 
   @queueSound: (id, path) ->
