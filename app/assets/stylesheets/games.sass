@@ -1,15 +1,54 @@
-body
-  text-align: center
+$c_link_blue: mix(blue, #3f7a9b, 30%)
 
-h1
+body.games
   text-align: center
+  background-color: mix(green, #EEE, 4%)
 
-#game_holder
-  padding: 20px
-  border: 1px solid #CCC
-  display: inline-block
-  text-align: center
-  canvas
-    background-color: black
-    margin: 0px auto
-    display: block
+  .intro
+    display: inline-block
+    padding: 10px
+    border: 1px solid #CCC
+    -moz-border-radius: 8px
+    border-radius: 8px
+    box-shadow: 0 1px 10px rgba(200,200,200,0.95), 0 0 0 #d6fcff
+    margin: 15px
+    &:hover
+      box-shadow: 0 1px 10px rgba(100,100,100,0.95), 0 0 0 #d6fcff
+
+  h1
+    text-align: center
+    color: #333
+    font-size: 24px
+    margin:
+      top: 10px
+      bottom: 5px
+
+  #game_holder
+    padding: 20px
+    border: 1px solid #CCC
+    display: inline-block
+    text-align: center
+    -moz-border-radius: 8px
+    border-radius: 8px
+
+    border: 1px solid black
+    border-radius: 12px
+    background-image: -moz-linear-gradient(144deg, rgba(255,255,255,0.10), rgba(0,0,0,0.10))
+    background-image: -webkit-gradient(linear, right bottom, left top, from(rgba(255,255,255,0.10)), to(rgba(0,0,0,0.10)))
+    box-shadow: 0 1px 5px rgba(0,0,0,0.75), inset -1px 0 0 #d6fcff
+
+    canvas
+      background-color: black
+      margin: 0px auto
+      display: block
+
+  ::-moz-selection, ::selection
+    background: transparent
+    color: #fff
+    text-shadow: none
+
+  a
+    color: $c_link_blue
+    text-decoration: none
+    &:hover
+      text-decoration: underline
