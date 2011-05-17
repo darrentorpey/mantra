@@ -1,8 +1,8 @@
 class Canvas
   @create_canvas: ->
-    @create_canvas_j().prependTo('body').get(0)
+    @j_createCanvas().prependTo('body').get(0)
 
-  @create_canvas_j: ->
+  @j_createCanvas: ->
     $('<canvas>')
       .attr(
         id:     'game_surface'
