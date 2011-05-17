@@ -1,8 +1,8 @@
 class EvilAliens extends GameBoard
-  constructor: ->
+  constructor: (@canvas) ->
     @lives = 10
     @score = 0
-    super()
+    super @canvas
 
   start: ->
     console.log 'EvilAliens start...'

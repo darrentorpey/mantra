@@ -16,10 +16,10 @@ class Actor
       context.stroke();
       context.closePath();
 
-  drawSpriteCentered: (ctx) ->
+  drawSpriteCentered: (context) ->
     x = @x - @sprite.width/2
     y = @y - @sprite.height/2
-    gb.context.drawImage(@sprite, x, y)
+    context.drawImage(@sprite, x, y)
 
   drawSpriteCenteredRotated: (context) ->
     context.save()

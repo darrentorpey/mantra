@@ -1,6 +1,6 @@
 class GameBoard
   constructor: (@canvas) ->
-    @canvas ?= GameBoard.create_canvas()
+    @canvas ?= Canvas.create_canvas()
     @context = @canvas.getContext '2d'
     @entities = [];
     @timer = new Timer
@@ -53,8 +53,6 @@ class GameBoard
     @click = null
 
   start: ->
-    console.log 'Starting game:'
-    # var that = this;
     gameLoop = () =>
       @loop()
       requestAnimFrame gameLoop, @canvas
@@ -75,18 +73,3 @@ class GameBoard
     @canvas.addEventListener('mousemove', (e) =>
       @mouse = getXandY(e)
     , false)
-
-  @create_canvas: ->
-    $('<canvas>')
-      .attr(
-        id:     'game_surface'
-        width:  '800'
-        height: '600'
-      )
-      .css(
-        'background-color': 'black'
-        margin:             '0px auto'
-        display:            'inline-block'
-      )
-      .prependTo('body')
-      .get(0)
