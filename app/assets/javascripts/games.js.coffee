@@ -23,8 +23,12 @@
 # queueSound = (id, name) -> AssetManager.queueSound id, "/assets/#{name}
 # 
 @gl
+@gb
 start_game = ->
-  @gl = new GameLauncher(EvilAliens)
+  @gb = new EvilAliens
+  @gl = new GameLauncher(@gb)
+  # console.log 'hihijij'
+  # console.log @gl
   @gl.init()
   @gl.launch()
   # console.log 'Initializing game board...'

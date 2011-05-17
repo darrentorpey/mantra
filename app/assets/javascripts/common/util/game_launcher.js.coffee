@@ -1,5 +1,6 @@
 class GameLauncher
-  constructor: (@game_klass) ->
+  constructor: (@game) ->
+    console.log @game
 
   init: ->
     console.log 'Initializing game board...'
@@ -15,18 +16,18 @@ class GameLauncher
     @queueSound 'bullet',      'bullet.mp3'
 
   launch: ->
-    AssetManager.downloadAll @start
+    AssetManager.downloadAll (=> @start())
 
   start: ->
     console.log 'this'
     console.log @
     console.log EvilAliens
-    console.log @game_klass
-    @gb = new EvilAliens
+    console.log 'game:'
+    console.log @game
     # @gb = new @game_klass
     console.log 'Game board initialized!'
-    @gb.init()
-    @gb.start()
+    # @game.init()
+    @game.start()
 
   queueAsset: (name) -> AssetManager.queueImage "/assets/#{name}"
   queueSound: (id, name) -> AssetManager.queueSound id, "/assets/#{name}"

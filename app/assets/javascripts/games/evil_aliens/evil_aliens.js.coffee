@@ -11,7 +11,7 @@ class EvilAliens extends GameBoard
     @earth = new Earth this
     @addEntity @sentry
     @addEntity @earth
-    super
+    super()
 
   update: ->
     if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
