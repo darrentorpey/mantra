@@ -5,10 +5,10 @@ class EvilAliens extends GameBoard
     super @canvas
 
   start: ->
-    console.log 'EvilAliens start...'
-    console.log @
+    @back   = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry = new Sentry this
-    @earth = new Earth this
+    @earth  = new Earth this
+    @addEntity @back
     @addEntity @sentry
     @addEntity @earth
     super()
@@ -28,9 +28,9 @@ class EvilAliens extends GameBoard
   drawLives: ->
     @context.fillStyle = 'red'
     @context.font      = 'bold 2em Arial'
-    @context.fillText "Lives: #{@lives}", -@canvas.width/2 + 50, @canvas.height/2 - 80
+    @context.fillText "Lives: #{@lives}", @canvas.width/2 - 125, @canvas.height/2 - 25
 
   drawScore: ->
     @context.fillStyle = 'red'
     @context.font      = 'bold 2em Arial'
-    @context.fillText "Score: #{@score}", -@canvas.width/2 + 50, @canvas.height/2 - 50
+    @context.fillText "Score: #{@score}", -@canvas.width/2 + 25, @canvas.height/2 - 25

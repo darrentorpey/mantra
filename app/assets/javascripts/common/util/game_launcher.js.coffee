@@ -3,33 +3,30 @@ class GameLauncher
     @game = new game_name @canvas
 
   init: ->
-    console.log 'Initializing game board...'
-    @queueAsset 'earth.png'
-    @queueAsset 'alien.png'
-    @queueAsset 'sentry.png'
-    @queueAsset 'bullet-single.png'
-    @queueAsset 'explosion.png'
-    @queueAsset 'alien-explosion.png'
+    console.log 'Queueing up assets to load...'
 
-    @queueSound 'alien-boom',  'alien_boom.mp3'
-    @queueSound 'bullet-boom', 'bullet_boom.mp3'
-    @queueSound 'bullet',      'bullet.mp3'
+    @image 'earth.png'
+    @image 'alien.png'
+    @image 'sentry.png'
+    @image 'bullet-single.png'
+    @image 'explosion.png'
+    @image 'alien-explosion.png'
+
+    @sound 'alien-boom',  'alien_boom.mp3'
+    @sound 'bullet-boom', 'bullet_boom.mp3'
+    @sound 'bullet',      'bullet.mp3'
 
   launch: ->
     AssetManager.downloadAll (=> @start())
 
   start: ->
-    console.log 'Game launched! Starting...'
-    console.log '@game'
-    console.log @game
-    # @gb = new @game_klass
+    console.log 'Assets loaded. Launching game...'
     @game.start()
 
-  queueAsset: (name)     -> AssetManager.queueImage     "/assets/#{name}"
-  queueSound: (id, name) -> AssetManager.queueSound id, "/assets/#{name}"
+  image: (name)     -> AssetManager.queueImage     "/assets/#{name}"
+  sound: (id, name) -> AssetManager.queueSound id, "/assets/#{name}"
 
   @launchInto: (game_klass, canvas) ->
-    console.log  canvas
     @launcher = new GameLauncher game_klass, canvas
     @launcher.init()
     @launcher.launch()

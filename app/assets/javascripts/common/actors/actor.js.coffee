@@ -11,8 +11,8 @@ class Actor
   draw: (context) ->
     if @game.showOutlines && @radius
       context.beginPath();
-      context.strokeStyle = "green";
-      context.arc(@x, @y, @radius, 0, Math.PI*2, false);
+      context.strokeStyle = 'green';
+      context.arc @x, @y, @radius, 0, Math.PI*2, false
       context.stroke();
       context.closePath();
 
@@ -42,8 +42,3 @@ class Actor
   outsideScreen: ->
     (@x > @game.halfSurfaceWidth || @x < -(@game.halfSurfaceWidth) || @y > @game.halfSurfaceHeight || @y < -(@game.halfSurfaceHeight))
 
-  @count: 0
-
-class SpaceShip extends Actor
-  enjoy: ->
-    console.log 'enjoying...'

@@ -44,7 +44,7 @@ class AssetManager
 
   @downloadSounds: (callback) ->
     soundManager.onready =>
-      console.log('soundManager ready');
+      console.log 'soundManager ready' if @debug_all
       for sound in @soundsQueue
         @downloadSound sound.id, sound.path, callback
 
@@ -58,6 +58,6 @@ class AssetManager
       autoLoad: true,
       url: path,
       onload: ->
-        console.log(this.url + ' is loaded')
+        console.log this.url + "#{@url} is loaded" if @debug_all
         manager.successCount += 1
         callback() if manager.isDone()

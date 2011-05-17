@@ -6,7 +6,6 @@ class Sentry extends Actor
     @angle = 0
 
   update: ->
-    # console.log "? #{@game.mouse}"
     if @game.mouse
       @angle = Math.atan2 @game.mouse.y, @game.mouse.x
       @angle += Math.PI * 2 if @angle < 0
