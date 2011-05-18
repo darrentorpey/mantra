@@ -1,4 +1,4 @@
-class Alien extends Actor
+class Alien extends Entity
   constructor: (game, @radial_distance, @angle) ->
     super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}alien.png"))
     @radius = @sprite.height/2

@@ -1,4 +1,4 @@
-class Bullet extends Actor
+class Bullet extends Entity
   constructor: (game, x, y, @angle, @explodesAt) ->
     super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}bullet-single.png")), { x: x, y: y }
     @speed = 250

@@ -1,4 +1,4 @@
-class Earth extends Actor
+class Earth extends Entity
   @RADIUS = 67
 
   constructor: (game) ->

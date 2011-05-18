@@ -1,4 +1,4 @@
-class Actor
+class Entity
   constructor: (@game, @sprite, coords = { x: 0, y: 0 }) ->
     @x = coords.x
     @y = coords.y

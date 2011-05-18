@@ -1,4 +1,4 @@
-class Background extends CustomDrawActor
+class Background extends CustomDrawEntity
   constructor: (game, position) ->
     position ?= { x: 0, y: 0 }
     super game, position

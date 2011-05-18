@@ -1,4 +1,4 @@
-class AlienExplosion extends Actor
+class AlienExplosion extends Entity
   constructor: (game, x, y) ->
     super game, null, { x: x, y: y }
     @animation = new Animation AssetManager.getAsset("#{root.asset_path}alien-explosion.png"), 69, 0.1

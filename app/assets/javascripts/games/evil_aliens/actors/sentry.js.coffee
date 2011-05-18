@@ -1,4 +1,4 @@
-class Sentry extends Actor
+class Sentry extends Entity
   constructor: (game) ->
     @distanceFromEarthCenter = 85
     super game, AssetManager.getAsset("#{root.asset_path}sentry.png"), { x: 0, y: @distanceFromEarthCenter }
