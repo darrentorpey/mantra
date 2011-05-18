@@ -5,6 +5,7 @@
 //= require      jquery_ujs
 //= require      common/util/core
 //= require_tree ./common/util
+//= require      common/entities/entity
 //= require_tree ./common
 //= require_tree ./games
 //= require      config
