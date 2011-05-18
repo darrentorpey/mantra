@@ -3,9 +3,11 @@
 //
 //= require      jquery
 //= require      jquery_ujs
+//= require      common/util/core
 //= require_tree ./common/util
 //= require_tree ./common
 //= require_tree ./games
+//= require      config
 //= require_tree .
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       || 
@@ -17,9 +19,3 @@ window.requestAnimFrame = (function(){
             window.setTimeout(callback, 1000 / 60);
           };
 })();
-
-soundManager.url = '/assets/';
-soundManager.flashVersion = 9;
-soundManager.debugFlash = false;
-soundManager.debugMode = false;
-soundManager.defaultOptions.volume = 10

@@ -19,8 +19,7 @@ class GameBoard
     @startInput()
 
   addEntity: (new_entities...) ->
-    for entity in new_entities
-      @entities.push entity
+    @entities.push entity for entity in new_entities
 
   # Move coordinate system to center of canvas
   translate_to_center: ->  
@@ -28,8 +27,7 @@ class GameBoard
 
   update: ->
     # Update every entity that isn't ready to be removed from the game world
-    for entity in @entities
-      entity.update() unless entity.remove_from_world
+    entity.update() for entity in @entities when !entity.remove_from_world
 
     # Remove the entities that are ready to be removed from the game world
     for i in [@entities.length - 1...0]

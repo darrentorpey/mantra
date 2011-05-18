@@ -2,16 +2,28 @@ class EvilAliens extends GameBoard
   constructor: (@canvas) ->
     @lives = 10
     @score = 0
+    @assets = {
+      images: [
+        'earth.png'
+        'alien.png'
+        'sentry.png'
+        'bullet-single.png'
+        'explosion.png'
+        'alien-explosion.png'
+      ]
+      sounds: {
+        'alien-boom'  : 'alien_boom.mp3'
+        'bullet-boom' : 'bullet_boom.mp3'
+        'bullet'      : 'bullet.mp3'
+      }
+    }
     super @canvas
 
   start: ->
     @back   = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry = new Sentry this
     @earth  = new Earth this
-    @main_screen = new EntitySet
-    @main_screen.add @back
-    @main_screen.add @sentry
-    @main_screen.add @earth
+    @main_screen = new EntitySet @back, @sentry, @earth
     @addEntity @main_screen
 
     super()

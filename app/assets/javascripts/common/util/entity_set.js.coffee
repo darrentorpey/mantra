@@ -1,13 +1,13 @@
 class EntitySet
-  constructor: (@entities = []) ->
+  constructor: (@entities...) ->
+    @visible = true
+    @paused = false
 
-  add: (entity) ->
-    @entities.push entity
+  add: (new_entities...) ->
+    @entities.push entity for entity in new_entities
 
   update: ->
-    for entity in @entities
-      entity.update()
+    entity.update() for entity in @entities unless @paused
 
   draw: (context) ->
-    for entity in @entities
-      entity.draw context
+    entity.draw context for entity in @entities if @visible
