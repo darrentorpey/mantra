@@ -8,9 +8,12 @@ class EvilAliens extends GameBoard
     @back   = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry = new Sentry this
     @earth  = new Earth this
-    @addEntity @back
-    @addEntity @sentry
-    @addEntity @earth
+    @main_screen = new EntitySet
+    @main_screen.add @back
+    @main_screen.add @sentry
+    @main_screen.add @earth
+    @addEntity @main_screen
+
     super()
 
   update: ->

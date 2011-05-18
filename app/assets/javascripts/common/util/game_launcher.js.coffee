@@ -30,6 +30,7 @@ class GameLauncher
     @launcher = new GameLauncher game_klass, canvas
     @launcher.init()
     @launcher.launch()
+    @launcher
 
   @launch: (game_klass) ->
     @launchInto game_klass

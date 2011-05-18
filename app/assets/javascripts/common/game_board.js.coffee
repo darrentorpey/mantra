@@ -18,8 +18,9 @@ class GameBoard
     @halfSurfaceHeight = @surfaceHeight/2
     @startInput()
 
-  addEntity: (entity) ->
-    @entities.push entity
+  addEntity: (new_entities...) ->
+    for entity in new_entities
+      @entities.push entity
 
   # Move coordinate system to center of canvas
   translate_to_center: ->  
