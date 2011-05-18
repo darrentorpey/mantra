@@ -1,6 +1,6 @@
 class Alien extends Actor
   constructor: (game, @radial_distance, @angle) ->
-    super game, @rotateAndCache(AssetManager.getAsset('/assets/alien.png'))
+    super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}alien.png"))
     @radius = @sprite.height/2
     @speed = 150
     @setCoords()
@@ -26,7 +26,7 @@ class Alien extends Actor
   explode: ->
     @remove_from_world = true
     @game.addEntity new AlienExplosion(@game, @x, @y)
-    AssetManager.getSound('/assets/alien_boom.mp3').play()
+    AssetManager.getSound("#{root.asset_path}alien_boom.mp3").play()
 
   hitPlanet: ->
     distance_squared = ((@x * @x) + (@y * @y))

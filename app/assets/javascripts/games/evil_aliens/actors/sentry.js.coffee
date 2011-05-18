@@ -1,7 +1,7 @@
 class Sentry extends Actor
   constructor: (game) ->
     @distanceFromEarthCenter = 85
-    super game, AssetManager.getAsset('/assets/sentry.png'), { x: 0, y: @distanceFromEarthCenter }
+    super game, AssetManager.getAsset("#{root.asset_path}sentry.png"), { x: 0, y: @distanceFromEarthCenter }
     @radius = @sprite.width / 2
     @angle = 0
 
@@ -28,4 +28,4 @@ class Sentry extends Actor
   shoot: ->
     bullet = new Bullet @game, @x, @y, @angle, @game.click
     @game.addEntity bullet
-    AssetManager.getSound('/assets/bullet.mp3').play()
+    AssetManager.getSound("#{root.asset_path}bullet.mp3").play()

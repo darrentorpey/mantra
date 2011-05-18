@@ -1,7 +1,7 @@
 class AlienExplosion extends Actor
   constructor: (game, x, y) ->
     super game, null, { x: x, y: y }
-    @animation = new Animation AssetManager.getAsset('/assets/alien-explosion.png'), 69, 0.1
+    @animation = new Animation AssetManager.getAsset("#{root.asset_path}alien-explosion.png"), 69, 0.1
     @radius = @animation.frameWidth/2
 
   update: ->

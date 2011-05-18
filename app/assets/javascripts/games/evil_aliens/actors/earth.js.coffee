@@ -2,7 +2,7 @@ class Earth extends Actor
   @RADIUS = 67
 
   constructor: (game) ->
-    super game, AssetManager.getAsset('/assets/earth.png')
+    super game, AssetManager.getAsset("#{root.asset_path}earth.png")
 
   update: ->
     super()
