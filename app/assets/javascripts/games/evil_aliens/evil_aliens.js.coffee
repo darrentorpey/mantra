@@ -30,7 +30,7 @@ class EvilAliens extends GameBoard
 
   update: ->
     if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
-      @addEntity new Alien(this, @canvas.width, Math.random() * Math.PI * 180)
+      @addEntity new Alien(this, @canvas.width/2 + 20, Math.random() * Math.PI * 180)
       @last_alien_addded_at = @timer.game_time
     super()
 
