@@ -26,12 +26,17 @@ class EvilAliens extends GameBoard
     @main_screen = new EntitySet @back, @sentry, @earth
     @addEntity @main_screen
 
+    $em.listen 'alien::spawn', this, (data) ->
+      console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
+
     super()
 
   update: ->
     if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
-      @addEntity new Alien(this, @canvas.width/2 + 20, Math.random() * Math.PI * 180)
+      new_alien = new Alien(this, @canvas.width/2 + 20, Math.random() * Math.PI * 180)
+      @addEntity new_alien
       @last_alien_addded_at = @timer.game_time
+      $em.trigger 'alien::spawn', alien: new_alien
     super()
 
   draw: ->

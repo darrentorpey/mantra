@@ -4,4 +4,4 @@ soundManager.debugFlash = false
 soundManager.debugMode = false
 soundManager.defaultOptions.volume = 10
 
-$em = EventManager.instance
+$em = EventManager.instance()
