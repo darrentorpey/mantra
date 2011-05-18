@@ -2,7 +2,6 @@ class Entity
   constructor: (@game, @sprite, coords = { x: 0, y: 0 }) ->
     @x = coords.x
     @y = coords.y
-    @is_alive = true
     @remove_from_world = false
 
   update: ->
@@ -42,3 +41,5 @@ class Entity
   outsideScreen: ->
     (@x > @game.halfSurfaceWidth || @x < -(@game.halfSurfaceWidth) || @y > @game.halfSurfaceHeight || @y < -(@game.halfSurfaceHeight))
 
+  listen: (type, callback) ->
+    EventManager.instance.listen(type, this, callback)
