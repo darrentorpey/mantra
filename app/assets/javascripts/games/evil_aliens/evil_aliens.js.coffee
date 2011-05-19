@@ -29,6 +29,9 @@ class EvilAliens extends GameBoard
     $em.listen 'alien::spawn', this, (data) ->
       console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
+    $em.listen 'alien::death', this, (data) ->
+      console.log "Alien killed at #{data.alien.s_coords()}"
+
     super()
 
   update: ->

@@ -43,3 +43,6 @@ class Entity
 
   listen: (type, callback) ->
     EventManager.instance.listen(type, this, callback)
+
+  s_coords: ->
+    "#{@x.toString()[0..5]}, #{@y.toString()[0..5]}"
