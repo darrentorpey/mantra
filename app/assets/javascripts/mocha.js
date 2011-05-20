@@ -1,15 +1,10 @@
-// FIXME: Tell people that this is a manifest file, real code should go into discrete files
-// FIXME: Tell people how Sprockets and CoffeeScript works
-//
-//= require      jquery
-//= require      jquery_ujs
-//= require      common/util/core
-//= require_tree ./common/util
-//= require      common/entities/entity
-//= require_tree ./common
-//= require_tree ./games
-//= require      config
-//= require_tree .
+//= require      mocha/common/util/core
+//= require_tree ./mocha/common/util
+//= require      mocha/common/entities/entity
+//= require_tree ./mocha/common
+//= require_tree ./mocha/games
+//= require      mocha/config
+//= require_tree ./mocha
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       || 
           window.webkitRequestAnimationFrame || 
