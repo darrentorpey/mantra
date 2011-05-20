@@ -16,6 +16,7 @@ class GameLauncher
 
   start: ->
     console.log 'Assets loaded. Launching game...'
+    @game.init()
     @game.start()
 
   addImage: (name)     -> AssetManager.queueImage     "#{root.asset_path}#{name}"

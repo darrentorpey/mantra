@@ -9,7 +9,6 @@ class GameBoard
     @surfaceHeight = null;
     @halfSurfaceWidth = null;
     @halfSurfaceHeight = null;
-    @init()
 
   init: ->
     @surfaceWidth      = @canvas.width
