@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="/assets/jasmine.css">
+
+  <%= javascript_include_tag "jasmine" %>
+
+  <!-- include source files here... -->
+  <%= javascript_include_tag "application" %>
+
+  <!-- include spec files here... -->
+  <%= javascript_include_tag "tests" %>
+</head>
+<body>
+  <script type="text/javascript">
+    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+    jasmine.getEnv().execute();
+  </script>
+</body>
+</html>

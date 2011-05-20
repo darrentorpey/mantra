@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MochaRails</title>
+  <link href="assets/application.css" media="screen" rel="stylesheet" type="text/css" />
+  <script src="assets/application.js" type="text/javascript"></script>
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="leXpYgGhNpm4VEvHH3ErNq9JHiayU/ZEI96jmIS6qeM=" name="csrf-token" />
+</head>
+<body class="games">
+
+<h1>CoffeeScript Game Dev Demo</h1>
+
+<section id="game_holder"></section>
+
+<p class="intro">
+  Adapted from <a href="http://twitter.com/sethladd" target="_blank">Seth Ladd's</a> Google IO 2011 talk, <a href="http://blog.sethladd.com/2011/05/source-code-slides-and-video-for-html5.html" target="_blank">Super Browser 2 Turbo HD Remix: An Introduction to HTML5 Game Development</a> 
+</p>
+
+<script>
+  gl = GameLauncher.launchInto(EvilAliens, Canvas.j_createCanvas().appendTo('#game_holder').get(0))
+  game = gl.game;
+</script>
+
+</body>
+</html>

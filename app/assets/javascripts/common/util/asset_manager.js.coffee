@@ -43,13 +43,14 @@ class AssetManager
     @cache[path]
 
   @downloadSounds: (callback) ->
-    soundManager.onready =>
-      console.log 'soundManager ready' if @debug_all
-      for sound in @soundsQueue
-        @downloadSound sound.id, sound.path, callback
-
-    soundManager.ontimeout ->
-      console.log('SM2 did not start');
+    # return unless soundManager
+    # soundManager.onready =>
+    #   console.log 'soundManager ready' if @debug_all
+    #   for sound in @soundsQueue
+    #     @downloadSound sound.id, sound.path, callback
+    # 
+    # soundManager.ontimeout ->
+    #   console.log('SM2 did not start');
 
   @downloadSound: (id, path, callback) ->
     manager = @

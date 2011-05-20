@@ -33,3 +33,6 @@ group :test do
 end
 
 gem 'rails3-generators', :group => :development
+gem 'jasmine'
+gem 'guard'
+gem 'guard-coffeescript'

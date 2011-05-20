@@ -55,6 +55,7 @@ MochaRails::Application.routes.draw do
   root :to => 'games#play', :id => 1
 
   match 'play/:id' => 'games#play', :as => :play_game
+  match 'tests' => 'tests#index', :as => :tests
 
   # See how all your routes lay out with "rake routes"
 
