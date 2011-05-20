@@ -3,13 +3,8 @@
 <html>
 <head>
   <title>Jasmine Test Runner</title>
-  <link rel="stylesheet" type="text/css" href="/assets/jasmine.css">
-
-  <%= javascript_include_tag "jasmine" -%>
-
-  <!-- // <script src="/__JASMINE_ROOT__/lib/jasmine.js" type="text/javascript"></script>  -->
-  <!-- // <script src="/__JASMINE_ROOT__/lib/jasmine-html.js" type="text/javascript"></script>  -->
-  <!-- // <script src="/__JASMINE_ROOT__/lib/json2.js" type="text/javascript"></script>  -->
+  <%= stylesheet_link_tag 'jasmine' %>
+  <%= javascript_include_tag 'jasmine' -%>
 
   <script type="text/javascript">
     var jsApiReporter;
@@ -32,10 +27,9 @@
     })();
   </script>
 
-  <script src="/assets/math.js" type="text/javascript"></script>
+  <%= javascript_include_tag 'math' %>
 
-  <!-- include spec files here... -->
-  <%= javascript_include_tag 'tests' %>
+  <%= javascript_include_tag 'spec' %>
 </head>
 <body>
 <div id="jasmine_content"></div>
