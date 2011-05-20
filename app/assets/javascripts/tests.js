@@ -1,1 +1,1 @@
-//= require_tree ./tests
+//= require_tree ./spec

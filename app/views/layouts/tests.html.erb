@@ -5,18 +5,39 @@
   <title>Jasmine Test Runner</title>
   <link rel="stylesheet" type="text/css" href="/assets/jasmine.css">
 
-  <%= javascript_include_tag "jasmine" %>
+  <%= javascript_include_tag "jasmine" -%>
 
-  <!-- include source files here... -->
-  <%= javascript_include_tag "application" %>
+  <!-- // <script src="/__JASMINE_ROOT__/lib/jasmine.js" type="text/javascript"></script>  -->
+  <!-- // <script src="/__JASMINE_ROOT__/lib/jasmine-html.js" type="text/javascript"></script>  -->
+  <!-- // <script src="/__JASMINE_ROOT__/lib/json2.js" type="text/javascript"></script>  -->
+
+  <script type="text/javascript">
+    var jsApiReporter;
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+
+      jsApiReporter = new jasmine.JsApiReporter();
+      var trivialReporter = new jasmine.TrivialReporter();
+
+      jasmineEnv.addReporter(jsApiReporter);
+      jasmineEnv.addReporter(trivialReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return trivialReporter.specFilter(spec);
+      };
+
+      window.onload = function() {
+        jasmineEnv.execute();
+      };
+    })();
+  </script>
+
+  <script src="/assets/math.js" type="text/javascript"></script>
 
   <!-- include spec files here... -->
-  <%= javascript_include_tag "tests" %>
+  <%= javascript_include_tag 'tests' %>
 </head>
 <body>
-  <script type="text/javascript">
-    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-    jasmine.getEnv().execute();
-  </script>
+<div id="jasmine_content"></div>
 </body>
 </html>
