@@ -28,7 +28,9 @@ class EvilAliens extends GameBoard
 
     @ui_pane = new UIPane this
     @ui_pane.addText -> @game.context.fillText "Lives: #{@game.lives}", @game.canvas.width/2 - 125, @game.canvas.height/2 - 25
-    @ui_pane.addText -> @game.context.fillText "Score: #{@game.score}", -@game.canvas.width/2 + 25, @game.canvas.height/2 - 25
+    @ui_pane.addTextItem
+      color: 'orange'
+      text: -> @game.context.fillText "Score: #{@game.score}", -@game.canvas.width/2 + 25, @game.canvas.height/2 - 25
     @addEntity @ui_pane
 
     $em.listen 'alien::spawn', this, (data) ->

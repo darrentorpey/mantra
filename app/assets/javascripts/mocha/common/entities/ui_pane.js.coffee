@@ -14,3 +14,9 @@ class UIPane extends EntitySet
       context.fillStyle = 'red'
       context.font      = 'bold 2em Arial'
       text_draw()
+
+  addTextItem: (text_item) ->
+    @addElement (context) ->
+      context.fillStyle = text_item.color || 'red'
+      context.font      = text_item.font  || 'bold 2em Arial'
+      text_item.text.apply this
