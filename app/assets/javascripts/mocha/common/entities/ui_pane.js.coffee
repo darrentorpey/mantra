@@ -1,0 +1,1 @@
+class UIPane extends EntitySet

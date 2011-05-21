@@ -25,6 +25,7 @@ class EvilAliens extends GameBoard
     @earth  = new Earth this
     @main_screen = new EntitySet @back, @sentry, @earth
     @addEntity @main_screen
+    @ui_pane = new UIPane
 
     $em.listen 'alien::spawn', this, (data) ->
       console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
