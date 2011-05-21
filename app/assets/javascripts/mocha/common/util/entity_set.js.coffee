@@ -1,5 +1,5 @@
 class EntitySet
-  constructor: (@entities = []) ->
+  constructor: (@entities...) ->
     @visible = true
     @paused  = false
 
