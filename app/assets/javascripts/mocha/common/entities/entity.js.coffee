@@ -46,3 +46,5 @@ class Entity
 
   s_coords: ->
     "#{@x.toString()[0..5]}, #{@y.toString()[0..5]}"
+
+  cull: -> null

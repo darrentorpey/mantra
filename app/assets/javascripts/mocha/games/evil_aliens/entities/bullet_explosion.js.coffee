@@ -13,7 +13,7 @@ class BulletExplosion extends Entity
 
     @radius = (@animation.frameWidth/2) * @scaleFactor()
 
-    for alien in @game.entities
+    for alien in @game.mainScreen.entities
       if (alien instanceof Alien) && @isCaughtInExplosion(alien)
         @game.score += 10
         alien.explode()

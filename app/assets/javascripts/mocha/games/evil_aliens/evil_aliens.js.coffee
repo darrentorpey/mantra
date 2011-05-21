@@ -20,43 +20,59 @@ class EvilAliens extends GameBoard
 
     super @canvas
 
-    @createMainScreen()
+  createIntroScreen: ->
+    @intro_ui_pane = new UIPane this
+    @intro_ui_pane.update = ->
+      @game.showScreen @game.mainScreen if @game.click
+
+    @intro_ui_pane.addTextItem
+      color: 'orange'
+      x:     'centered'
+      y:     0
+      text:  -> 'Click to start!'
+
+    @addScreen @intro_ui_pane
 
   createMainScreen: ->
-    @ui_pane = new UIPane this
+    @mainScreen  = new EntitySet this
 
+    @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
+    @sentry      = new Sentry     this
+    @earth       = new Earth      this
+    @stuff       = new EntitySet  this, @back, @sentry, @earth
+    @mainScreen.add @stuff
+
+    @ui_pane = new UIPane this
     @ui_pane.addTextItem
       x:    @canvas.width/2 - 125
       y:    @canvas.height/2 - 25
       text: -> "Lives: #{@game.lives}"
-
     @ui_pane.addTextItem
       color: 'orange'
       x:     -@canvas.width/2 + 25
       y:      @canvas.height/2 - 25
       text:  -> "Score: #{@game.score}"
+    @mainScreen.add @ui_pane
 
-    @addScreen @ui_pane
+    @addScreen @mainScreen
 
   start: ->
-    @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
-    @sentry      = new Sentry this
-    @earth       = new Earth this
-    @main_screen = new EntitySet this, @back, @sentry, @earth
-    @addEntity @main_screen
+    @createIntroScreen()
+    @createMainScreen()
 
     $em.listen 'alien::spawn', this, (data) ->
-      console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
+      # console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
     $em.listen 'alien::death', this, (data) ->
-      console.log "Alien killed at #{data.alien.s_coords()}"
+      # console.log "Alien killed at #{data.alien.s_coords()}"
 
     super()
 
   update: ->
     if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
       new_alien = new Alien(this, @canvas.width/2 + 20, Math.random() * Math.PI * 180)
-      @addEntity new_alien
+      @mainScreen.add new_alien
+      # @addEntity new_alien
       @last_alien_addded_at = @timer.game_time
       $em.trigger 'alien::spawn', alien: new_alien
     super()

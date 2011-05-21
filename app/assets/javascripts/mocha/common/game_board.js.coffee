@@ -28,6 +28,7 @@ class GameBoard
   update: ->
     # Update every entity that isn't ready to be removed from the game world
     entity.update() for entity in @entities when !entity.remove_from_world
+    entity.cull()   for entity in @entities
 
     # Remove the entities that are ready to be removed from the game world
     for i in [@entities.length - 1...0]

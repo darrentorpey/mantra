@@ -23,3 +23,7 @@ class EntitySet
 
   show: ->
     @visible = true
+
+  cull: ->
+    for i in [@entities.length - 1...0]
+      @entities.splice i, 1 if @entities[i].remove_from_world
