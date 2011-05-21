@@ -8,3 +8,9 @@ class UIPane extends EntitySet
     entity.draw = (context) ->
       draw_func.apply this, [context]
     @add entity
+
+  addText: (text_draw) ->
+    @addElement (context) ->
+      context.fillStyle = 'red'
+      context.font      = 'bold 2em Arial'
+      text_draw()
