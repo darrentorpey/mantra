@@ -4,9 +4,7 @@ class UIPane extends EntitySet
     @pane = true
 
   addElement: (draw_func) ->
-    new_el = new Entity @game
-    new_el.draw = (context) ->
-      console.log 'context'
-      console.log context
+    entity = new Entity @game
+    entity.draw = (context) ->
       draw_func.apply this, [context]
-    @add new_el
+    @add entity
