@@ -8,7 +8,7 @@ stub_asset_manager = ->
   sinon.stub AssetManager, 'getAsset', -> { height: 10, width: 10 }
 
 stub_entity_sprites = ->
-  sinon.stub Entity.prototype, 'rotateAndCache', ->  { height: 10, width: 10 }
+  sinon.stub Entity.prototype, 'rotateAndCache', -> { height: 10, width: 10 }
 
 expect_true = (it) ->
   expect(it).toBeTruthy()
