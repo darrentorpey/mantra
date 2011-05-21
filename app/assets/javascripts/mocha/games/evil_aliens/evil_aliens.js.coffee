@@ -17,26 +17,33 @@ class EvilAliens extends GameBoard
         'bullet'      : 'bullet.mp3'
       }
     }
+
     super @canvas
 
-  start: ->
-    @back   = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
-    @sentry = new Sentry this
-    @earth  = new Earth this
-    @main_screen = new EntitySet this, @back, @sentry, @earth
-    @addEntity @main_screen
+    @createMainScreen()
 
+  createMainScreen: ->
     @ui_pane = new UIPane this
+
     @ui_pane.addTextItem
       x:    @canvas.width/2 - 125
       y:    @canvas.height/2 - 25
       text: -> "Lives: #{@game.lives}"
+
     @ui_pane.addTextItem
       color: 'orange'
       x:     -@canvas.width/2 + 25
       y:      @canvas.height/2 - 25
       text:  -> "Score: #{@game.score}"
-    @addEntity @ui_pane
+
+    @addScreen @ui_pane
+
+  start: ->
+    @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
+    @sentry      = new Sentry this
+    @earth       = new Earth this
+    @main_screen = new EntitySet this, @back, @sentry, @earth
+    @addEntity @main_screen
 
     $em.listen 'alien::spawn', this, (data) ->
       console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"

@@ -1,9 +1,10 @@
 class GameBoard
   constructor: (@canvas) ->
-    @canvas ?= Canvas.create_canvas()
-    @context = @canvas.getContext '2d'
-    @entities = [];
-    @timer = new Timer
+    @canvas  ?= Canvas.create_canvas()
+    @context  = @canvas.getContext '2d'
+    @entities = []
+    @timer    = new Timer
+    @screens  = []
 
     @surfaceWidth = null;
     @surfaceHeight = null;
@@ -40,7 +41,7 @@ class GameBoard
     for entity in @entities
       entity.draw @context
 
-    callback(this) if callback
+    callback this if callback
 
     @context.restore()
 
@@ -51,10 +52,16 @@ class GameBoard
     @click = null
 
   start: ->
+    @showScreen @currentScreen
+
     gameLoop = () =>
       @loop()
       requestAnimFrame gameLoop, @canvas
     gameLoop()
+
+  showScreen: (screen) ->
+    i_screen.hide() for i_screen in @screens
+    screen.show()
 
   startInput: ->
     getXandY = (e) =>
@@ -71,3 +78,8 @@ class GameBoard
     @canvas.addEventListener('mousemove', (e) =>
       @mouse = getXandY(e)
     , false)
+
+  addScreen: (screen) ->
+    @screens.push screen
+    @addEntity screen
+    @currentScreen ?= screen
