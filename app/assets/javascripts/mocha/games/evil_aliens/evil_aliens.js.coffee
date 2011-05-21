@@ -23,9 +23,21 @@ class EvilAliens extends GameBoard
     @back   = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry = new Sentry this
     @earth  = new Earth this
-    @main_screen = new EntitySet @back, @sentry, @earth
+    @main_screen = new EntitySet this, @back, @sentry, @earth
     @addEntity @main_screen
-    @ui_pane = new UIPane
+
+    @ui_pane = new UIPane this
+    @ui_pane.addElement((context) ->
+      @game.context.fillStyle = 'red'
+      @game.context.font      = 'bold 2em Arial'
+      @game.context.fillText "Lives: #{@game.lives}", @game.canvas.width/2 - 125, @game.canvas.height/2 - 25
+    )
+    @ui_pane.addElement((context) ->
+      @game.context.fillStyle = 'red'
+      @game.context.font      = 'bold 2em Arial'
+      @game.context.fillText "Score: #{@game.score}", -@game.canvas.width/2 + 25, @game.canvas.height/2 - 25
+    )
+    @addEntity @ui_pane
 
     $em.listen 'alien::spawn', this, (data) ->
       console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
@@ -42,19 +54,3 @@ class EvilAliens extends GameBoard
       @last_alien_addded_at = @timer.game_time
       $em.trigger 'alien::spawn', alien: new_alien
     super()
-
-  draw: ->
-    super((game) ->
-      game.drawScore()
-      game.drawLives()
-    )
-
-  drawLives: ->
-    @context.fillStyle = 'red'
-    @context.font      = 'bold 2em Arial'
-    @context.fillText "Lives: #{@lives}", @canvas.width/2 - 125, @canvas.height/2 - 25
-
-  drawScore: ->
-    @context.fillStyle = 'red'
-    @context.font      = 'bold 2em Arial'
-    @context.fillText "Score: #{@score}", -@canvas.width/2 + 25, @canvas.height/2 - 25
