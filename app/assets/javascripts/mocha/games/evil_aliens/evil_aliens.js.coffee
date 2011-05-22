@@ -34,7 +34,13 @@ class EvilAliens extends GameBoard
     @addScreen @intro_ui_pane
 
   createMainScreen: ->
-    @mainScreen  = new EntitySet this
+    @mainScreen  = new Screen this
+    @mainScreen.onUpdate = =>
+      if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
+        new_alien = new Alien this, @canvas.width/2 + 20, Math.random() * Math.PI * 180
+        @mainScreen.add new_alien
+        @last_alien_addded_at = @timer.game_time
+        $em.trigger 'alien::spawn', alien: new_alien
 
     @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry      = new Sentry     this
@@ -61,18 +67,9 @@ class EvilAliens extends GameBoard
     @createMainScreen()
 
     $em.listen 'alien::spawn', this, (data) ->
-      # console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
+      console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
     $em.listen 'alien::death', this, (data) ->
-      # console.log "Alien killed at #{data.alien.s_coords()}"
+      console.log "Alien killed at #{data.alien.s_coords()}"
 
-    super()
-
-  update: ->
-    if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
-      new_alien = new Alien(this, @canvas.width/2 + 20, Math.random() * Math.PI * 180)
-      @mainScreen.add new_alien
-      # @addEntity new_alien
-      @last_alien_addded_at = @timer.game_time
-      $em.trigger 'alien::spawn', alien: new_alien
     super()

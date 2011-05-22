@@ -62,7 +62,9 @@ class GameBoard
 
   showScreen: (screen) ->
     i_screen.hide() for i_screen in @screens
+    i_screen.pause() for i_screen in @screens
     screen.show()
+    screen.unpause()
 
   startInput: ->
     getXandY = (e) =>
