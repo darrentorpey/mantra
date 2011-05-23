@@ -8,6 +8,10 @@ class GameLauncher
     assets.images ?= []
     assets.sounds ?= []
 
+    console.log 'Initializing game...'
+    @game.init()
+    @game.start() if @game.currentScreen
+
     @addImage image for image in assets.images
     @addSound id, sound for id, sound of assets.sounds
 
@@ -16,8 +20,7 @@ class GameLauncher
 
   start: ->
     console.log 'Assets loaded. Launching game...'
-    @game.init()
-    @game.start()
+    @game.start() if @game.state == ''
 
   addImage: (name)     -> AssetManager.queueImage     "#{root.asset_path}#{name}"
   addSound: (id, name) -> AssetManager.queueSound id, "#{root.asset_path}#{name}"

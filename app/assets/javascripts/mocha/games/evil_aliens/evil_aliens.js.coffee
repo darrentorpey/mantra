@@ -20,10 +20,11 @@ class EvilAliens extends GameBoard
 
     super @canvas
 
+    @createLoadingScreen()
+
   createIntroScreen: ->
+    @intro_screen = new Screen this
     @intro_ui_pane = new UIPane this
-    @intro_ui_pane.update = ->
-      @game.showScreen @game.mainScreen if @game.click
 
     @intro_ui_pane.addTextItem
       color: 'orange'
@@ -31,7 +32,13 @@ class EvilAliens extends GameBoard
       y:     0
       text:  -> 'Click to start!'
 
-    @addScreen @intro_ui_pane
+    @intro_screen.add @intro_ui_pane
+    @intro_screen.onUpdate = =>
+      if @click
+        @createMainScreen()
+        @showScreen @mainScreen
+
+    @addScreen @intro_screen
 
   createMainScreen: ->
     @mainScreen  = new Screen this
@@ -62,14 +69,31 @@ class EvilAliens extends GameBoard
 
     @addScreen @mainScreen
 
+  createLoadingScreen: ->
+    @loading_screen = new Screen this
+    @loading_ui_pane = new UIPane this
+
+    @loading_ui_pane.addTextItem
+      color: 'orange'
+      x:     'centered'
+      y:     0
+      text:  -> "Loading... #{AssetManager.getProgress()}%"
+
+    @loading_screen.add @loading_ui_pane
+
+    @loading_screen.onUpdate = =>
+      # console.log "Loading... #{5}%"
+      if @state != '' && AssetManager.isDone()
+        @createIntroScreen()
+        @showScreen @intro_screen
+
+    @addScreen @loading_screen
+
   start: ->
-    @createIntroScreen()
-    @createMainScreen()
+    @createLoadingScreen()
 
-    $em.listen 'alien::spawn', this, (data) ->
-      console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
+    $em.listen 'alien::spawn', this, (data) -> console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
-    $em.listen 'alien::death', this, (data) ->
-      console.log "Alien killed at #{data.alien.s_coords()}"
+    $em.listen 'alien::death', this, (data) -> console.log "Alien killed at #{data.alien.s_coords()}"
 
     super()

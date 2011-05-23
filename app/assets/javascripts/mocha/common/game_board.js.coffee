@@ -5,6 +5,7 @@ class GameBoard
     @entities = []
     @timer    = new Timer
     @screens  = []
+    @state    = ''
 
     @surfaceWidth = null;
     @surfaceHeight = null;
@@ -59,6 +60,8 @@ class GameBoard
       @loop()
       requestAnimFrame gameLoop, @canvas
     gameLoop()
+
+    @state = 'started'
 
   showScreen: (screen) ->
     i_screen.hide() for i_screen in @screens

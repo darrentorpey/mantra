@@ -11,8 +11,17 @@ class AssetManager
   @queueSound: (id, path) ->
     @soundsQueue.push { id: id, path: path }
 
+  @totalAssets: ->
+    @downloadQueue.length + @soundsQueue.length
+
+  @numFinished: ->
+    @successCount + @errorCount
+
+  @getProgress: ->
+    if @totalAssets() == 0 then '0' else ((@numFinished() / @totalAssets()) * 100).toString()[0..3]
+
   @isDone: =>
-    (@downloadQueue.length + @soundsQueue.length) == (@successCount + @errorCount)
+    @totalAssets() == (@successCount + @errorCount)
 
   @downloadAll: (callback) ->
     callback() if @downloadQueue.length == 0 && @soundsQueue.length == 0
