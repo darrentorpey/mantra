@@ -7,16 +7,11 @@ class BulletExplosion extends Entity
   update: ->
     super()
 
-    if (@animation.isDone())
-      @remove_from_world = true;
-      return
+    return @remove_from_world = true if @animation.isDone()
 
-    @radius = (@animation.frameWidth/2) * @scaleFactor()
+    @radius = @animation.frameWidth/2 * @scaleFactor()
 
-    for alien in @game.mainScreen.entities
-      if (alien instanceof Alien) && @isCaughtInExplosion(alien)
-        @game.score += 10
-        alien.explode()
+    alien.explode() for alien in @game.getAliens() when @isCaughtInExplosion(alien)
 
   scaleFactor: ->
     1 + (this.animation.currentFrame() / 3)
