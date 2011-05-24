@@ -5,8 +5,11 @@ class GameBoard
     @entities = []
     @timer    = new Timer
     @screens  = []
+    @process_game_over = -> null
     @state    = new FSM 'initialized', { name: 'initialized' }
-    @state.add_transition 'start', 'initialized', (-> console.log 'started'), 'started'
+    @state.add_transition 'start', 'initialized', null,                      'started'
+    @state.add_transition 'lose',  'started',     (=> @process_game_over()), 'game_lost'
+    @state.add_transition 'restart', ['started', 'game_won', 'game_lost'], null, 'started'
 
     @surfaceWidth      = null
     @surfaceHeight     = null
@@ -33,8 +36,7 @@ class GameBoard
     entity.cull()   for entity in @entities
 
     # Remove the entities that are ready to be removed from the game world
-    for i in [@entities.length - 1...0]
-      @entities.splice i, 1 if @entities[i].remove_from_world
+    @entities.splice i, 1 for i in [@entities.length - 1...0] when @entities[i].remove_from_world
 
   draw: (callback) ->
     @context.clearRect 0, 0, @canvas.width, @canvas.height

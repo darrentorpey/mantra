@@ -1,6 +1,6 @@
 class EvilAliens extends GameBoard
   constructor: (@canvas) ->
-    @lives = 10
+    @lives = 1
     @score = 0
     @assets = {
       images: [
@@ -21,6 +21,27 @@ class EvilAliens extends GameBoard
     super @canvas
 
     @createLoadingScreen()
+    @createGameLostScreen()
+
+    @process_game_over = ->
+      @showScreen @game_lost_screen
+
+  createGameLostScreen: ->
+    @game_lost_screen = new Screen this
+    intro_ui_pane = new UIPane this
+    intro_ui_pane.addTextItem
+      color: 'red'
+      x:     'centered'
+      y:     0
+      text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
+
+    @game_lost_screen.add intro_ui_pane
+    @game_lost_screen.onUpdate = =>
+      if @click
+        @restart()
+        @showScreen @main_screen
+
+    @addScreen @game_lost_screen
 
   createIntroScreen: ->
     @intro_screen = new Screen this
@@ -91,13 +112,32 @@ class EvilAliens extends GameBoard
   start: ->
     @createLoadingScreen()
 
-    # $em.listen 'alien::spawn', this, (data) -> console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
+    $em.listen 'alien::spawn', this, (data) ->
+      # console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
     $em.listen 'alien::death', this, (data) ->
-      console.log "Alien killed at #{data.alien.s_coords()}"
+      # console.log "Alien killed at #{data.alien.s_coords()}"
       @score += 10
+
+    $em.listen 'alien::hit_planet', this, (date) ->
+      @lives -= 1
+      @state.send_event 'lose' if @lives == 0
 
     super()
 
+  restart: ->
+    @state.send_event 'restart'
+    ent.remove_from_world = true for ent in @getAliens()
+    ent.remove_from_world = true for ent in @getBullets()
+    ent.remove_from_world = true for ent in @getBulletExplosions()
+    @lives = 1
+    @score = 0
+
   getAliens: ->
     alien for alien in @main_screen.entities when alien instanceof Alien
+
+  getBullets: ->
+    ent for ent in @main_screen.entities when ent instanceof Bullet
+
+  getBulletExplosions: ->
+    ent for ent in @main_screen.entities when ent instanceof BulletExplosion

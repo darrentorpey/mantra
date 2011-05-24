@@ -11,7 +11,7 @@ class Alien extends Entity
 
     if @hitPlanet()
       @remove_from_world = true
-      @game.lives -= 1
+      $em.trigger 'alien::hit_planet', alien: this
 
     super()
 
