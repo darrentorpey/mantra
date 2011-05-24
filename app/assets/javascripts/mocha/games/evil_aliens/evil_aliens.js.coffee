@@ -82,7 +82,7 @@ class EvilAliens extends GameBoard
     @loading_screen.add @loading_ui_pane
 
     @loading_screen.onUpdate = =>
-      if @state != '' && AssetManager.isDone()
+      if @state.current_state != 'initialized' && AssetManager.isDone()
         @createIntroScreen()
         @showScreen @intro_screen
 

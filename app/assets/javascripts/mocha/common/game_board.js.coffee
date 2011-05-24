@@ -5,12 +5,13 @@ class GameBoard
     @entities = []
     @timer    = new Timer
     @screens  = []
-    @state    = ''
+    @state    = new FSM 'initialized', { name: 'initialized' }
+    @state.add_transition 'start', 'initialized', (-> console.log 'started'), 'started'
 
-    @surfaceWidth = null;
-    @surfaceHeight = null;
-    @halfSurfaceWidth = null;
-    @halfSurfaceHeight = null;
+    @surfaceWidth      = null
+    @surfaceHeight     = null
+    @halfSurfaceWidth  = null
+    @halfSurfaceHeight = null
 
   init: ->
     @surfaceWidth      = @canvas.width
@@ -40,8 +41,7 @@ class GameBoard
     @context.save()
     @translate_to_center()
 
-    for entity in @entities
-      entity.draw @context
+    entity.draw @context for entity in @entities
 
     callback this if callback
 
@@ -61,13 +61,11 @@ class GameBoard
       requestAnimFrame gameLoop, @canvas
     gameLoop()
 
-    @state = 'started'
+    @state.send_event 'start'
 
   showScreen: (screen) ->
-    i_screen.hide() for i_screen in @screens
-    i_screen.pause() for i_screen in @screens
-    screen.show()
-    screen.unpause()
+    i_screen.turnOff() for i_screen in @screens
+    screen.turnOn()
 
   startInput: ->
     getXandY = (e) =>

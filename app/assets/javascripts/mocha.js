@@ -1,5 +1,6 @@
 //= require      jquery
 //= require      jquery_ujs
+//= require_tree ./lib
 //= require      mocha/common/util/core
 //= require_tree ./mocha/common/util
 //= require      mocha/common/entities/entity
