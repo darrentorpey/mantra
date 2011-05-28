@@ -4,6 +4,7 @@ class AssetManager
   @cache         = {}
   @downloadQueue = []
   @soundsQueue   = []
+  @asset_lookup  = {}
 
   @queueImage: (path) ->
     @downloadQueue.push path
@@ -51,15 +52,17 @@ class AssetManager
   @getSound: (path) ->
     @cache[path]
 
+  @getBackgroundSong: (id) ->
+    @asset_lookup[id]
+
   @downloadSounds: (callback) ->
     return unless soundManager
     soundManager.onready =>
-      console.log 'soundManager ready' if @debug_all
-      for sound in @soundsQueue
-        @downloadSound sound.id, sound.path, callback
+      $logger.sound.info 'SoundManager ready'
+      @downloadSound sound.id, sound.path, callback for sound in @soundsQueue
 
     soundManager.ontimeout ->
-      console.log('SM2 did not start');
+      $logger.sound.error 'SM2 did not start'
 
   @downloadSound: (id, path, callback) ->
     manager = @
@@ -68,6 +71,12 @@ class AssetManager
       autoLoad: true,
       url: path,
       onload: ->
-        console.log this.url + "#{@url} is loaded" if @debug_all
+        $logger.assets.info this.url + "#{@url} is loaded"
         manager.successCount += 1
         callback() if manager.isDone()
+    @cache[path].restart = ->
+      $logger.sound.info "Restarting '#{@sID}'"
+      @stop()
+      @setPosition 0
+      @play()
+    @asset_lookup[id] = @cache[path]

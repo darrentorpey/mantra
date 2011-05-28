@@ -14,9 +14,12 @@ class EvilAliens extends GameBoard
         'alien-explosion.png'
       ]
       sounds: {
-        'alien-boom'  : 'alien_boom.mp3'
-        'bullet-boom' : 'bullet_boom.mp3'
-        'bullet'      : 'bullet.mp3'
+        'alien-boom'   : 'alien_boom.mp3'
+        'bullet-boom'  : 'bullet_boom.mp3'
+        'bullet'       : 'bullet.mp3'
+      }
+      music: {
+        'bulldozer'    : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
       }
     }
 
@@ -26,8 +29,7 @@ class EvilAliens extends GameBoard
     @createPauseScreen()
     @createGameLostScreen()
 
-    @process_game_over = ->
-      @showScreen @game_lost_screen
+    @process_game_over = -> @showScreen @game_lost_screen
 
   createGameLostScreen: ->
     @game_lost_screen = new Screen this, 'lost'
@@ -42,6 +44,7 @@ class EvilAliens extends GameBoard
     @game_lost_screen.onUpdate = =>
       if @click
         @restart()
+        @bg_song.restart()
         @showScreen @main_screen
 
     @addScreen @game_lost_screen
@@ -59,6 +62,7 @@ class EvilAliens extends GameBoard
     @intro_screen.onUpdate = =>
       if @click
         @createMainScreen()
+        @bg_song.play()
         @showScreen @main_screen
 
     @addScreen @intro_screen
@@ -75,7 +79,9 @@ class EvilAliens extends GameBoard
     @pause_screen.add pause_ui_pane
 
     @pause_screen.onKeys {
-      p: => @showScreen @main_screen
+      p: =>
+        @showScreen @main_screen
+        @bg_song.resume()
     }
 
     @addScreen @pause_screen
@@ -96,7 +102,9 @@ class EvilAliens extends GameBoard
     @main_screen.add @stuff
 
     @main_screen.onKeys {
-      p: => @showScreen @pause_screen
+      p: =>
+        @showScreen @pause_screen
+        @bg_song.pause()
     }
 
     @ui_pane = new UIPane this
@@ -110,6 +118,8 @@ class EvilAliens extends GameBoard
       y:      @canvas.height/2 - 25
       text:  -> "Score: #{@game.score}"
     @main_screen.add @ui_pane
+
+    @bg_song = AssetManager.getBackgroundSong('bulldozer')
 
     @addScreen @main_screen
 
@@ -136,10 +146,10 @@ class EvilAliens extends GameBoard
     @createLoadingScreen()
 
     $em.listen 'alien::spawn', this, (data) ->
-      # console.log "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
+      $logger.game.info "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
     $em.listen 'alien::death', this, (data) ->
-      # console.log "Alien killed at #{data.alien.s_coords()}"
+      $logger.game.info "Alien killed at #{data.alien.s_coords()}"
       @score += 10
 
     $em.listen 'alien::hit_planet', this, (date) ->

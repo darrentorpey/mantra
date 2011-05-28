@@ -8,11 +8,15 @@ $em = EventManager.instance()
 $logger = Logger.instance()
 
 $logger.registerSubsystem 'global'
+$logger.registerSubsystem 'sound'
 $logger.registerSubsystem 'assets'
+$logger.registerSubsystem 'game'
 
 $logger.levels {
   global: 'debug'
+  sound:  'debug'
   assets: 'debug'
+  game:   'off'
 }
 
 # $logger.global.debug "Here's the world: #{'6'}"

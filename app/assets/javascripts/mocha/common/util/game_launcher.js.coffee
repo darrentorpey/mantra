@@ -12,8 +12,9 @@ class GameLauncher
     @game.init()
     @game.start() if @game.currentScreen
 
-    @addImage image for image in assets.images
+    @addImage image     for image in assets.images
     @addSound id, sound for id, sound of assets.sounds
+    @addSound id, sound for id, sound of assets.music
 
   launch: ->
     AssetManager.downloadAll (=> @start())

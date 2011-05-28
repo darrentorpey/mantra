@@ -7,6 +7,7 @@ class Logger
     info:  3
     warn:  2
     error: 1
+    off:   0
 
   constructor: (@log_levels = {}) -> null
 
