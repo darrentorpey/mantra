@@ -1,6 +1,6 @@
 class UIPane extends EntitySet
-  constructor: (@game, @entities...) ->
-    super @game, @entities...
+  constructor: (@game, @options = {}) ->
+    super @game, (@options.entities || [])...
     @pane = true
 
   addElement: (draw_func) ->

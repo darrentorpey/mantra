@@ -21,6 +21,10 @@ class GameBoard
     @surfaceHeight     = @canvas.height
     @halfSurfaceWidth  = @surfaceWidth/2
     @halfSurfaceHeight = @surfaceHeight/2
+
+    $(window).keypress (e) =>
+      @currentScreen.onKey String.fromCharCode(e.which) if @currentScreen
+
     @startInput()
 
   addEntity: (new_entities...) ->
@@ -68,6 +72,7 @@ class GameBoard
   showScreen: (screen) ->
     i_screen.turnOff() for i_screen in @screens
     screen.turnOn()
+    @currentScreen = screen
 
   startInput: ->
     getXandY = (e) =>

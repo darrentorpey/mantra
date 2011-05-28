@@ -1,6 +1,8 @@
 class EvilAliens extends GameBoard
+  @starting_lives = 10
+
   constructor: (@canvas) ->
-    @lives = 1
+    @lives = EvilAliens::starting_lives
     @score = 0
     @assets = {
       images: [
@@ -21,13 +23,14 @@ class EvilAliens extends GameBoard
     super @canvas
 
     @createLoadingScreen()
+    @createPauseScreen()
     @createGameLostScreen()
 
     @process_game_over = ->
       @showScreen @game_lost_screen
 
   createGameLostScreen: ->
-    @game_lost_screen = new Screen this
+    @game_lost_screen = new Screen this, 'lost'
     intro_ui_pane = new UIPane this
     intro_ui_pane.addTextItem
       color: 'red'
@@ -44,9 +47,8 @@ class EvilAliens extends GameBoard
     @addScreen @game_lost_screen
 
   createIntroScreen: ->
-    @intro_screen = new Screen this
+    @intro_screen = new Screen this, 'intro'
     intro_ui_pane = new UIPane this
-
     intro_ui_pane.addTextItem
       color: 'orange'
       x:     'centered'
@@ -61,8 +63,25 @@ class EvilAliens extends GameBoard
 
     @addScreen @intro_screen
 
+  createPauseScreen: ->
+    @pause_screen = new Screen this, 'pause'
+    pause_ui_pane = new UIPane this
+    pause_ui_pane.addTextItem
+      color: 'white'
+      x:     'centered'
+      y:     0
+      text:  -> ':: Paused ::'
+
+    @pause_screen.add pause_ui_pane
+
+    @pause_screen.onKeys {
+      p: => @showScreen @main_screen
+    }
+
+    @addScreen @pause_screen
+
   createMainScreen: ->
-    @main_screen  = new Screen this
+    @main_screen  = new Screen this, 'main'
     @main_screen.onUpdate = =>
       if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
         new_alien = new Alien this, @canvas.width/2 + 20, Math.random() * Math.PI * 180
@@ -75,6 +94,10 @@ class EvilAliens extends GameBoard
     @earth       = new Earth      this
     @stuff       = new EntitySet  this, @back, @sentry, @earth
     @main_screen.add @stuff
+
+    @main_screen.onKeys {
+      p: => @showScreen @pause_screen
+    }
 
     @ui_pane = new UIPane this
     @ui_pane.addTextItem
@@ -91,7 +114,7 @@ class EvilAliens extends GameBoard
     @addScreen @main_screen
 
   createLoadingScreen: ->
-    @loading_screen = new Screen this
+    @loading_screen = new Screen this, 'loading'
     @loading_ui_pane = new UIPane this
 
     @loading_ui_pane.addTextItem
@@ -130,7 +153,7 @@ class EvilAliens extends GameBoard
     ent.remove_from_world = true for ent in @getAliens()
     ent.remove_from_world = true for ent in @getBullets()
     ent.remove_from_world = true for ent in @getBulletExplosions()
-    @lives = 1
+    @lives = EvilAliens::starting_lives
     @score = 0
 
   getAliens: ->
