@@ -2,7 +2,7 @@ class EvilAliens extends GameBoard
   @starting_lives = 10
 
   constructor: (@canvas) ->
-    @lives = EvilAliens::starting_lives
+    @lives = EvilAliens.starting_lives
     @score = 0
     @assets = {
       images: [
@@ -153,7 +153,7 @@ class EvilAliens extends GameBoard
     ent.remove_from_world = true for ent in @getAliens()
     ent.remove_from_world = true for ent in @getBullets()
     ent.remove_from_world = true for ent in @getBulletExplosions()
-    @lives = EvilAliens::starting_lives
+    @lives = EvilAliens.starting_lives
     @score = 0
 
   getAliens: ->
