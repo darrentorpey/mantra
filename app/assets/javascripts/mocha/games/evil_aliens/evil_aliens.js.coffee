@@ -112,6 +112,19 @@ class EvilAliens extends GameBoard
         @bg_song.pause()
     }
 
+    # $('<div>')
+    #   .css(
+    #     width:  '64px'
+    #     height: '64px'
+    #     'border-radius': '32px'
+    #     position: 'absolute'
+    #     top:  '200px'
+    #     left: '400px'
+    #     backgroundColor: '#aaffff'
+    #     opacity: '0.8'
+    #   )
+    #   .appendTo('body')
+
     @main_screen.add @gui_pane()
     @main_screen.add @game_widget()
 
