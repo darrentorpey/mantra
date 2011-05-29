@@ -1,6 +1,6 @@
 class Alien extends Entity
   constructor: (game, @radial_distance, @angle) ->
-    super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}alien.png"))
+    super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}alien.png"), @angle)
     @radius = @sprite.height/2
     @speed = 150
     @setCoords()

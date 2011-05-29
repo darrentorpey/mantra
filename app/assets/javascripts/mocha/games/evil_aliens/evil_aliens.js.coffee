@@ -30,7 +30,7 @@ class EvilAliens extends GameBoard
     @createGameLostScreen()
 
     @onKeys {
-      m: =>
+      M: =>
         $audio_manager.toggle_mute()
     }
 
@@ -79,12 +79,12 @@ class EvilAliens extends GameBoard
       color: 'white'
       x:     'centered'
       y:     0
-      text:  -> ':: Paused ::'
+      text:  -> ':: paused ::'
 
     @pause_screen.add pause_ui_pane
 
     @pause_screen.onKeys {
-      p: =>
+      P: =>
         @showScreen @main_screen
         @bg_song.resume()
     }
@@ -107,11 +107,19 @@ class EvilAliens extends GameBoard
     @main_screen.add @stuff
 
     @main_screen.onKeys {
-      p: =>
+      P: =>
         @showScreen @pause_screen
         @bg_song.pause()
     }
 
+    @main_screen.add @gui_pane()
+    @main_screen.add @game_widget()
+
+    @bg_song = AssetManager.getBackgroundSong('bulldozer')
+
+    @addScreen @main_screen
+
+  gui_pane: ->
     @ui_pane = new UIPane this
     @ui_pane.addTextItem
       x:    @canvas.width/2 - 125
@@ -122,11 +130,12 @@ class EvilAliens extends GameBoard
       x:     -@canvas.width/2 + 25
       y:      @canvas.height/2 - 25
       text:  -> "Score: #{@game.score}"
-    @main_screen.add @ui_pane
+    @ui_pane
 
-    @bg_song = AssetManager.getBackgroundSong('bulldozer')
-
-    @addScreen @main_screen
+  game_widget: ->
+    @game_widget = new GameWidget this
+    @game_widget.setCoords x: -200, y: -200
+    @game_widget
 
   createLoadingScreen: ->
     @loading_screen = new Screen this, 'loading'

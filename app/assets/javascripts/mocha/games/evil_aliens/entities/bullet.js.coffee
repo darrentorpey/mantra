@@ -1,6 +1,6 @@
 class Bullet extends Entity
   constructor: (game, x, y, @angle, @explodesAt) ->
-    super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}bullet-single.png")), { x: x, y: y }
+    super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}bullet-single.png"), @angle), { x: x, y: y }
     @speed = 250
     @radial_distance = 95
 

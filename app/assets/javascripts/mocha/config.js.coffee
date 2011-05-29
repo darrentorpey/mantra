@@ -11,21 +11,14 @@ $audio_manager = AudioManager.instance()
 $logger.registerSubsystem 'global'
 $logger.registerSubsystem 'sound'
 $logger.registerSubsystem 'assets'
+$logger.registerSubsystem 'input'
 $logger.registerSubsystem 'game'
 
+# Levels, in increasing order of verbosity: off, error, warn, info, debug
 $logger.levels {
   global: 'debug'
   sound:  'debug'
   assets: 'debug'
+  input:  'info'
   game:   'off'
 }
-
-# $logger.global.debug "Here's the world: #{'6'}"
-# $logger.global.info  'Hi, global'
-# $logger.global.warn  'WARNING: The globe is warming'
-# $logger.global.error "FAIL: the world is dead"
-
-# $logger.assets.debug 'All assets so far: []'
-# $logger.assets.info  'Hi, assets are okay'
-# $logger.assets.warn  'Be careful of assets'
-# $logger.assets.error 'BAD asset failure!'

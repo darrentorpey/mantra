@@ -12,6 +12,8 @@ class GameLauncher
     @game.init()
     @game.start() if @game.currentScreen
 
+    KeyManager.capture_keypresses @game
+
     @addImage image     for image in assets.images
     @addSound id, sound for id, sound of assets.sounds
     @addSound id, sound for id, sound of assets.music

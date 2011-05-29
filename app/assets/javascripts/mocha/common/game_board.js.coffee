@@ -23,10 +23,6 @@ class GameBoard
     @halfSurfaceWidth  = @surfaceWidth/2
     @halfSurfaceHeight = @surfaceHeight/2
 
-    $(window).keypress (e) =>
-      @onKey String.fromCharCode(e.which)
-      @currentScreen.onKey String.fromCharCode(e.which) if @currentScreen
-
     @startInput()
 
   addEntity: (new_entities...) ->
@@ -75,6 +71,7 @@ class GameBoard
 
   onKey: (key) ->
     @key_map[key]() if @key_map[key]
+    @currentScreen.onKey key if @currentScreen
 
   showScreen: (screen) ->
     i_screen.turnOff() for i_screen in @screens
