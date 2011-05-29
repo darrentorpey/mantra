@@ -4,8 +4,9 @@ soundManager.debugFlash = false
 soundManager.debugMode = false
 soundManager.defaultOptions.volume = 10
 
-$em = EventManager.instance()
-$logger = Logger.instance()
+$em            = EventManager.instance()
+$logger        = Logger.instance()
+$audio_manager = AudioManager.instance()
 
 $logger.registerSubsystem 'global'
 $logger.registerSubsystem 'sound'

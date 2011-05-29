@@ -5,6 +5,7 @@ class GameBoard
     @entities = []
     @timer    = new Timer
     @screens  = []
+    @key_map  = {}
     @process_game_over = -> null
     @state    = new FSM 'initialized', { name: 'initialized' }
     @state.add_transition 'start', 'initialized', null,                      'started'
@@ -23,6 +24,7 @@ class GameBoard
     @halfSurfaceHeight = @surfaceHeight/2
 
     $(window).keypress (e) =>
+      @onKey String.fromCharCode(e.which)
       @currentScreen.onKey String.fromCharCode(e.which) if @currentScreen
 
     @startInput()
@@ -68,6 +70,11 @@ class GameBoard
     gameLoop()
 
     @state.send_event 'start'
+
+  onKeys: (@key_map) -> null
+
+  onKey: (key) ->
+    @key_map[key]() if @key_map[key]
 
   showScreen: (screen) ->
     i_screen.turnOff() for i_screen in @screens

@@ -29,6 +29,11 @@ class EvilAliens extends GameBoard
     @createPauseScreen()
     @createGameLostScreen()
 
+    @onKeys {
+      m: =>
+        $audio_manager.toggle_mute()
+    }
+
     @process_game_over = -> @showScreen @game_lost_screen
 
   createGameLostScreen: ->

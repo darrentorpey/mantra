@@ -15,8 +15,7 @@ class Screen extends EntitySet
     @show()
     @unpause()
 
-  onKeys: (@key_map) ->
-    null
+  onKeys: (@key_map) -> null
 
   onKey: (key) ->
     # console.log "'#{key}' pressed"
