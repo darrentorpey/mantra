@@ -16,23 +16,9 @@ class GameWidget extends Entity
   draw: (context) ->
     context.fillStyle = "rgba(200, 255, 255, .6)"
     context.beginPath()
-    context.arc @x, @y, 30, 0, Math.PI*2, true
+    context.arc @x, @y, 35, 0, Math.PI*2, true
     context.closePath()
     context.fill()
-
-    context.strokeStyle = "rgba(200, 255, 255, .8)"
-    context.lineWidth = 2
-    context.beginPath()
-    context.arc @x, @y, 30, 0, Math.PI*2, true
-    context.closePath()
-    context.stroke()
-
-    context.strokeStyle = "rgba(200, 255, 255, .9)"
-    context.lineWidth = 2
-    context.beginPath()
-    context.arc @x, @y, 32, 0, Math.PI*2, true
-    context.closePath()
-    context.stroke()
 
     super context
 

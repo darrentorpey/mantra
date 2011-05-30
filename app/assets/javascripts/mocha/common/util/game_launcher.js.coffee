@@ -16,7 +16,7 @@ class GameLauncher
 
     @addImage image     for image in assets.images
     @addSound id, sound for id, sound of assets.sounds
-    @addSound id, sound for id, sound of assets.music
+    @addSound id, music for id, music of assets.music
 
   launch: ->
     AssetManager.downloadAll (=> @start())
