@@ -29,12 +29,12 @@ class EvilAliens extends GameBoard
     @createPauseScreen()
     @createGameLostScreen()
 
-    @onKeys {
-      M: =>
-        $audio_manager.toggle_mute()
-    }
+    @onKeys
+      M: => $audio_manager.toggle_mute()
 
-    @process_game_over = -> @showScreen @game_lost_screen
+    @process_game_over = ->
+      @showScreen @game_lost_screen
+      @bg_song.stop()
 
   createGameLostScreen: ->
     @game_lost_screen = new Screen this, 'lost'
@@ -93,37 +93,18 @@ class EvilAliens extends GameBoard
 
   createMainScreen: ->
     @main_screen  = new Screen this, 'main'
-    @main_screen.onUpdate = =>
-      if !@last_alien_addded_at || (@timer.game_time - @last_alien_addded_at) > 1
-        new_alien = new Alien this, @canvas.width/2 + 20, Math.random() * Math.PI * 180
-        @main_screen.add new_alien
-        @last_alien_addded_at = @timer.game_time
-        $em.trigger 'alien::spawn', alien: new_alien
 
     @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry      = new Sentry     this
     @earth       = new Earth      this
-    @stuff       = new EntitySet  this, @back, @sentry, @earth
+    @mothership  = new Mothership this
+    @stuff       = new EntitySet  this, @back, @sentry, @earth, @mothership
     @main_screen.add @stuff
 
-    @main_screen.onKeys {
+    @main_screen.onKeys
       P: =>
         @showScreen @pause_screen
         @bg_song.pause()
-    }
-
-    # $('<div>')
-    #   .css(
-    #     width:  '64px'
-    #     height: '64px'
-    #     'border-radius': '32px'
-    #     position: 'absolute'
-    #     top:  '200px'
-    #     left: '400px'
-    #     backgroundColor: '#aaffff'
-    #     opacity: '0.8'
-    #   )
-    #   .appendTo('body')
 
     @main_screen.add @gui_pane()
     @main_screen.add @game_widget()
@@ -134,15 +115,18 @@ class EvilAliens extends GameBoard
 
   gui_pane: ->
     @ui_pane = new UIPane this
+
     @ui_pane.addTextItem
       x:    @canvas.width/2 - 125
       y:    @canvas.height/2 - 25
       text: -> "Lives: #{@game.lives}"
+
     @ui_pane.addTextItem
       color: 'orange'
       x:     -@canvas.width/2 + 25
       y:      @canvas.height/2 - 25
       text:  -> "Score: #{@game.score}"
+
     @ui_pane
 
   game_widget: ->
@@ -171,9 +155,6 @@ class EvilAliens extends GameBoard
 
   start: ->
     @createLoadingScreen()
-
-    $em.listen 'alien::spawn', this, (data) ->
-      $logger.game.info "Alien incomming from #{data.alien.radial_distance}km away @ #{data.alien.angle}"
 
     $em.listen 'alien::death', this, (data) ->
       $logger.game.info "Alien killed at #{data.alien.s_coords()}"

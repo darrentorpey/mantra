@@ -17,8 +17,8 @@ $logger.registerSubsystem 'game'
 # Levels, in increasing order of verbosity: off, error, warn, info, debug
 $logger.levels {
   global: 'debug'
-  sound:  'debug'
-  assets: 'debug'
+  sound:  'warn'
+  assets: 'warn'
   input:  'info'
-  game:   'off'
+  game:   'warn'
 }
