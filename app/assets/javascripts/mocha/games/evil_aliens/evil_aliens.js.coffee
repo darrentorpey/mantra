@@ -24,7 +24,7 @@ class EvilAliens extends GameBoard
       }
     }
 
-    super()
+    super @options
 
     @createLoadingScreen()
     @createPauseScreen()

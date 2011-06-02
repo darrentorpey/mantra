@@ -52,6 +52,7 @@ MochaRails::Application.routes.draw do
   #     resources :products
   #   end
 
+  match '/:id', :to => 'games#play'
   root :to => 'games#play', :id => 1
 
   match 'play/:id' => 'games#play', :as => :play_game

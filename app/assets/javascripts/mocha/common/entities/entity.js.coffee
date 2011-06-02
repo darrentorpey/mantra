@@ -4,8 +4,7 @@ class Entity
     @y = coords.y
     @remove_from_world = false
 
-  update: ->
-    null
+  update: -> null
 
   draw: (context) ->
     if @game.showOutlines && @radius

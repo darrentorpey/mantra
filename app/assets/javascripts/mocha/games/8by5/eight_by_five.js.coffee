@@ -4,11 +4,6 @@ class EightByFive extends GameBoard
     @assets {
       images: ['alien.png']
     }
-    # _.defaults @options, {
-    #   assets: {
-    #     images: []
-    #   }
-    # }
 
     super @options
 
@@ -33,6 +28,10 @@ class EightByFive extends GameBoard
       main: (screen) =>
         screen.onUpdate = =>
           console.log 'main'
+
+        @defender = new Defender this
+        @defender.setCoords x: -200, y: -200
+        screen.add @defender
 
         screen.onKeys
           P: =>

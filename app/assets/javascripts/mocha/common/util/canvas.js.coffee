@@ -14,3 +14,10 @@ class Canvas
         margin:             '0px auto'
         display:            'block'
       )
+
+  @circle: (context, params) ->
+    context.fillStyle = params.style
+    context.beginPath()
+    context.arc params.x, params.y, params.radius, 0, Math.PI*2, true
+    context.closePath()
+    context.fill()

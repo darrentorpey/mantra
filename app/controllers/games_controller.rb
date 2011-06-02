@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   # GET /games/1/play
   # GET /games/1/play.json
   def play
-    @game = Game.find params[:id]
+    # @game = Game.find params[:id]
 
     respond_to do |format|
       format.html # play.html.erb
