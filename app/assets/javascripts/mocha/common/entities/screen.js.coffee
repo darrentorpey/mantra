@@ -18,6 +18,4 @@ class Screen extends EntitySet
   onKeys: (@key_map) -> null
 
   onKey: (key) ->
-    # console.log "'#{key}' pressed"
-    # console.log !!@key_map[key]
     @key_map[key]() if @key_map[key]

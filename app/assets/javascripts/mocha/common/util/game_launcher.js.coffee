@@ -1,6 +1,8 @@
 class GameLauncher
   constructor: (game_name, @canvas) ->
-    @game = new game_name @canvas
+    @game = new game_name {
+      canvas: @canvas
+    }
 
   init: (assets = @game.assets) ->
     console.log 'Queueing up assets to load...'
@@ -9,6 +11,7 @@ class GameLauncher
     assets.sounds ?= []
 
     console.log 'Initializing game...'
+    $logger.assets.debug "# assets: #{assets.images.length}"
     @game.init()
     @game.start() if @game.currentScreen
 

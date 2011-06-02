@@ -25,5 +25,5 @@ class EntitySet
     @visible = true
 
   cull: ->
-    for i in [@entities.length - 1...0]
-      @entities.splice i, 1 if @entities[i].remove_from_world
+    if @entities.length
+      @entities.splice i, 1 for i in [@entities.length - 1...0] when @entities[i].remove_from_world

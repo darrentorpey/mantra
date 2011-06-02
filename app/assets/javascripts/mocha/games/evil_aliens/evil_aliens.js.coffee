@@ -1,7 +1,8 @@
 class EvilAliens extends GameBoard
   @starting_lives = 10
 
-  constructor: (@canvas) ->
+  constructor: (@options = {}) ->
+    @canvas = @options.canvas
     @lives = EvilAliens.starting_lives
     @score = 0
     @assets = {
@@ -23,7 +24,7 @@ class EvilAliens extends GameBoard
       }
     }
 
-    super @canvas
+    super()
 
     @createLoadingScreen()
     @createPauseScreen()
