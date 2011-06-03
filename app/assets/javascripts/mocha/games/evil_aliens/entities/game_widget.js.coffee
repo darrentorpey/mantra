@@ -1,4 +1,4 @@
-class GameWidget extends Entity
+class GameWidget extends SpriteEntity
   constructor: (game, @radius = 30) ->
     super game, null, 0
     @speed = 3

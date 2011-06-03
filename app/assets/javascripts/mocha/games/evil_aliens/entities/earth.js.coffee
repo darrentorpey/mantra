@@ -1,4 +1,4 @@
-class Earth extends Entity
+class Earth extends SpriteEntity
   @RADIUS = 67
 
   constructor: (game) ->

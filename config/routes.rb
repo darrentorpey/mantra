@@ -53,7 +53,7 @@ MochaRails::Application.routes.draw do
   #   end
 
   match '/:id', :to => 'games#play'
-  root :to => 'games#play', :id => 1
+  root :to => 'games#play', :id => 'EightByFive'
 
   match 'play/:id' => 'games#play', :as => :play_game
   match 'tests' => 'tests#index', :as => :tests

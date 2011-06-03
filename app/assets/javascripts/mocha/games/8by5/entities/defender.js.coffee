@@ -1,4 +1,4 @@
-class Defender extends Entity
+class Defender extends SpriteEntity
   constructor: (game, @radius = 16) ->
     super game, null, 0
     @speed = 5

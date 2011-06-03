@@ -8,7 +8,7 @@ class EightByFive extends GameBoard
     super @options
 
     @setScreens {
-      loading: (screen) =>  
+      loading: (screen) =>
         @loading_ui_pane = new UIPane this
 
         @loading_ui_pane.addTextItem

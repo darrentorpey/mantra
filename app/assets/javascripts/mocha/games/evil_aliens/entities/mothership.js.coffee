@@ -1,4 +1,4 @@
-class Mothership extends Entity
+class Mothership extends SpriteEntity
   constructor: (@game) ->
     super @game
     machine = new Machine()

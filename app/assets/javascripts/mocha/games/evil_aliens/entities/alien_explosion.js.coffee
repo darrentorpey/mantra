@@ -1,4 +1,4 @@
-class AlienExplosion extends Entity
+class AlienExplosion extends SpriteEntity
   constructor: (game, x, y) ->
     super game, null, { x: x, y: y }
     @animation = new Animation AssetManager.getAsset("#{root.asset_path}alien-explosion.png"), 69, 0.1

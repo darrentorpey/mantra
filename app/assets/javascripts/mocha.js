@@ -5,6 +5,7 @@
 //= require      mocha/common/util/core
 //= require_tree ./mocha/common/util
 //= require      mocha/common/entities/entity
+//= require      mocha/common/entities/sprite_entity
 //= require_tree ./mocha/common
 //= require_tree ./mocha/games
 //= require      mocha/config
