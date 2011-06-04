@@ -33,8 +33,6 @@ class GameBoard
     # @addScreen screens.loading(new Screen this, 'loading') if screens.loading?    
     if screens.loading?
       @loading_screen = new Screen this, 'loading'
-      # console.log @
-      # console.log @screens
       @addScreen screens.loading(@loading_screen)
 
     if screens.main?
@@ -78,7 +76,7 @@ class GameBoard
   draw: (callback) ->
     @context.clearRect 0, 0, @canvas.width, @canvas.height
     @context.save()
-    @translate_to_center()
+    @translate_to_center() if @center_coordinates
 
     entity.draw @context for entity in @entities
 

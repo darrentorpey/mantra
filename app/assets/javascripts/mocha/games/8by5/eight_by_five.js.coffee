@@ -60,14 +60,24 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 '''
 
 $map_string = '''
-xxxxxxxx
-x    x x
-x      x
-x      x
-x  x   x
-x      x
-x  or  x
-xxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx
+x    x x               x
+x      x               x
+x      x               x
+x  x   x               x
+x      x               x
+x  or  x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+x      x               x
+xxxxxxxxxxxxxxxxxxxxxxxx
 '''
 
 class EightByFive extends GameBoard
@@ -106,8 +116,8 @@ class EightByFive extends GameBoard
         screen.add @defender
 
         @color_map = Map.generateColorMapFromASCII $map_string, {
-          map_width:    8
-          map_height:   8
+          map_width:    24
+          map_height:   20
           piece_width:  32
           piece_height: 32
           nuller:       ' '
@@ -118,8 +128,9 @@ class EightByFive extends GameBoard
           }
         }
 
-        console.log @color_map.length
-        screen.add new MapEntity this, { x: ent.x, y: ent.y, w: 24, h: 24, style: ent.obj } for ent in @color_map
+        padding_w = 20
+        padding_h = 16
+        screen.add new MapEntity this, { x: ent.x + padding_w, y: ent.y + padding_h, w: 24, h: 24, style: ent.obj } for ent in @color_map
 
         # screen.add new MapEntity this, { x: -100, y: -20, w: 32, h: 32 }
 

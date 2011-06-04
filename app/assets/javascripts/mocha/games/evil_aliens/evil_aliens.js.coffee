@@ -24,6 +24,8 @@ class EvilAliens extends GameBoard
       }
     }
 
+    @center_coordinates = true
+
     super @options
 
     @createLoadingScreen()
