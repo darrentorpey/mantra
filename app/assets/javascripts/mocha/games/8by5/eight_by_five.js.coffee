@@ -32,6 +32,7 @@ class EightByFive extends GameBoard
         @defender = new Defender this
         @defender.setCoords x: -200, y: -200
         screen.add @defender
+        screen.add new MapEntity this, { x: 0, y: 0, w: 32, h: 32 }
 
         screen.onKeys
           P: =>

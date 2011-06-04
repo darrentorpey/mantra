@@ -1,5 +1,5 @@
 class Entity
-  constructor: (@game, @sprite, coords = { x: 0, y: 0 }) ->
+  constructor: (@game, coords = { x: 0, y: 0 }) ->
     @x = coords.x
     @y = coords.y
     @remove_from_world = false

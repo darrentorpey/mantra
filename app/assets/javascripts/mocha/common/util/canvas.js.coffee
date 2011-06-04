@@ -21,3 +21,7 @@ class Canvas
     context.arc params.x, params.y, params.radius, 0, Math.PI*2, true
     context.closePath()
     context.fill()
+
+  @rectangle: (context, params) ->
+    context.fillStyle = params.style
+    context.fillRect params.x, params.y, params.w, params.h
