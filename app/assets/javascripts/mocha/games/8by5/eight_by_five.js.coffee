@@ -108,22 +108,20 @@ class EightByFive extends GameBoard
         @color_map = Map.generateColorMapFromASCII $map_string, {
           map_width:    8
           map_height:   8
-          piece_width:  16
-          piece_height: 16
-          nuller: ' '
+          piece_width:  32
+          piece_height: 32
+          nuller:       ' '
           translations: {
-            # ' ' : ''
             'o' : 'orange'
             'r' : 'red'
-            'x' : 'white'
+            'x' : null
           }
         }
 
-        console.log @color_map
-        console.log ent for ent in @color_map
-        screen.add new MapEntity this, { x: ent.x * 32, y: ent.y * 32, w: 32, h: 32, style: ent.obj } for ent in @color_map
+        console.log @color_map.length
+        screen.add new MapEntity this, { x: ent.x, y: ent.y, w: 24, h: 24, style: ent.obj } for ent in @color_map
 
-        screen.add new MapEntity this, { x: -100, y: -20, w: 32, h: 32 }
+        # screen.add new MapEntity this, { x: -100, y: -20, w: 32, h: 32 }
 
         screen.onKeys
           P: =>
