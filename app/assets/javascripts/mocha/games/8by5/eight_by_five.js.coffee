@@ -96,7 +96,7 @@ class EightByFive extends GameBoard
         @loading_ui_pane.addTextItem
           color: 'orange'
           x:     'centered'
-          y:     0
+          y:     @canvas.height/2
           text:  -> "Loading... #{AssetManager.getProgress()}%"
 
         screen.add @loading_ui_pane
@@ -112,7 +112,7 @@ class EightByFive extends GameBoard
           console.log 'main'
 
         @defender = new Defender this
-        @defender.setCoords x: -200, y: -200
+        @defender.setCoords x: 200, y: 150
         screen.add @defender
 
         @color_map = Map.generateColorMapFromASCII $map_string, {
@@ -146,7 +146,7 @@ class EightByFive extends GameBoard
         intro_ui_pane.addTextItem
           color: 'orange'
           x:     'centered'
-          y:     0
+          y:     'centered'
           text:  -> 'Click to start!'
 
         screen.add intro_ui_pane
