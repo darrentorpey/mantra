@@ -181,7 +181,7 @@ class EvilAliens extends GameBoard
     alien for alien in @main_screen.entities when alien instanceof Alien
 
   getBullets: ->
-    ent for ent in @main_screen.entities when ent instanceof Bullet
+    ent for ent in @main_screen.entities when ent instanceof EarthBullet
 
   getBulletExplosions: ->
     ent for ent in @main_screen.entities when ent instanceof BulletExplosion

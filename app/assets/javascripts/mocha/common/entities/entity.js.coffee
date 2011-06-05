@@ -16,3 +16,9 @@ class Entity
 
   s_coords: ->
     "#{@x.toString()[0..5]}, #{@y.toString()[0..5]}"
+
+  drawSpriteCentered: (context) ->
+    return unless @sprite?
+    x = @x - @sprite.width/2
+    y = @y - @sprite.height/2
+    context.drawImage(@sprite, x, y)

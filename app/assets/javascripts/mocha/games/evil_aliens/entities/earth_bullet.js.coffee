@@ -1,8 +1,13 @@
-class Bullet extends SpriteEntity
+class EarthBullet extends Bullet
   constructor: (game, x, y, @angle, @explodesAt) ->
-    super game, @rotateAndCache(AssetManager.getAsset("#{root.asset_path}bullet-single.png"), @angle), { x: x, y: y }
-    @speed = 250
-    @radial_distance = 95
+    super game, {
+      radial_distance: 95
+      angle:           @angle
+      explodesAt:      explodesAt
+      speed:           250
+    }
+
+    @sprite = Sprite.rotateAndCache(AssetManager.getAsset("#{root.asset_path}bullet-single.png"), @angle)
 
   update: ->
     if @outsideScreen()
