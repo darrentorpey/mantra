@@ -1,65 +1,4 @@
 $map_string = '''
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-x                  xx                                      xx                  x
-x                  xx                                      xx                  x
-xxxxxxxx      x    xx                  xxxxxxxxx      x    xx                  x
-x             x    xxxxxxxxxx          xx             x    xxxxxxxxxx          x
-x             x                        xx             x                        x
-x             x                        xx             x                        x
-x     xxxx  xxxxxxxxx           xxxxxxxxx     xxxx  xxxxxxxxx           xxxxxxxx
-x                  xx                  xx                  xx                  x
-x                  xx                                      xx                  x
-xxxx               xx                    xxx               xx                  x
-x      xxxxxxxxx   xx                  xxxxx   xxxxxxxxx   xx                  x
-x                  xx                  xx                  xx                  x
-x                  xx        x         xx                  xx        x         x
-xxxxxxx  xxxxxxxxxxxx        x         xxxxxxxx  xxxxxxxxxxxx        x         x
-xxxxxxx  xxxxxxxxxxxx        x         xxxxxxxx  xxxxxxxxxxxx        x         x
-x                  xx      xxxx        xx                  xx      xxxx        x
-x                  xx        x         xx                  xx        x         x
-xxxxxxxx      x    xx        x             xxxxx      x    xx        x         x
-x             x    xx                  xx             x    xx                  x
-x             x    xx                  xx             x    xx                  x
-x             x    xx                  xx             x    xx                  x
-x     xxxx  xxxxxxxxx                  xx     xxxx  xxxxxxxxx                  x
-x                  xx                  xx                  xx                  x
-xxxx                                   xxxxx                                   x
-x                                                                              x
-x      xxxxxxxxx   xx                          xxxxxxxxx   xx                  x
-x                  xx                  xx                  xx                  x
-x                                      xx                  xx                  x
-x                                      xx                  xx                  x
-x                  xx                  xx                  xx                  x
-x                  xx                  xx                  xx                  x
-xxxxxxxx      x    xx                  xxxxxxxxx      x    xx                  x
-x             x    xxxxxxxxxx          xx             x    xxxxxxxxxx          x
-x             x                        xx             x                        x
-x             x                        xx             x                        x
-x     xxxx  xxxxxxxxx           xxxxxxxxx     xxxx  xxxxxxxxx           xxxxxxxx
-x                  xx                  xx                  xx                  x
-x                  xx                                      xx                  x
-xxxx               xx                    xxx               xx                  x
-x      xxxxxxxxx   xx                  xxxxx   xxxxxxxxx   xx                  x
-x                  xx                  xx                  xx                  x
-x                  xx        x         xx                  xx        x         x
-xxxxxxx  xxxxxxxxxxxx        x         xxxxxxxx  xxxxxxxxxxxx        x         x
-xxxxxxx  xxxxxxxxxxxx        x         xxxxxxxx  xxxxxxxxxxxx        x         x
-x                  xx      xxxx        xx                  xx      xxxx        x
-x                  xx        x         xx                  xx        x         x
-xxxxxxxx      x    xx        x             xxxxx      x    xx        x         x
-x             x    xx                  xx             x    xx                  x
-x             x    xx                  xx             x    xx                  x
-x             x    xx                  xx             x    xx                  x
-x     xxxx  xxxxxxxxx                  xx     xxxx  xxxxxxxxx                  x
-x                  xx                  xx                  xx                  x
-xxxx                                   xxxxx                                   x
-x                                                                              x
-x      xxxxxxxxx   xx                          xxxxxxxxx   xx                  x
-x                  xx                  xx                  xx                  x
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-'''
-
-$map_string = '''
 xxxxxxxxxxxxxxxxxxxxxxxx
 x    x x               x
 x      x               x
@@ -108,9 +47,6 @@ class EightByFive extends GameBoard
         screen
 
       main: (screen) =>
-        screen.onUpdate = =>
-          console.log 'main'
-
         @defender = new Defender this
         @defender.setCoords x: 200, y: 150
         screen.add @defender

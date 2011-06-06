@@ -5,6 +5,7 @@ class Defender extends Entity
 
   update: ->
     Controls.moveByKeys.call @
+    @shoot() if @game.click
 
   draw: (context) ->
     Canvas.circle context, {
@@ -15,3 +16,11 @@ class Defender extends Entity
   setCoords: (coords) ->
     @x = coords.x
     @y = coords.y
+
+  shoot: ->
+    @game.main_screen.add new DefenderBullet @game, {
+      x:             @x
+      y:             @y
+      angle:         Math.atan2 @game.mouse.y - @y, @game.mouse.x - @x
+      radial_offset: @radius
+    }

@@ -9,7 +9,10 @@ class Entity
   cull:   -> null
 
   outsideScreen: ->
-    (@x > @game.halfSurfaceWidth || @x < -(@game.halfSurfaceWidth) || @y > @game.halfSurfaceHeight || @y < -(@game.halfSurfaceHeight))
+    if @game.center_coordinates
+      (@x > @game.halfSurfaceWidth || @x < -(@game.halfSurfaceWidth) || @y > @game.halfSurfaceHeight || @y < -(@game.halfSurfaceHeight))
+    else
+      (@x > @game.canvas.width || @x < -(@game.canvas.width) || @y > @game.canvas.height || @y < -(@game.canvas.height))
 
   listen: (type, callback) ->
     EventManager.instance.listen(type, this, callback)

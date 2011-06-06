@@ -7,20 +7,22 @@ class Bullet extends Entity
     @radial_distance = options.radial_distance ?= 95
     @auto_cull       = options.auto_cull       ?= true
 
+    @explode         = options.explode         if options.explode?
+    @explodeOn       = options.explodeOn       ?= ->
+      console.log 'def explodeOn'
+      Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
+
     super game
 
   update: ->
-    if @auto_cull and @outsideScreen()
-      @remove_from_world = true
-    else if Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
-      AssetManager.getSound("#{root.asset_path}bullet_boom.mp3").play()
-      @game.main_screen.add new BulletExplosion(@game, @explodesAt.x, @explodesAt.y)
-      @remove_from_world = true
-    else
-      @x = @radial_distance * Math.cos(@angle)
-      @y = @radial_distance * Math.sin(@angle)
-      @radial_distance += @speed * @game.clock_tick;
+    # return (@remove_from_world = true) if @auto_cull and @outsideScreen()
+    return @explode() if @explodeOn()
+    @move()
 
-  draw: (context) ->
-    @drawSpriteCentered context
-    super context
+  move: ->
+    @x = @radial_distance * Math.cos(@angle)
+    @y = @radial_distance * Math.sin(@angle)
+    @radial_distance += @speed * @game.clock_tick;
+
+  explode: ->
+    @remove_from_world = true

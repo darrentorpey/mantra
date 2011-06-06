@@ -1,24 +1,29 @@
 class DefenderBullet extends Bullet
-  constructor: (game, x, y, @angle, @explodesAt) ->
-    @speed = 250
+  constructor: (game, @options) ->
     super game, {
-      radial_distance: 95
-      angle:           @angle
+      radial_distance: 0
+      angle:           @options.angle
+      speed:           250
+      explodeOn:      ->
+        (Date.now() - @shotAt) > 2000
     }
-    @sprite = Sprite.rotateAndCache(AssetManager.getAsset("#{root.asset_path}bullet-single.png"), @angle)
 
-  update: ->
-    if @outsideScreen()
-      @remove_from_world = true
-    else if Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
-      AssetManager.getSound("#{root.asset_path}bullet_boom.mp3").play()
-      @game.main_screen.add new BulletExplosion(@game, @explodesAt.x, @explodesAt.y)
-      @remove_from_world = true
-    else
-      @x = @radial_distance * Math.cos(@angle)
-      @y = @radial_distance * Math.sin(@angle)
-      @radial_distance += @speed * @game.clock_tick;
+    _.defaults @options, {
+      size: 4
+    }
+
+    @shotFrom = { x: @options.x, y: @options.y }
+    @shotAt = Date.now()
+    @radial_offset = @options.radial_offset
 
   draw: (context) ->
-    @drawSpriteCentered context
-    super context
+    Canvas.rectangle context, {
+      x: @x, y: @y, w: @options.size, h: @options.size
+      style:  'rgba(173, 216, 230, 0.9)'
+    }
+
+  move: ->
+    starting_distance = @radial_offset + @radial_distance
+    @x = @shotFrom.x + (starting_distance * Math.cos(@angle))
+    @y = @shotFrom.y + (starting_distance * Math.sin(@angle))
+    @radial_distance += @speed * @game.clock_tick;

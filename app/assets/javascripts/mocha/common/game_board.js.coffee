@@ -117,8 +117,10 @@ class GameBoard
 
   startInput: ->
     getXandY = (e) =>
-      x = e.clientX - @canvas.getBoundingClientRect().left - (@canvas.width/2)
-      y = e.clientY - @canvas.getBoundingClientRect().top - (@canvas.height/2)
+      x = e.clientX - @canvas.getBoundingClientRect().left
+      x -= (@canvas.width/2) if @center_coordinates
+      y = e.clientY - @canvas.getBoundingClientRect().top
+      y -= (@canvas.height/2) if @center_coordinates
       { x: x, y: y }
 
     @canvas.addEventListener('click', (e) =>
