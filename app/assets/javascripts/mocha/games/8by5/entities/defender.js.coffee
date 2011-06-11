@@ -6,6 +6,8 @@ class Defender extends Entity
   update: ->
     Controls.moveByKeys.call @
     @shoot() if @game.click
+    # Map.tileCollision @, @game.map_def, @game.color_map
+    console.log "#{@touchedup} : #{@touchedright} : #{@toucheddown} : #{@touchedleft}"
 
   draw: (context) ->
     Canvas.circle context, {

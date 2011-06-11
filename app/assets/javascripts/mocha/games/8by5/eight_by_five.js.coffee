@@ -51,7 +51,7 @@ class EightByFive extends GameBoard
         @defender.setCoords x: 200, y: 150
         screen.add @defender
 
-        @color_map = Map.generateColorMapFromASCII $map_string, {
+        @map_def = {
           map_width:    24
           map_height:   20
           piece_width:  32
@@ -63,6 +63,9 @@ class EightByFive extends GameBoard
             'x' : null
           }
         }
+
+        @color_map = Map.generateColorMapFromASCII $map_string, @map_def
+        # console.log @color_map
 
         padding_w = 20
         padding_h = 16
