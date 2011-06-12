@@ -64,12 +64,29 @@ class EightByFive extends GameBoard
           }
         }
 
-        @color_map = Map.generateColorMapFromASCII $map_string, @map_def
+        # @color_map = Map.generateColorMapFromASCII $map_string, @map_def
+        @map = new Map {
+          map_width:    @map_def.map_width,
+          map_height:   @map_def.map_height,
+          piece_width:  @map_def.piece_width,
+          piece_height: @map_def.piece_height
+          translations: @map_def.translations
+        }
+
+        @map_data = $map_string.replace(/\n/g, '').trim().split('')
+        @map.drawFrom @map_data, @map_def.nuller
+
+        @color_map = @map.color_map
+
+        @map_presence = @map.getPresence @map_data, @map_def.nuller
+
         # console.log @color_map
 
         padding_w = 20
         padding_h = 16
-        screen.add new MapEntity this, { x: ent.x + padding_w, y: ent.y + padding_h, w: 24, h: 24, style: ent.obj } for ent in @color_map
+        padding_w = 0
+        padding_h = 0
+        screen.add new MapEntity this, { x: ent.x + padding_w, y: ent.y + padding_h, w: 32, h: 32, style: ent.obj } for ent in @color_map
 
         # screen.add new MapEntity this, { x: -100, y: -20, w: 32, h: 32 }
 

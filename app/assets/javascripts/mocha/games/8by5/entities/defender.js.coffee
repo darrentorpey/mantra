@@ -2,12 +2,24 @@ class Defender extends Entity
   constructor: (game, @radius = 16) ->
     super game, null, 0
     @speed = 5
+    @colw = 32
+    @colh = 32
+    @colx = 16
+    @coly = 16
 
   update: ->
     Controls.moveByKeys.call @
     @shoot() if @game.click
-    # Map.tileCollision @, @game.map_def, @game.color_map
-    console.log "#{@touchedup} : #{@touchedright} : #{@toucheddown} : #{@touchedleft}"
+    # console.log @game.clock_tick%20 * 1000
+    # console.log @game.timer
+
+    # it = !((@game.clock_tick * 1000)%35)
+    # console.log it
+    # if it
+    #   Map.tileCollision @, @game.map_def, @game.map_presence
+    #   console.log "top: #{@touchedup} | right: #{@touchedright} | bottom: #{@toucheddown} | left: #{@touchedleft}" if @touchedup || @touchedright || @toucheddown || @touchedlef  
+
+    Map.tileCollision @, @game.map_def, @game.map_presence
 
   draw: (context) ->
     Canvas.circle context, {
