@@ -2,14 +2,14 @@
 //= require      jquery
 //= require      jquery_ujs
 //= require_tree ./lib
-//= require      mocha/common/util/core
-//= require_tree ./mocha/common/util
-//= require      mocha/common/entities/entity
-//= require      mocha/common/entities/sprite_entity
-//= require_tree ./mocha/common
-//= require_tree ./mocha/games
-//= require      mocha/config
-//= require_tree ./mocha
+//= require      mantra/common/util/core
+//= require_tree ./mantra/common/util
+//= require      mantra/common/entities/entity
+//= require      mantra/common/entities/sprite_entity
+//= require_tree ./mantra/common
+//= require_tree ./mantra/games
+//= require      mantra/config
+//= require_tree ./mantra
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       || 
           window.webkitRequestAnimationFrame || 
