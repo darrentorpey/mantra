@@ -8,8 +8,4 @@ $em            = EventManager.instance()
 $logger        = Logger.instance()
 $audio_manager = AudioManager.instance()
 
-$logger.registerSubsystem 'global'
-$logger.registerSubsystem 'sound'
-$logger.registerSubsystem 'assets'
-$logger.registerSubsystem 'input'
-$logger.registerSubsystem 'game'
+$logger.subsystems 'global', 'sound', 'assets', 'input', 'game'

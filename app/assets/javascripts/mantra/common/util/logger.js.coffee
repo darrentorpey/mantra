@@ -11,6 +11,9 @@ class Logger
 
   constructor: (@log_levels = {}) -> null
 
+  subsystems: (subsystems...) ->
+    @registerSubsystem(system) for system in subsystems
+
   registerSubsystem: (name) ->
     @[name] = {
       debug: (message) => @log "[#{name}] #{message}" if Logger.level_map[@log_levels[name]] >= Logger.level_map['debug']
