@@ -27,6 +27,7 @@ class Defender extends Entity
       style:  'rgba(255, 170, 30, .8)'
     }
 
+    # Draw the collision box
     # Canvas.rectangle context, {
     #   x: @x - @colx, y: @y - @coly, w: @radius * 2, h: @radius * 2
     #   style:  'rgba(273, 216, 230, 0.9)'

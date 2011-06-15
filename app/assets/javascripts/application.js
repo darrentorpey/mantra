@@ -6,8 +6,6 @@
 //= require      mantra/config
 //= require_tree ./games
 
-// require_tree ./mantra
-
 var game_launcher, game;
 
 function launchGame(game_name) {

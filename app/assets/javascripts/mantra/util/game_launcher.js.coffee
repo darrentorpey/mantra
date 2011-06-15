@@ -10,10 +10,11 @@ class GameLauncher
     assets.images ?= []
     assets.sounds ?= []
 
+    @configureEngine()
+
     console.log 'Initializing game...'
     $logger.assets.debug "# assets: #{assets.images.length}"
 
-    @game.configureEngine()
     @game.init()
     @game.start() if @game.currentScreen
 
@@ -22,6 +23,15 @@ class GameLauncher
     @addImage image     for image in assets.images
     @addSound id, sound for id, sound of assets.sounds
     @addSound id, music for id, music of assets.music
+
+  configureEngine: ->
+    root.$em            = EventManager.instance()
+    root.$logger        = Logger.instance()
+    root.$audio_manager = AudioManager.instance()
+
+    $logger.subsystems 'global', 'sound', 'assets', 'input', 'game'
+
+    @game.configureEngine()
 
   launch: ->
     AssetManager.downloadAll (=> @start())

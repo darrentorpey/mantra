@@ -1,5 +1,6 @@
-//= require      mantra/common/util/core
-//= require_tree ./mantra/common/util
-//= require      mantra/common/entities/entity
-//= require      mantra/common/entities/sprite_entity
-//= require_tree ./mantra/common
+//= require      mantra/util/core
+//= require_tree ./mantra/util
+//= require      mantra/entities/entity
+//= require      mantra/entities/sprite_entity
+//= require      mantra/config
+//= require_tree ./mantra

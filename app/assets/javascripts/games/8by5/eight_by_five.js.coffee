@@ -135,6 +135,7 @@ class EightByFive extends GameBoard
 
   configureEngine: ->
     # Levels, in increasing order of verbosity: off, error, warn, info, debug
+    console.log $logger
     $logger.levels {
       global: 'debug'
       sound:  'warn'
