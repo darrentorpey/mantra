@@ -4,9 +4,9 @@ x    x x               x
 x      x               x
 x      xxxxx        xxxx
 x  x   x               x
-x      x               x
+x      x       o       x
 x  o   x               x
-x             xxx      x
+x             x x      x
 x             xxx      x
 x      x               x
 x      x               x
@@ -43,6 +43,23 @@ class EightByFive extends GameBoard
         screen.onUpdate = =>
           if @state.current_state != 'initialized' && AssetManager.isDone()
             @showScreen 'intro'
+
+        screen
+
+      intro: (screen) =>
+        intro_ui_pane = new UIPane this
+        intro_ui_pane.addTextItem
+          color: 'orange'
+          x:     'centered'
+          y:     'centered'
+          text:  -> 'Click to start!'
+
+        screen.add intro_ui_pane
+        screen.onUpdate = =>
+          console.log 'intro'
+          if @click
+            # @bg_song.play()
+            @showScreen 'main'
 
         screen
 
@@ -97,29 +114,12 @@ class EightByFive extends GameBoard
 
         screen
 
-      intro: (screen) =>
-        intro_ui_pane = new UIPane this
-        intro_ui_pane.addTextItem
-          color: 'orange'
-          x:     'centered'
-          y:     'centered'
-          text:  -> 'Click to start!'
-
-        screen.add intro_ui_pane
-        screen.onUpdate = =>
-          console.log 'intro'
-          if @click
-            # @bg_song.play()
-            @showScreen 'main'
-
-        screen
-
       pause: (screen) =>
         pause_ui_pane = new UIPane this
         pause_ui_pane.addTextItem
           color: 'white'
           x:     'centered'
-          y:     0
+          y:     'centered'
           text:  -> ':: paused ::'
 
         screen.add pause_ui_pane
