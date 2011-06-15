@@ -2,20 +2,20 @@ $map_string = '''
 xxxxxxxxxxxxxxxxxxxxxxxx
 x    x x               x
 x      x               x
-x      x               x
+x      xxxxx        xxxx
 x  x   x               x
 x      x               x
-x  or  x               x
-x                      x
+x  o   x               x
 x             xxx      x
-x      x      xxx      x
-x      x      xxx      x
+x             xxx      x
 x      x               x
 x      x               x
 x      x               x
 x      x               x
+x      x       xxxxxxxxx
 x      x               x
-x      x               x
+x      x r             x
+x      x        oo     x
 xxxxxxxxxxxxxxxxxxxxxxxx
 '''
 
@@ -48,7 +48,7 @@ class EightByFive extends GameBoard
 
       main: (screen) =>
         @defender = new Defender this
-        @defender.setCoords x: 200, y: 150
+        @defender.setCoords x: 300, y: 150
         screen.add @defender
 
         @map_def = {
