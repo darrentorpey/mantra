@@ -185,3 +185,13 @@ class EvilAliens extends GameBoard
 
   getBulletExplosions: ->
     ent for ent in @main_screen.entities when ent instanceof BulletExplosion
+
+  configureEngine: ->
+    # Levels, in increasing order of verbosity: off, error, warn, info, debug
+    $logger.levels {
+      global: 'debug'
+      sound:  'warn'
+      assets: 'info'
+      input:  'info'
+      game:   'info'
+    }

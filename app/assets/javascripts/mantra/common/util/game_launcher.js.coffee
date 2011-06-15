@@ -12,6 +12,8 @@ class GameLauncher
 
     console.log 'Initializing game...'
     $logger.assets.debug "# assets: #{assets.images.length}"
+
+    @game.configureEngine()
     @game.init()
     @game.start() if @game.currentScreen
 

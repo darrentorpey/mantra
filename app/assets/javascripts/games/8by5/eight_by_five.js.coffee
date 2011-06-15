@@ -132,3 +132,13 @@ class EightByFive extends GameBoard
         
         screen
     }
+
+  configureEngine: ->
+    # Levels, in increasing order of verbosity: off, error, warn, info, debug
+    $logger.levels {
+      global: 'debug'
+      sound:  'warn'
+      assets: 'info'
+      input:  'info'
+      game:   'info'
+    }

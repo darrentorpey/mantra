@@ -2,24 +2,11 @@
 //= require      jquery
 //= require      jquery_ujs
 //= require_tree ./lib
-//= require      mantra/common/util/core
-//= require_tree ./mantra/common/util
-//= require      mantra/common/entities/entity
-//= require      mantra/common/entities/sprite_entity
-//= require_tree ./mantra/common
-//= require_tree ./mantra/games
+//= require      mantra
 //= require      mantra/config
-//= require_tree ./mantra
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       || 
-          window.webkitRequestAnimationFrame || 
-          window.mozRequestAnimationFrame    || 
-          window.oRequestAnimationFrame      || 
-          window.msRequestAnimationFrame     || 
-          function(/* function */ callback, /* DOMElement */ element){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
+//= require_tree ./games
+
+// require_tree ./mantra
 
 var game_launcher, game;
 
