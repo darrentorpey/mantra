@@ -23,5 +23,10 @@ class Canvas
     context.fill()
 
   @rectangle: (context, params) ->
-    context.fillStyle = params.style
-    context.fillRect params.x, params.y, params.w, params.h
+    context.fillStyle   = params.style
+    context.strokeStyle = params.style
+    context.lineWidth   = params.borderWidth || 1
+    if params.hollow
+      context.strokeRect params.x, params.y, params.w, params.h
+    else
+      context.fillRect params.x, params.y, params.w, params.h
