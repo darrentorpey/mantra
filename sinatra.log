@@ -1,0 +1,5 @@
+127.0.0.1 - - [17/Jun/2011 06:56:44] "GET /soundmanager2_debug.swf " 404 455 0.0172
+127.0.0.1 - - [17/Jun/2011 07:03:00] "GET /javascripts/javascripts/mantra/util/asset_manager.js.coffee.coffee " 404 498 0.0008
+127.0.0.1 - - [17/Jun/2011 07:03:11] "GET /javascripts/javascripts/mantra/util/asset_manager.js.coffee.coffee " 404 498 0.0009
+127.0.0.1 - - [17/Jun/2011 08:15:38] "GET /javascripts/lib/ " 404 448 0.0028
+127.0.0.1 - - [17/Jun/2011 08:15:39] "GET /__sinatra__/404.png " 304 - 0.0349
