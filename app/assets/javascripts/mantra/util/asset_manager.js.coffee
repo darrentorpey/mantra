@@ -80,3 +80,10 @@ class AssetManager
       @setPosition 0
       @play()
     @asset_lookup[id] = @cache[path]
+
+  @configureSoundManager: (asset_path) ->
+    soundManager.url                   = asset_path
+    soundManager.flashVersion          = 9
+    soundManager.debugFlash            = false
+    soundManager.debugMode             = false
+    soundManager.defaultOptions.volume = 5

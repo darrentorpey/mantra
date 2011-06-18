@@ -95,7 +95,7 @@ class EightByFive extends GameBoard
 
         @color_map = @map.color_map
 
-        @map_presence = @map.getPresence @map_data, @map_def.nuller
+        @map_presence = @map.getPresenceLookup @map_data, @map_def.nuller
 
         # console.log @color_map
 
