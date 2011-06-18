@@ -28,23 +28,9 @@ class EightByFive extends GameBoard
 
     super @options
 
+    @addScreen ScreenMaker.create this, 'loading'
+
     @setScreens {
-      loading: (screen) =>
-        @loading_ui_pane = new UIPane this
-
-        @loading_ui_pane.addTextItem
-          color: 'orange'
-          x:     'centered'
-          y:     @canvas.height/2
-          text:  -> "Loading... #{AssetManager.getProgress()}%"
-
-        screen.add @loading_ui_pane
-
-        screen.onUpdate = =>
-          if @state.current_state != 'initialized' && AssetManager.isDone()
-            @showScreen 'intro'
-
-        screen
 
       main: (screen) =>
         @defender = new Defender this

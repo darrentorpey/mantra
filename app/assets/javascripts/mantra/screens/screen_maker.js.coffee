@@ -20,6 +20,19 @@ class ScreenMaker
           onUpdate: =>
             game.showScreen options.firstScreen if game.click
         }
+      when 'loading'
+        {
+          addText: (screen) ->
+            ui_pane = new UIPane game
+            ui_pane.addTextItem
+              color: 'orange'
+              x:     'centered'
+              y:     game.canvas.height/2
+              text:  -> "Loading... #{AssetManager.getProgress()}%"
+            screen.add ui_pane
+          onUpdate: =>
+            game.showScreen 'intro' if game.state.current_state != 'initialized' && AssetManager.isDone()
+        }
       else {}
 
     _.defaults options, presets
