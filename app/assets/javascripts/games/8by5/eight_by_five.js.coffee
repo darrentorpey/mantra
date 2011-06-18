@@ -10,12 +10,12 @@ x            x x     x
 x            xxx     x
 x      x             x
 x      x             x
-x      x             x
+x      x  o          x
 x      x             x
 x      x      xxxxxxxx
 x      x             x
 x      x r           x
-x      x       oo    x
+x      x       or    x
 xxxxxxxxxxxxxxxxxxxxxx
 '''
 
@@ -66,45 +66,23 @@ class EightByFive extends GameBoard
 
         @map_presence = @map.getPresenceLookup @map_data, @map_def.nuller
 
-        # console.log @color_map
-
         padding_w = 20
         padding_h = 16
         padding_w = 0
         padding_h = 0
         screen.add new MapEntity this, { x: ent.x + padding_w, y: ent.y + padding_h, w: 32, h: 32, style: ent.obj } for ent in @color_map
 
-        # screen.add new MapEntity this, { x: -100, y: -20, w: 32, h: 32 }
-
         screen.onKeys
-          P: =>
-            @showScreen 'pause'
-            # @bg_song.pause()
+          P: => @showScreen 'pause'
 
-        screen
-
-      pause: (screen) =>
-        pause_ui_pane = new UIPane this
-        pause_ui_pane.addTextItem
-          color: 'white'
-          x:     'centered'
-          y:     'centered'
-          text:  -> ':: paused ::'
-
-        screen.add pause_ui_pane
-
-        screen.onKeys {
-          P: =>
-            @showScreen 'main'
-            # @bg_song.resume()
-        }
-        
         screen
     }
 
     @addScreen ScreenMaker.create this, 'intro', {
       text: 'Click anywhere to start!'
     }
+
+    @addScreen ScreenMaker.create this, 'pause'
 
   configureEngine: ->
     # Levels, in increasing order of verbosity: off, error, warn, info, debug

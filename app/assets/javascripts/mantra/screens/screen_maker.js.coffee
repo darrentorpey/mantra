@@ -33,6 +33,21 @@ class ScreenMaker
           onUpdate: =>
             game.showScreen 'intro' if game.state.current_state != 'initialized' && AssetManager.isDone()
         }
+      when 'pause'
+        {
+          addText: (screen) ->
+            ui_pane = new UIPane game
+            ui_pane.addTextItem
+              color: 'white'
+              x:     'centered'
+              y:     'centered'
+              text:  -> ':: paused ::'
+            screen.add ui_pane
+          onKeys: {
+            P: =>
+              game.showScreen 'main'
+          }
+        }
       else {}
 
     _.defaults options, presets
@@ -40,6 +55,7 @@ class ScreenMaker
     screen = new Screen game, options.name
 
     options.addText screen if options.addText
+    screen.onKeys options.onKeys if options.onKeys
 
     screen.onUpdate = options.onUpdate
 
