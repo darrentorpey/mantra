@@ -100,6 +100,8 @@ class GameBoard
 
     @state.send_event 'start'
 
+    $logger.game.info 'Game started'
+
   onKeys: (@key_map) -> null
 
   onKey: (key) ->
@@ -107,7 +109,7 @@ class GameBoard
     @currentScreen.onKey key if @currentScreen
 
   showScreen: (screen) ->
-    screen = @screens_lookup[screen] if screen if typeof screen is 'string'
+    screen = @screens_lookup[screen] if typeof screen is 'string'
 
     $logger.game.info "Showing screen '#{screen.name}'"
 

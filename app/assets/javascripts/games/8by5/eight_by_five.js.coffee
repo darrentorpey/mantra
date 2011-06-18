@@ -1,22 +1,22 @@
 $map_string = '''
-xxxxxxxxxxxxxxxxxxxxxxxx
-x    x x               x
-x      x               x
-x      xxxxx        xxxx
-x  x   x               x
-x      x       o       x
-x  o   x               x
-x             x x      x
-x             xxx      x
-x      x               x
-x      x               x
-x      x               x
-x      x               x
-x      x       xxxxxxxxx
-x      x               x
-x      x r             x
-x      x        oo     x
-xxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxx
+x    x x             x
+x      x             x
+x      xxxx       xxxx
+x  x   x             x
+x      x      o      x
+x  o   x             x
+x            x x     x
+x            xxx     x
+x      x             x
+x      x             x
+x      x             x
+x      x             x
+x      x      xxxxxxxx
+x      x             x
+x      x r           x
+x      x       oo    x
+xxxxxxxxxxxxxxxxxxxxxx
 '''
 
 class EightByFive extends GameBoard
@@ -46,30 +46,13 @@ class EightByFive extends GameBoard
 
         screen
 
-      intro: (screen) =>
-        intro_ui_pane = new UIPane this
-        intro_ui_pane.addTextItem
-          color: 'orange'
-          x:     'centered'
-          y:     'centered'
-          text:  -> 'Click to start!'
-
-        screen.add intro_ui_pane
-        screen.onUpdate = =>
-          console.log 'intro'
-          if @click
-            # @bg_song.play()
-            @showScreen 'main'
-
-        screen
-
       main: (screen) =>
         @defender = new Defender this
         @defender.setCoords x: 300, y: 150
         screen.add @defender
 
         @map_def = {
-          map_width:    24
+          map_width:    22
           map_height:   20
           piece_width:  32
           piece_height: 32
@@ -131,6 +114,10 @@ class EightByFive extends GameBoard
         }
         
         screen
+    }
+
+    @addScreen ScreenMaker.create this, 'intro', {
+      text: 'Click anywhere to start!'
     }
 
   configureEngine: ->
