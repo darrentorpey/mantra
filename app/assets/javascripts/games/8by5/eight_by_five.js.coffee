@@ -1,24 +1,3 @@
-$map_string = '''
-xxxxxxxxxxxxxxxxxxxxxx
-x    x x             x
-x      x             x
-x      xxxx       xxxx
-x  x   x             x
-x      x      o      x
-x  o   x             x
-x            x x     x
-x            xxx     x
-x      x             x
-x      x             x
-x      x  o          x
-x      x             x
-x      x      xxxxxxxx
-x      x             x
-x      x r           x
-x      x       or    x
-xxxxxxxxxxxxxxxxxxxxxx
-'''
-
 class EightByFive extends GameBoard
   constructor: (@options = {}) ->
     @canvas = @options.canvas
@@ -31,46 +10,49 @@ class EightByFive extends GameBoard
     @addScreen ScreenMaker.create this, 'loading'
 
     @setScreens {
-
       main: (screen) =>
         @defender = new Defender this
         @defender.setCoords x: 300, y: 150
         screen.add @defender
 
-        @map_def = {
+
+        $map_string = '''
+        xxxxxxxxxxxxxxxxxxxxxx
+        x    x x             x
+        x      x             x
+        x      xxxx       xxxx
+        x  x   x             x
+        x      x      o      x
+        x  o                 x
+        x            x x     x
+        x            xxx     x
+        x                    x
+        x      x             x
+        x      x  o          x
+        x      x             x
+        x      x      xxxxxxxx
+        x      x             x
+        x      x r           x
+        x      x       or    x
+        xxxxxxxxxxxxxxxxxxxxxx
+        '''
+
+        @map = new Map {
           map_width:    22
           map_height:   20
           piece_width:  32
           piece_height: 32
           nuller:       ' '
+          data:         $map_string
           translations: {
             'o' : 'orange'
             'r' : 'red'
             'x' : null
-          }
+          },
         }
 
-        # @color_map = Map.generateColorMapFromASCII $map_string, @map_def
-        @map = new Map {
-          map_width:    @map_def.map_width,
-          map_height:   @map_def.map_height,
-          piece_width:  @map_def.piece_width,
-          piece_height: @map_def.piece_height
-          translations: @map_def.translations
-        }
+        screen.add new MapEntity this, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj } for ent in @map.objectMap()
 
-        @map_data = $map_string.replace(/\n/g, '').trim().split('')
-        @map.drawFrom @map_data, @map_def.nuller
-
-        @color_map = @map.color_map
-
-        @map_presence = @map.getPresenceLookup @map_data, @map_def.nuller
-
-        padding_w = 20
-        padding_h = 16
-        padding_w = 0
-        padding_h = 0
-        screen.add new MapEntity this, { x: ent.x + padding_w, y: ent.y + padding_h, w: 32, h: 32, style: ent.obj } for ent in @color_map
 
         screen.onKeys
           P: => @showScreen 'pause'
