@@ -8,10 +8,15 @@ class EightByFive extends GameBoard
 
     @addScreen ScreenMaker.create this, 'loading'
 
+    @addScreen ScreenMaker.create this, 'intro'
+      text: 'Click anywhere to start!'
+
+    @addScreen ScreenMaker.create this, 'pause'
+
     @setScreens
       main: (screen) =>
         @defender = new Defender this
-        @defender.setCoords x: 300, y: 150
+        @defender.setCoords x: 332, y: 182
         screen.add @defender
 
         @map = new Map
@@ -52,11 +57,6 @@ class EightByFive extends GameBoard
           P: => @showScreen 'pause'
 
         screen
-
-    @addScreen ScreenMaker.create this, 'intro'
-      text: 'Click anywhere to start!'
-
-    @addScreen ScreenMaker.create this, 'pause'
 
   configureEngine: ->
     # Levels, in increasing order of verbosity: off, error, warn, info, debug
