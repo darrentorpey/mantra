@@ -19,7 +19,7 @@ class DefenderBullet extends Bullet
   draw: (context) ->
     Canvas.rectangle context, {
       x: @x, y: @y, w: @options.size, h: @options.size
-      style:  'rgba(173, 216, 230, 0.9)'
+      style:  'rgba(240, 240, 240, 1)'
     }
 
   move: ->

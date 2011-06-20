@@ -24,7 +24,7 @@ class Defender extends Entity
   draw: (context) ->
     Canvas.circle context, {
       x: @x, y: @y, radius: @radius
-      style:  'rgba(255, 170, 30, .8)'
+      style:  'rgba(100, 200, 20, .8)'
     }
 
     # Draw the collision box
