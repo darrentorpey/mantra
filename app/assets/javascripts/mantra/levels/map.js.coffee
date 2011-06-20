@@ -2,8 +2,8 @@ class Map
   constructor: (@options) ->
     @map_width    = @options.map_width
     @map_height   = @options.map_height
-    @piece_width  = @options.piece_width
-    @piece_height = @options.piece_height
+    @tile_width   = @options.tile_width
+    @tile_height  = @options.tile_height
     @translations = @options.translations
 
     @map_data     = @options.data
@@ -16,7 +16,7 @@ class Map
     i = 0
     object_map = []
     for datum in @map_data
-      object_map.push { x: i%@map_width * @piece_width, y: Math.floor(i/@map_width) * @piece_height, obj: @translations[datum] } if datum != @options.nuller
+      object_map.push { x: i%@map_width * @tile_width, y: Math.floor(i/@map_width) * @tile_height, obj: @translations[datum] } if datum != @options.nuller
       i++
     object_map
 
@@ -44,21 +44,21 @@ class Map
     approximation = data.approximation || 10
 
     for t in [tolerance..(obj.colw - tolerance)] by approximation
-      bottom_tile = @getTileInMap presence_map, obj.x + obj.colx + t, obj.y + obj.coly + obj.colh - 1, map_def.piece_width, map_def.piece_height, map_def.map_width, map_def.map_height
-      top_tile    = @getTileInMap presence_map, obj.x + obj.colx + t, obj.y + obj.coly,                map_def.piece_width, map_def.piece_height, map_def.map_width, map_def.map_height
+      bottom_tile = @getTileInMap presence_map, obj.x + obj.colx + t, obj.y + obj.coly + obj.colh - 1, map_def.tile_width, map_def.tile_height, map_def.map_width, map_def.map_height
+      top_tile    = @getTileInMap presence_map, obj.x + obj.colx + t, obj.y + obj.coly,                map_def.tile_width, map_def.tile_height, map_def.map_width, map_def.map_height
       obj.toucheddown = true if bottom_tile
       obj.touchedup   = true if top_tile
 
     for t in [tolerance..(obj.colh - tolerance)] by approximation
-      left_tile  = @getTileInMap presence_map, obj.x + obj.colx,                obj.y + obj.coly + t, map_def.piece_width, map_def.piece_height, map_def.map_width, map_def.map_height
-      right_tile = @getTileInMap presence_map, obj.x + obj.colx + obj.colw - 1, obj.y + obj.coly + t, map_def.piece_width, map_def.piece_height, map_def.map_width, map_def.map_height
+      left_tile  = @getTileInMap presence_map, obj.x + obj.colx,                obj.y + obj.coly + t, map_def.tile_width, map_def.tile_height, map_def.map_width, map_def.map_height
+      right_tile = @getTileInMap presence_map, obj.x + obj.colx + obj.colw - 1, obj.y + obj.coly + t, map_def.tile_width, map_def.tile_height, map_def.map_width, map_def.map_height
       obj.touchedleft  = true if left_tile  #if map.tileIsSolid th, left_tile
       obj.touchedright = true if right_tile #if map.tileIsSolid th, right_tile
 
-    obj.y = @yPixelToTile(map_def.piece_height, obj.y + obj.coly) - obj.coly                              if obj.touchedup
-    obj.y = @yPixelToTile(map_def.piece_height, obj.y + obj.coly + obj.colh, 0) - obj.coly - obj.colh     if obj.toucheddown
-    obj.x = @xPixelToTile(map_def.piece_width,  obj.x + obj.colx, 1) - obj.colx                           if obj.touchedleft
-    obj.x = @xPixelToTile(map_def.piece_width,  obj.x + obj.colx + obj.colw - 1, 0) - obj.colx - obj.colw if obj.touchedright
+    obj.y = @yPixelToTile(map_def.tile_height, obj.y + obj.coly) - obj.coly                              if obj.touchedup
+    obj.y = @yPixelToTile(map_def.tile_height, obj.y + obj.coly + obj.colh, 0) - obj.coly - obj.colh     if obj.toucheddown
+    obj.x = @xPixelToTile(map_def.tile_width,  obj.x + obj.colx, 1) - obj.colx                           if obj.touchedleft
+    obj.x = @xPixelToTile(map_def.tile_width,  obj.x + obj.colx + obj.colw - 1, 0) - obj.colx - obj.colw if obj.touchedright
 
   @getTileInMap: (presence_map, x, y, tile_width, tile_height, map_width, map_height) ->
     tile_x = (Math.floor (x / tile_width))  - 1
