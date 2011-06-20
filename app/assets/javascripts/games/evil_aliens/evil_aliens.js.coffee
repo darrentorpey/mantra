@@ -95,7 +95,7 @@ class EvilAliens extends GameBoard
     @addScreen @pause_screen
 
   createMainScreen: ->
-    @main_screen  = new Screen this, 'main'
+    @main_screen  = new Screen this, 'game'
 
     @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry      = new Sentry     this

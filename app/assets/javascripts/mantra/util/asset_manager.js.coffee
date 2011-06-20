@@ -55,6 +55,9 @@ class AssetManager
   @getBackgroundSong: (id) ->
     @asset_lookup[id]
 
+  @playSound: (id) ->
+    @asset_lookup[id].play()
+
   @downloadSounds: (callback) ->
     return unless soundManager
     soundManager.onready =>

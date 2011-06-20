@@ -1,8 +1,7 @@
 class ScreenMaker
   @create: (game, preset_name, options = {}) ->
-    console.log 'preset_name', preset_name
     _.defaults options, {
-      firstScreen: 'main'
+      firstScreen: 'game'
       name:        preset_name
     }
 
@@ -45,7 +44,7 @@ class ScreenMaker
             screen.add ui_pane
           onKeys: {
             P: =>
-              game.showScreen 'main'
+              game.showScreen options.gameScreen || 'game'
           }
         }
       else {}

@@ -2,7 +2,8 @@ class EightByFive extends GameBoard
   constructor: (@options = {}) ->
     @canvas = @options.canvas
     @assets
-      images: ['alien.png']
+      sounds:
+        'bullet_shot' : 'simple_shot.mp3'
 
     super @options
 
@@ -14,7 +15,7 @@ class EightByFive extends GameBoard
     @addScreen ScreenMaker.create this, 'pause'
 
     @setScreens
-      main: (screen) =>
+      game: (screen) =>
         @defender = new Defender this
         @defender.setCoords x: 332, y: 182
         screen.add @defender

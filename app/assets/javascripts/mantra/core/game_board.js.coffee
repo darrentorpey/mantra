@@ -29,23 +29,9 @@ class GameBoard
 
   assets:  (@assets)  -> null
   setScreens: (screens) ->
-    # return @screens unless screens?
-    # @addScreen screens.loading(new Screen this, 'loading') if screens.loading?    
-    if screens.loading?
-      @loading_screen = new Screen this, 'loading'
-      @addScreen screens.loading(@loading_screen)
-
-    if screens.main?
-      @main_screen = new Screen this, 'main'
-      @addScreen screens.main(@main_screen)
-
-    if screens.intro?
-      @intro_screen = new Screen this, 'intro'
-      @addScreen screens.intro(@intro_screen)
-
-    if screens.pause?
-      @pause_screen = new Screen this, 'pause'
-      @addScreen screens.pause(@pause_screen)
+    for screen_name, creator of screens
+      screen = new Screen this, screen_name
+      @addScreen creator(screen)
 
   init: ->
     @surfaceWidth      = @canvas.width
