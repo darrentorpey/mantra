@@ -7,8 +7,12 @@ class Bullet extends Entity
 
     @explodesAt      = options.explodesAt
     @explode         = options.explode         if options.explode?
-    @explodeOn       = options.explodeOn       ?= ->
-      Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
+
+    _.defaults options,
+      explodeWhen: ->
+        Math.abs(@x) >= Math.abs(@explodesAt.x) || Math.abs(@y) >= Math.abs(@explodesAt.y)
+
+    @explodeWhen     = options.explodeWhen
 
     @auto_cull       = options.auto_cull       ?= false
 
@@ -16,7 +20,7 @@ class Bullet extends Entity
 
   update: ->
     return (@remove_from_world = true) if @auto_cull and @outsideScreen()
-    return @explode() if @explodeOn()
+    return @explode() if @explodeWhen()
 
     @move()
 

@@ -2,10 +2,8 @@ class Defender extends Entity
   constructor: (game, @radius = 16) ->
     super game, null, 0
     @speed = 5
-    @colw = 32
-    @colh = 32
-    @colx = 16
-    @coly = 16
+    [@colx, @coly] = [16, 16]
+    [@colw, @colh] = [32, 32]
 
   update: ->
     Controls.moveByKeys.call @
@@ -14,14 +12,14 @@ class Defender extends Entity
     @game.map.tileCollision @
 
   draw: (context) ->
-    Canvas.circle context, {
+    Canvas.circle context,
       x: @x, y: @y, radius: @radius
       style:  'rgba(100, 200, 20, .8)'
-    }
 
     if @game.draw_collision_boxes
       Canvas.rectangle context,
-        x: @x - @colx, y: @y - @coly, w: @radius * 2, h: @radius * 2
+        x: @x - @colx,  y: @y - @coly,
+        w: @radius * 2, h: @radius * 2
         hollow: true
         style:  'white'
 

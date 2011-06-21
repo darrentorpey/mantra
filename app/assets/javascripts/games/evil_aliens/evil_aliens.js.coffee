@@ -152,7 +152,7 @@ class EvilAliens extends Mantra.Game
     @loading_screen.onUpdate = =>
       if @state.current_state != 'initialized' && AssetManager.isDone()
         @createIntroScreen()
-        @showScreen @intro_screen
+        @showScreen 'intro'
 
     @addScreen @loading_screen
 
