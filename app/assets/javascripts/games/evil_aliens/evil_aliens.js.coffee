@@ -1,4 +1,4 @@
-class EvilAliens extends GameBoard
+class EvilAliens extends Mantra.Game
   @starting_lives = 10
 
   constructor: (@options = {}) ->

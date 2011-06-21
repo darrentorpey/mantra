@@ -1,4 +1,4 @@
-class EightByFive extends GameBoard
+class EightByFive extends Mantra.Game
   constructor: (@options = {}) ->
     @canvas = @options.canvas
     @assets
@@ -7,16 +7,16 @@ class EightByFive extends GameBoard
 
     super @options
 
-    @addScreen ScreenMaker.create this, 'loading'
+    @addScreen ScreenMaker.create @, 'loading'
 
-    @addScreen ScreenMaker.create this, 'intro'
+    @addScreen ScreenMaker.create @, 'intro'
       text: 'Click anywhere to start!'
 
-    @addScreen ScreenMaker.create this, 'pause'
+    @addScreen ScreenMaker.create @, 'pause'
 
     @setScreens
       game: (screen) =>
-        @defender = new Defender this
+        @defender = new Defender @
         @defender.setCoords x: 332, y: 182
         screen.add @defender
 
@@ -51,7 +51,7 @@ class EightByFive extends GameBoard
             xxxxxxxxxxxxxxxxxxxxxx
             '''
 
-        screen.add new MapEntity this, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj } for ent in @map.objectMap()
+        screen.add new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj } for ent in @map.objectMap()
 
 
         screen.onKeys

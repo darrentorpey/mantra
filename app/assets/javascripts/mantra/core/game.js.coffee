@@ -1,4 +1,4 @@
-class GameBoard
+class Mantra.Game
   constructor: (@options) ->
     @canvas  ?= Canvas.create_canvas()
     @context  = @canvas.getContext '2d'

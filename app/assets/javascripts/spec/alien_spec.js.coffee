@@ -21,7 +21,7 @@ describe 'Alien:', ->
     stub_canvas()
     stub_entity_sprites()
     stub_asset_manager()
-    @game = new GameBoard
+    @game = new Mantra.Game
 
   describe 'a new one', ->
     beforeEach ->
