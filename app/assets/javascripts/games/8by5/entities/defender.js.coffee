@@ -30,7 +30,7 @@ class Defender extends Entity
     @y = coords.y
 
   shoot: ->
-    @game.screens_lookup.game.add new DefenderBullet @game,
+    @game.screens.game.add new DefenderBullet @game,
       x:             @x
       y:             @y
       angle:         Math.atan2 @game.mouse.y - @y, @game.mouse.x - @x

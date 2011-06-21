@@ -4,8 +4,7 @@ class Mantra.Game
     @context  = @canvas.getContext '2d'
     @entities = []
     @timer    = new Timer
-    @screens  = []
-    @screens_lookup  = {}
+    @screens  = {}
     @key_map  = {}
 
     _.defaults @options, {
@@ -14,20 +13,16 @@ class Mantra.Game
       }
     }
 
-    @assets  ?= @options.assets
-
     @process_game_over = -> null
     @state    = new FSM 'initialized', { name: 'initialized' }
     @state.add_transition 'start', 'initialized', null,                      'started'
     @state.add_transition 'lose',  'started',     (=> @process_game_over()), 'game_lost'
     @state.add_transition 'restart', ['started', 'game_won', 'game_lost'], null, 'started'
 
-    @surfaceWidth      = null
-    @surfaceHeight     = null
-    @halfSurfaceWidth  = null
-    @halfSurfaceHeight = null
+    [@surfaceWidth, @surfaceHeight, @halfSurfaceWidth, @halfSurfaceHeight] = [null, null, null, null]
 
   assets:  (@assets)  -> null
+
   setScreens: (screens) ->
     for screen_name, creator of screens
       screen = new Screen this, screen_name
@@ -95,11 +90,11 @@ class Mantra.Game
     @currentScreen.onKey key if @currentScreen
 
   showScreen: (screen) ->
-    screen = @screens_lookup[screen] if typeof screen is 'string'
+    screen = @screens[screen] if typeof screen is 'string'
 
     $logger.game.info "Showing screen '#{screen.name}'"
 
-    i_screen.turnOff() for i_screen in @screens
+    i_screen.turnOff() for name, i_screen of @screens
     screen.turnOn()
     @currentScreen = screen
 
@@ -122,7 +117,6 @@ class Mantra.Game
     , false)
 
   addScreen: (screen) =>
-    @screens.push screen
-    @screens_lookup[screen.name] = screen
+    @screens[screen.name] = screen
     @addEntity screen
     @currentScreen ?= screen
