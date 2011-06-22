@@ -12,3 +12,10 @@ class Timer
     game_delta  = Math.min wall_delta, @max_step
     @game_time += game_delta
     game_delta
+
+  @after: (game, options = {}) ->
+    options.seconds = options.milliseconds/1000 if options.milliseconds?
+
+    starting_tick = game.timer.game_time
+    timer_check = ->
+      (game.timer.game_time - starting_tick) > options.seconds

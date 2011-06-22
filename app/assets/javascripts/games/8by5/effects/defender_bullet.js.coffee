@@ -4,8 +4,7 @@ class DefenderBullet extends Bullet
       radial_distance: 0
       angle:           @options.angle
       speed:           250
-      explodeWhen:     ->
-        (Date.now() - @firedAt) > 2000
+      explodeWhen:     Timer.after(game, { milliseconds: 1500 })
 
     _.defaults @options,
       size: 4
