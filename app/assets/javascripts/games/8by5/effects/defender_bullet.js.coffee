@@ -5,8 +5,8 @@ class DefenderBullet extends Bullet
     @setOptions
       radial_distance: 0
       angle:           @options.angle
-      speed:           250
-      explodeWhen:     Timer.after(@, { milliseconds: 750 })
+      speed:           200
+      explodeWhen:     Timer.after(@, { milliseconds: 1250 })
 
     _.defaults @options,
       size: 4
@@ -19,6 +19,11 @@ class DefenderBullet extends Bullet
     Canvas.rectangle context,
       x: @x, y: @y, w: @options.size, h: @options.size
       style:  'rgba(240, 240, 240, 1)'
+
+    Canvas.rectangle context, x: @x + 1, y: @y - 1, w: 2, h: 2, style:  'white'
+    Canvas.rectangle context, x: @x + 1, y: @y + @options.size/2 + 1, w: 2, h: 2, style:  'white'
+    Canvas.rectangle context, x: @x + @options.size/2 + 2, y: @y + 1, w: 1, h: 2, style:  'white'
+    Canvas.rectangle context, x: @x - 1, y: @y + 1, w: 1, h: 2, style:  'white'
 
   move: ->
     starting_distance = @radial_offset + @radial_distance

@@ -4,17 +4,20 @@ class MapEntity extends Entity
     super game, { x: @x, y: @y }
 
   draw: (context) ->
-    Canvas.rectangle context, {
+    Canvas.rectangle context,
       x: @x, y: @y, w: @w, h: @h
       style:  @style || 'rgba(173, 216, 230, 1.0)'
-    }
-    Canvas.rectangle context, {
-      x: @x, y: @y, w: @w, h: @h
-      style:  'rgba(0, 0, 0, 0.4)'
-      # style:  'rgba(0, 112, 138, 1.0)'
+
+    Canvas.rectangle context,
+      x: @x + 1, y: @y + 1, w: @w - 2, h: @h - 2
+      style:  'rgba(0, 0, 0, 0.5)'
       hollow: true
-      borderWidth: 3
-    }
+      borderWidth: 2
+
+    Canvas.rectangle context,
+      x: @x + 5, y: @y + 5, w: @w - 10, h: @h - 10
+      hollow: true
+      borderWidth: 2
 
   setCoords: (coords) ->
     @x = coords.x
