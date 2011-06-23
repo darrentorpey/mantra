@@ -21,7 +21,7 @@ class EightByFive extends Mantra.Game
         screen.add @defender
 
         @map = @loadMap()
-        screen.add new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj } for ent in @map.objectMap()
+        screen.add new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj.color } for ent in @map.objectMap()
 
         screen.onKeys
           P: => @showScreen 'pause'
@@ -35,10 +35,11 @@ class EightByFive extends Mantra.Game
     tile_height:  32
     nuller:       ' '
     translations:
-      'o' : 'orange'
-      'r' : 'red'
-      'x' : null
-    data:'''
+      'o' : { solid: true,  color: 'orange' }
+      'r' : { solid: false, color: 'red'    }
+      'x' : { solid: true }
+    data:
+      '''
       xxxxxxxxxxxxxxxxxxxxxx
       x    x x             x
       x      x             x
@@ -50,7 +51,7 @@ class EightByFive extends Mantra.Game
       x            xxx     x
       x      xx            x
       x      xx            x
-      x      xx o          x
+      x      xx o     oo   x
       x      xx            x
       x      xx     xxxxxxxx
       x                    x

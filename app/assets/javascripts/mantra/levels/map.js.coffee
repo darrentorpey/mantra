@@ -29,9 +29,11 @@ class Map
     for datum in @map_data
       x = i%@map_width
       y = Math.floor(i/@map_width)
-      lookup["#{x}|#{y}"] = @translations[datum] if (datum != @options.nuller) && (typeof @translations[datum] != 'undefined')
+      lookup["#{x}|#{y}"] = true if @tileIsSolid datum
       i++
     lookup
+
+  tileIsSolid: (tile) -> (tile != @options.nuller) && !!(@translations[tile]?.solid)
 
   tileCollision: (obj) ->
     Map.tileCollision obj, @, @presenceLookup()
@@ -64,7 +66,7 @@ class Map
     tile_x = (Math.floor (x / tile_width))  - 1
     tile_y = (Math.floor (y / tile_height)) - 1
 
-    return 'solid' if presence_map["#{tile_x}|#{tile_y}"] == null
+    return 'solid' if presence_map["#{tile_x}|#{tile_y}"]
 
     return null
 
