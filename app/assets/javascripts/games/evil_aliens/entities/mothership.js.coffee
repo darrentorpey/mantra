@@ -32,7 +32,7 @@ class Mothership extends SpriteEntity
     true
 
   canSpawn: ->
-    !@last_alien_addded_at || (@game.timer.game_time - @last_alien_addded_at) > @spawn_delay
+    !@last_alien_addded_at || (@game.timer.time_passed - @last_alien_addded_at) > @spawn_delay
 
   spawnOne: ->
     $logger.game.info 'Spawning one'
@@ -46,5 +46,5 @@ class Mothership extends SpriteEntity
   spawnAlien: (angle) ->
     new_alien = new Alien @game, @game.canvas.width/2 + 20, angle
     @game.main_screen.add new_alien
-    @last_alien_addded_at = @game.timer.game_time
+    @last_alien_addded_at = @game.timer.time_passed
     $logger.game.info "Alien spawn: #{new_alien.radial_distance}km @ #{new_alien.angle}"

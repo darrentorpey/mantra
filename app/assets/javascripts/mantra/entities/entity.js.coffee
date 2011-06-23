@@ -1,12 +1,17 @@
 class Entity
   constructor: (@game, coords = { x: 0, y: 0 }) ->
-    @x = coords.x
-    @y = coords.y
+    [@x, @y] = [coords.x, coords.y]
     @remove_from_world = false
+    @screen            = null
+    @timers            = []
 
-  update: -> null
+  update: ->
+    timer.tick() for timer in @timers
+
   draw:   -> null
   cull:   -> null
+
+  addTimer: (timer) -> @timers.push timer
 
   outsideScreen: ->
     if @game.center_coordinates

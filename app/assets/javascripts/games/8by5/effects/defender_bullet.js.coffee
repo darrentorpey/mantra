@@ -1,10 +1,12 @@
 class DefenderBullet extends Bullet
   constructor: (game, @options) ->
-    super game,
+    super game
+
+    @setOptions
       radial_distance: 0
       angle:           @options.angle
       speed:           250
-      explodeWhen:     Timer.after(game, { milliseconds: 1500 })
+      explodeWhen:     Timer.after(@, { milliseconds: 750 })
 
     _.defaults @options,
       size: 4

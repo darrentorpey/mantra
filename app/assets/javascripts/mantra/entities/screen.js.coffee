@@ -3,6 +3,10 @@ class Screen extends EntitySet
     @key_map = {}
     super @game
 
+  add: (new_entities...) ->
+    entity.screen = @ for entity in new_entities
+    super new_entities...
+
   update: ->
     @onUpdate() if @onUpdate and !@paused
     super()

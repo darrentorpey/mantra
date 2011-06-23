@@ -1,5 +1,9 @@
 class Bullet extends Entity
   constructor: (game, options) ->
+    super game
+    @setOptions options if options?
+
+  setOptions: (options) ->
     [@x, @y]         = [options.x, options.y]
     @angle           = options.angle
     @speed           = options.speed           ?= 250
@@ -16,13 +20,12 @@ class Bullet extends Entity
 
     @auto_cull       = options.auto_cull       ?= false
 
-    super game
-
   update: ->
     return (@remove_from_world = true) if @auto_cull and @outsideScreen()
     return @explode() if @explodeWhen()
 
     @move()
+    super()
 
   move: ->
     @x = @radial_distance * Math.cos(@angle)
