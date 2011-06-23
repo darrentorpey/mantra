@@ -15,8 +15,8 @@ class Map
   generateObjectMap: ->
     i = 0
     object_map = []
-    for datum in @map_data
-      object_map.push { x: i%@map_width * @tile_width, y: Math.floor(i/@map_width) * @tile_height, obj: @translations[datum] } if datum != @options.nuller
+    for tile in @map_data
+      object_map.push { x: i%@map_width * @tile_width, y: Math.floor(i/@map_width) * @tile_height, obj: @translations[tile] } unless @translations[tile] == null
       i++
     object_map
 
@@ -33,7 +33,7 @@ class Map
       i++
     lookup
 
-  tileIsSolid: (tile) -> (tile != @options.nuller) && !!(@translations[tile]?.solid)
+  tileIsSolid: (tile) -> !!@translations[tile]?.solid
 
   tileCollision: (obj) ->
     Map.tileCollision obj, @, @presenceLookup()

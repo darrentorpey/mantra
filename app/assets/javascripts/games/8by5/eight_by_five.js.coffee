@@ -33,18 +33,18 @@ class EightByFive extends Mantra.Game
     map_height:   20
     tile_width:   32
     tile_height:  32
-    nuller:       ' '
     translations:
       'o' : { solid: true,  color: 'orange' }
       'r' : { solid: false, color: 'red'    }
       'x' : { solid: true }
+      ' ' : null
     data:
       '''
       xxxxxxxxxxxxxxxxxxxxxx
       x    x x             x
       x      x             x
       x      xxxx       xxxx
-      x  x   x             x
+      x  x   x    r        x
       x      x      o      x
       x  o                 x
       x            x x     x
