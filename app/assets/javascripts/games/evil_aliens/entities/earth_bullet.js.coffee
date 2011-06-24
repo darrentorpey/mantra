@@ -15,7 +15,7 @@ class EarthBullet extends Bullet
 
   explode: ->
     AssetManager.getSound("#{root.asset_path}bullet_boom.mp3").play()
-    @game.main_screen.add new BulletExplosion(@game, @explodesAt.x, @explodesAt.y)
+    @game.screens.game.add new BulletExplosion(@game, @explodesAt.x, @explodesAt.y)
     super()
 
   draw: (context) ->

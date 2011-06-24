@@ -6,7 +6,7 @@ class Entity
     @timers            = []
 
   update: ->
-    timer.tick() for timer in @timers
+    # timer.tick() for timer in @timers
 
   draw:   -> null
   cull:   -> null

@@ -25,7 +25,7 @@ class Alien extends SpriteEntity
 
   explode: ->
     @remove_from_world = true
-    @game.main_screen.add new AlienExplosion @game, @x, @y
+    @game.screens.game.add new AlienExplosion @game, @x, @y
     AssetManager.getSound("#{root.asset_path}alien_boom.mp3").play()
     $em.trigger 'alien::death', alien: this
 

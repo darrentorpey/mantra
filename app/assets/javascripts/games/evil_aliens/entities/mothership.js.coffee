@@ -45,6 +45,6 @@ class Mothership extends SpriteEntity
 
   spawnAlien: (angle) ->
     new_alien = new Alien @game, @game.canvas.width/2 + 20, angle
-    @game.main_screen.add new_alien
+    @game.screens.game.add new_alien
     @last_alien_addded_at = @game.timer.time_passed
     $logger.game.info "Alien spawn: #{new_alien.radial_distance}km @ #{new_alien.angle}"

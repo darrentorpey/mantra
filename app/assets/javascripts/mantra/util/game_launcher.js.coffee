@@ -16,7 +16,6 @@ class GameLauncher
     $logger.assets.debug "# assets: #{assets.images.length}"
 
     @game.init()
-    @game.start() if @game.currentScreen
 
     KeyManager.capture_keypresses @game
 
@@ -38,7 +37,8 @@ class GameLauncher
 
   start: ->
     console.log 'Assets loaded. Launching game...'
-    @game.start() if @game.state == ''
+    console.log @game.state.current_state
+    @game.start() if @game.state.current_state == 'initialized'
 
   addImage: (name)     -> AssetManager.queueImage     "#{root.asset_path}#{name}"
   addSound: (id, name) -> AssetManager.queueSound id, "#{root.asset_path}#{name}"

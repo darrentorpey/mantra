@@ -5,7 +5,8 @@ class EvilAliens extends Mantra.Game
     @canvas = @options.canvas
     @lives = EvilAliens.starting_lives
     @score = 0
-    @assets = {
+    @auto_start = true
+    @assets
       images: [
         'earth.png'
         'alien.png'
@@ -19,18 +20,14 @@ class EvilAliens extends Mantra.Game
         'bullet-boom'  : 'bullet_boom.mp3'
         'bullet'       : 'bullet.mp3'
       }
-      music: {
+      music:
         'bulldozer'    : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
-      }
-    }
 
     @center_coordinates = true
 
-    super @options
+    @addScreen ScreenMaker.create @, 'loading'
 
-    @createLoadingScreen()
-    @createPauseScreen()
-    @createGameLostScreen()
+    super @options
 
     @onKeys
       M: => $audio_manager.toggle_mute()
@@ -53,68 +50,31 @@ class EvilAliens extends Mantra.Game
       if @click
         @restart()
         @bg_song.restart()
-        @showScreen @main_screen
+        @showScreen @screens.game
 
     @addScreen @game_lost_screen
 
-  createIntroScreen: ->
-    @intro_screen = new Screen this, 'intro'
-    intro_ui_pane = new UIPane this
-    intro_ui_pane.addTextItem
-      color: 'orange'
-      x:     'centered'
-      y:     0
-      text:  -> 'Click to start!'
-
-    @intro_screen.add intro_ui_pane
-    @intro_screen.onUpdate = =>
-      if @click
-        @createMainScreen()
-        @bg_song.play()
-        @showScreen @main_screen
-
-    @addScreen @intro_screen
-
-  createPauseScreen: ->
-    @pause_screen = new Screen this, 'pause'
-    pause_ui_pane = new UIPane this
-    pause_ui_pane.addTextItem
-      color: 'white'
-      x:     'centered'
-      y:     0
-      text:  -> ':: paused ::'
-
-    @pause_screen.add pause_ui_pane
-
-    @pause_screen.onKeys {
-      P: =>
-        @showScreen @main_screen
-        @bg_song.resume()
-    }
-
-    @addScreen @pause_screen
-
   createMainScreen: ->
-    @main_screen  = new Screen this, 'game'
+    @screens.game  = new Screen this, 'game'
 
     @back        = new Background this, { x: -@canvas.width/2, y: -@canvas.height/2 }
     @sentry      = new Sentry     this
     @earth       = new Earth      this
     @mothership  = new Mothership this
     @stuff       = new EntitySet  this, @back, @sentry, @earth, @mothership
-    @main_screen.add @stuff
+    @screens.game.add @stuff
 
-    @main_screen.onKeys
+    @screens.game.onKeys
       P: =>
         @showScreen @pause_screen
         @bg_song.pause()
 
-    @main_screen.add @gui_pane()
-    @main_screen.add @game_widget()
+    @screens.game.add @gui_pane()
+    @screens.game.add @game_widget()
 
     @bg_song = AssetManager.getBackgroundSong('bulldozer')
 
-    @addScreen @main_screen
+    @addScreen @screens.game
 
   gui_pane: ->
     @ui_pane = new UIPane this
@@ -137,27 +97,34 @@ class EvilAliens extends Mantra.Game
     @game_widget.setCoords x: -200, y: -200
     @game_widget
 
-  createLoadingScreen: ->
-    @loading_screen = new Screen this, 'loading'
-    @loading_ui_pane = new UIPane this
-
-    @loading_ui_pane.addTextItem
-      color: 'orange'
-      x:     'centered'
-      y:     0
-      text:  -> "Loading... #{AssetManager.getProgress()}%"
-
-    @loading_screen.add @loading_ui_pane
-
-    @loading_screen.onUpdate = =>
-      if @state.current_state != 'initialized' && AssetManager.isDone()
-        @createIntroScreen()
-        @showScreen 'intro'
-
-    @addScreen @loading_screen
-
   start: ->
-    @createLoadingScreen()
+    @addScreen ScreenMaker.create @, 'intro'
+      text: 'Defend Earth from the alien invasion!'
+
+    @addScreen ScreenMaker.create @, 'pause'
+
+    @setScreens
+      game: (screen) =>
+        @back        = new Background @, { x: -@canvas.width/2, y: -@canvas.height/2 }
+        @sentry      = new Sentry     @
+        @earth       = new Earth      @
+        @mothership  = new Mothership @
+        @stuff       = new EntitySet  @, @back, @sentry, @earth, @mothership
+        screen.add @stuff
+
+        screen.onKeys
+          P: =>
+            @showScreen @pause_screen
+            @bg_song.pause()
+
+        screen.add @gui_pane()
+        screen.add @game_widget()
+
+        @bg_song = AssetManager.getBackgroundSong('bulldozer')
+
+        screen
+
+    @createGameLostScreen()
 
     $em.listen 'alien::death', this, (data) ->
       $logger.game.info "Alien killed at #{data.alien.s_coords()}"
@@ -177,14 +144,9 @@ class EvilAliens extends Mantra.Game
     @lives = EvilAliens.starting_lives
     @score = 0
 
-  getAliens: ->
-    alien for alien in @main_screen.entities when alien instanceof Alien
-
-  getBullets: ->
-    ent for ent in @main_screen.entities when ent instanceof EarthBullet
-
-  getBulletExplosions: ->
-    ent for ent in @main_screen.entities when ent instanceof BulletExplosion
+  getAliens:           -> ent for ent in @screens.game.entities when ent instanceof Alien
+  getBullets:          -> ent for ent in @screens.game.entities when ent instanceof EarthBullet
+  getBulletExplosions: -> ent for ent in @screens.game.entities when ent instanceof BulletExplosion
 
   configureEngine: ->
     # Levels, in increasing order of verbosity: off, error, warn, info, debug

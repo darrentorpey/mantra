@@ -26,7 +26,7 @@ class ScreenMaker
             ui_pane.addTextItem
               color: 'orange'
               x:     'centered'
-              y:     game.canvas.height/2
+              y:     'centered'
               text:  -> "Loading... #{AssetManager.getProgress()}%"
             screen.add ui_pane
           onUpdate: =>
