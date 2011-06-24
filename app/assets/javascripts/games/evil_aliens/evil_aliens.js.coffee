@@ -25,8 +25,6 @@ class EvilAliens extends Mantra.Game
 
     @center_coordinates = true
 
-    @addScreen ScreenMaker.create @, 'loading'
-
     super @options
 
     @onKeys
@@ -98,6 +96,8 @@ class EvilAliens extends Mantra.Game
     @game_widget
 
   start: ->
+    @addScreen ScreenMaker.create @, 'loading'
+
     @addScreen ScreenMaker.create @, 'intro'
       text: 'Defend Earth from the alien invasion!'
 
