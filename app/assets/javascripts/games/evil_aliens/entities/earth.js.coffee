@@ -1,11 +1,7 @@
 class Earth extends SpriteEntity
-  @RADIUS = 67
-
   constructor: (game) ->
     super game, AssetManager.getAsset("#{root.asset_path}earth.png")
-
-  update: ->
-    super()
+    @radius = 67
 
   draw: (context) ->
     context.drawImage @sprite, @x - @sprite.width/2, @y - @sprite.height/2

@@ -31,5 +31,5 @@ class Alien extends SpriteEntity
 
   hitPlanet: ->
     distance_squared = ((@x * @x) + (@y * @y))
-    radii_squared = (@radius + Earth.RADIUS) * (@radius + Earth.RADIUS)
+    radii_squared = (@radius + @game.earth.radius) * (@radius + @game.earth.radius)
     distance_squared < radii_squared

@@ -1,7 +1,7 @@
 class GameWidget extends SpriteEntity
   constructor: (game, @radius = 30) ->
     super game, null, 0
-    @speed = 3
+    @speed = 5
 
   update: ->
     @x -= @speed if keydown.left

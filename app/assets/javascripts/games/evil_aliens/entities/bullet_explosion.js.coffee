@@ -11,16 +11,12 @@ class BulletExplosion extends SpriteEntity
 
     @radius = @animation.frameWidth/2 * @scaleFactor()
 
-    alien.explode() for alien in @game.getAliens() when @isCaughtInExplosion(alien)
+    alien.explode() for alien in @game.getAliens() when @isCaughtInExplosion alien
 
-  scaleFactor: ->
-    1 + (this.animation.currentFrame() / 3)
+  scaleFactor: -> 1 + (this.animation.currentFrame() / 3)
 
   draw: (context) ->
     @animation.drawFrame @game.clock_tick, context, @x, @y, @scaleFactor()
     super context
 
-  isCaughtInExplosion: (alien) ->
-    distance_squared = ((@x - alien.x) * (@x - alien.x)) + ((@y - alien.y) * (@y - alien.y))
-    radii_squared = (@radius + alien.radius) * (@radius + alien.radius)
-    distance_squared < radii_squared
+  isCaughtInExplosion: (alien) -> Mantra.Geometry.withinCircle @, alien

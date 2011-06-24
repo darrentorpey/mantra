@@ -12,7 +12,7 @@ class Sentry extends SpriteEntity
       @x = (Math.cos(@angle) * @distanceFromEarthCenter)
       @y = (Math.sin(@angle) * @distanceFromEarthCenter)
 
-    @shoot() if @game.click
+    @shoot() if @game.click && !Mantra.Geometry.withinCircle @game.earth, { x: @game.click.x, y: @game.click.y, radius: 1 }, buffer: 20
 
     super()
 
@@ -26,5 +26,6 @@ class Sentry extends SpriteEntity
     super context
 
   shoot: ->
+    console.log @game.click
     @game.screens.game.add new EarthBullet @game, @x, @y, @angle, @game.click
     AssetManager.getSound("#{root.asset_path}bullet.mp3").play()

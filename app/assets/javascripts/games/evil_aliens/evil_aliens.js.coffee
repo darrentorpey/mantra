@@ -92,7 +92,7 @@ class EvilAliens extends Mantra.Game
 
   game_widget: ->
     @game_widget = new GameWidget this
-    @game_widget.setCoords x: -200, y: -200
+    @game_widget.setCoords x: 100, y: -100
     @game_widget
 
   start: ->
