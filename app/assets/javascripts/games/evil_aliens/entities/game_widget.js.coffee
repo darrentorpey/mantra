@@ -14,9 +14,10 @@ class GameWidget extends SpriteEntity
     super()
 
   draw: (context) ->
-    context.fillStyle = "rgba(200, 255, 255, .6)"
+    # context.fillStyle = "rgba(200, 255, 255, .6)"
+    context.fillStyle = "rgba(200, 255, 255, 0.9)"
     context.beginPath()
-    context.arc @x, @y, 35, 0, Math.PI*2, true
+    context.arc @x, @y, 30, 0, Math.PI*2, true
     context.closePath()
     context.fill()
 
