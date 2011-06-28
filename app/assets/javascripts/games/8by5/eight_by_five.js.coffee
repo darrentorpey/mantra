@@ -7,8 +7,6 @@ class EightByFive extends Mantra.Game
 
     super @options
 
-    @addScreen ScreenMaker.create @, 'loading'
-
     @addScreen ScreenMaker.create @, 'intro'
       text: 'Click anywhere to start!'
 

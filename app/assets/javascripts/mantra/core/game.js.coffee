@@ -10,7 +10,8 @@ class Mantra.Game
     _.defaults @options, {
       assets: {
         images: []
-      }
+      },
+      defaultScreens: ['loading']
     }
 
     @process_game_over = -> null
@@ -20,6 +21,8 @@ class Mantra.Game
     @state.add_transition 'restart', ['started', 'game_won', 'game_lost'], null, 'started'
 
     [@surfaceWidth, @surfaceHeight, @halfSurfaceWidth, @halfSurfaceHeight] = [null, null, null, null]
+
+    @addScreen screen for screen in @options.defaultScreens if @options.defaultScreens
 
   assets:  (@assets)  -> null
 
@@ -34,7 +37,16 @@ class Mantra.Game
     @halfSurfaceWidth  = @surfaceWidth/2
     @halfSurfaceHeight = @surfaceHeight/2
 
+    @startGameLoop on_screen: 'loading'
+
     @startInput()
+
+  start: ->
+    @showScreen @currentScreen
+
+    @state.send_event 'start'
+
+    $logger.game.info 'Game started'
 
   addEntity: (new_entities...) ->
     @entities.push entity for entity in new_entities
@@ -71,17 +83,13 @@ class Mantra.Game
     @draw()
     @click = null
 
-  start: ->
-    @showScreen @currentScreen
+  startGameLoop: (options = {}) ->
+    @showScreen options.on_screen if @screens[options.on_screen]
 
     gameLoop = () =>
       @loop()
       requestAnimFrame gameLoop, @canvas
     gameLoop()
-
-    @state.send_event 'start'
-
-    $logger.game.info 'Game started'
 
   onKeys: (@key_map) -> null
 
@@ -90,7 +98,7 @@ class Mantra.Game
     @currentScreen.onKey key if @currentScreen
 
   showScreen: (screen) ->
-    screen = @screens[screen] if typeof screen is 'string'
+    screen   = @screens[screen] if typeof screen is 'string'
 
     $logger.game.info "Showing screen '#{screen.name}'"
 
@@ -117,6 +125,8 @@ class Mantra.Game
     , false)
 
   addScreen: (screen) =>
+    screen = ScreenMaker.create @, screen if typeof screen is 'string'
+
     @screens[screen.name] = screen
     @addEntity screen
     @currentScreen ?= screen

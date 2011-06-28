@@ -15,9 +15,9 @@ class GameLauncher
     console.log 'Initializing game...'
     $logger.assets.debug "# assets: #{assets.images.length}"
 
-    @game.init()
-
     KeyManager.capture_keypresses @game
+
+    @game.init()
 
     @addImage image     for image in assets.images
     @addSound id, sound for id, sound of assets.sounds

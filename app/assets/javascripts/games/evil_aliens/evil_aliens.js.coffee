@@ -96,8 +96,6 @@ class EvilAliens extends Mantra.Game
     @game_widget
 
   start: ->
-    @addScreen ScreenMaker.create @, 'loading'
-
     @addScreen ScreenMaker.create @, 'intro'
       text: 'Defend Earth from the alien invasion!'
 
@@ -153,7 +151,7 @@ class EvilAliens extends Mantra.Game
     $logger.levels {
       global: 'debug'
       sound:  'warn'
-      assets: 'info'
-      input:  'info'
+      assets: 'warn'
+      input:  'warn'
       game:   'info'
     }
