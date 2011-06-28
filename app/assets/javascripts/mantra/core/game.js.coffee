@@ -7,17 +7,19 @@ class Mantra.Game
     @screens  = {}
     @key_map  = {}
 
-    _.defaults @options, {
-      assets: {
+    console.log @options
+    _.defaults @options,
+      assets:
         images: []
-      },
-      defaultScreens: ['loading']
-    }
+      defaultScreens:     ['loading']
+      center_coordinates: false
+      process_game_over:  -> null
 
-    @process_game_over = -> null
-    @state    = new FSM 'initialized', { name: 'initialized' }
+    @center_coordinates = true if @options.center_coordinates
+
+    @state = new FSM 'initialized', { name: 'initialized' }
     @state.add_transition 'start', 'initialized', null,                      'started'
-    @state.add_transition 'lose',  'started',     (=> @process_game_over()), 'game_lost'
+    @state.add_transition 'lose',  'started', (=> @options.process_game_over.call @), 'game_lost'
     @state.add_transition 'restart', ['started', 'game_won', 'game_lost'], null, 'started'
 
     [@surfaceWidth, @surfaceHeight, @halfSurfaceWidth, @halfSurfaceHeight] = [null, null, null, null]
