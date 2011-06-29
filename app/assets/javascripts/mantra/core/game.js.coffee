@@ -26,7 +26,10 @@ class Mantra.Game
 
     @addScreen screen for screen in @options.defaultScreens if @options.defaultScreens
 
-  assets:  (@assets)  -> null
+    @onKeys @options.on_keypress if @options.on_keypress
+    @assets @options.assets      if @options.assets
+
+  assets: (@assets) -> null
 
   setScreens: (screens) ->
     for screen_name, creator of screens
@@ -50,12 +53,10 @@ class Mantra.Game
 
     $logger.game.info 'Game started'
 
-  addEntity: (new_entities...) ->
-    @entities.push entity for entity in new_entities
+  addEntity: (new_entities...) -> @entities.push entity for entity in new_entities
 
   # Move coordinate system to center of canvas
-  translate_to_center: ->  
-    @context.translate @canvas.width/2, @canvas.height/2
+  translateToCenter: -> @context.translate @canvas.width/2, @canvas.height/2
 
   update: ->
     if @entities.length
@@ -71,7 +72,7 @@ class Mantra.Game
   draw: (callback) ->
     @context.clearRect 0, 0, @canvas.width, @canvas.height
     @context.save()
-    @translate_to_center() if @center_coordinates
+    @translateToCenter() if @center_coordinates
 
     entity.draw @context for entity in @entities
 
@@ -88,10 +89,11 @@ class Mantra.Game
   startGameLoop: (options = {}) ->
     @showScreen options.on_screen if @screens[options.on_screen]
 
-    gameLoop = () =>
-      @loop()
-      requestAnimFrame gameLoop, @canvas
-    gameLoop()
+    @gameLoop()
+
+  gameLoop: =>
+    @loop()
+    requestAnimFrame @gameLoop, @canvas
 
   onKeys: (@key_map) -> null
 
@@ -100,11 +102,11 @@ class Mantra.Game
     @currentScreen.onKey key if @currentScreen
 
   showScreen: (screen) ->
-    screen   = @screens[screen] if typeof screen is 'string'
+    screen = @screens[screen] if typeof screen is 'string'
 
     $logger.game.info "Showing screen '#{screen.name}'"
 
-    i_screen.turnOff() for name, i_screen of @screens
+    skreen.turnOff() for name, skreen of @screens
     screen.turnOn()
     @currentScreen = screen
 

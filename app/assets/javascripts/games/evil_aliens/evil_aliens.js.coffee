@@ -2,36 +2,37 @@ class EvilAliens extends Mantra.Game
   @starting_lives = 10
 
   constructor: (@options = {}) ->
-    @canvas     = @options.canvas
-    @lives      = EvilAliens.starting_lives
-    @score      = 0
-    @auto_start = true
-    @assets
-      images: [
-        'earth.png'
-        'alien.png'
-        'sentry.png'
-        'bullet-single.png'
-        'explosion.png'
-        'alien-explosion.png'
-      ]
-
-      sounds:
-        'alien-boom'  : 'alien_boom.mp3'
-        'bullet-boom' : 'bullet_boom.mp3'
-        'bullet'      : 'bullet.mp3'
-
-      music:
-        'bulldozer' : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
+    @canvas = @options.canvas
 
     super _.defaults @options,
       center_coordinates: true
+
+      on_keypress:
+        M: -> $audio_manager.toggle_mute()
+
       process_game_over: ->
         @showScreen @game_lost_screen
         @bg_song.stop()
 
-    @onKeys
-      M: => $audio_manager.toggle_mute()
+      assets:
+        images: [
+          'earth.png'
+          'alien.png'
+          'sentry.png'
+          'bullet-single.png'
+          'explosion.png'
+          'alien-explosion.png'
+        ]
+
+        sounds:
+          'alien-boom'  : 'alien_boom.mp3'
+          'bullet-boom' : 'bullet_boom.mp3'
+          'bullet'      : 'bullet.mp3'
+
+        music:
+          'bulldozer' : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
+
+    @resetStats()
 
   createGameLostScreen: ->
     @game_lost_screen = new Screen this, 'lost'
@@ -111,6 +112,9 @@ class EvilAliens extends Mantra.Game
     ent.remove_from_world = true for ent in @getAliens()
     ent.remove_from_world = true for ent in @getBullets()
     ent.remove_from_world = true for ent in @getBulletExplosions()
+    @resetStats()
+
+  resetStats: ->
     @lives = EvilAliens.starting_lives
     @score = 0
 
