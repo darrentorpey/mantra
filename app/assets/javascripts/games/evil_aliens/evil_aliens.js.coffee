@@ -11,8 +11,10 @@ class EvilAliens extends Mantra.Game
         M: -> $audio_manager.toggle_mute()
 
       process_game_over: ->
-        @showScreen @game_lost_screen
+        @showScreen 'game_lost'
         @bg_song.stop()
+
+      defaultScreens: ['loading', 'pause']
 
       assets:
         images: [
@@ -34,24 +36,6 @@ class EvilAliens extends Mantra.Game
 
     @resetStats()
 
-  createGameLostScreen: ->
-    @game_lost_screen = new Screen this, 'lost'
-    intro_ui_pane = new UIPane this
-    intro_ui_pane.addTextItem
-      color: 'red'
-      x:     'centered'
-      y:     0
-      text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
-
-    @game_lost_screen.add intro_ui_pane
-    @game_lost_screen.onUpdate = =>
-      if @click
-        @restart()
-        @bg_song.restart()
-        @showScreen @screens.game
-
-    @addScreen @game_lost_screen
-
   guiPane: ->
     @ui_pane = new UIPane this
 
@@ -72,20 +56,17 @@ class EvilAliens extends Mantra.Game
     @addScreen ScreenMaker.create @, 'intro'
       text: 'Defend Earth from the alien invasion!'
 
-    @addScreen ScreenMaker.create @, 'pause'
-
     @setScreens
       game: (screen) =>
-        @back        = new Background @, { x: -@canvas.width/2, y: -@canvas.height/2 }
+        @background  = new Background @, { x: -@canvas.width/2, y: -@canvas.height/2 }
         @sentry      = new Sentry     @
         @earth       = new Earth      @
         @mothership  = new Mothership @
-        @stuff       = new EntitySet  @, @back, @sentry, @earth, @mothership
-        screen.add @stuff
+        screen.add new EntitySet @, @background, @sentry, @earth, @mothership
 
         screen.onKeys
           P: =>
-            @showScreen @pause_screen
+            @showScreen 'pause'
             @bg_song.pause()
 
         screen.add @guiPane()
@@ -95,7 +76,22 @@ class EvilAliens extends Mantra.Game
 
         screen
 
-    @createGameLostScreen()
+      game_lost: (screen) =>
+        intro_ui_pane = new UIPane this
+        intro_ui_pane.addTextItem
+          color: 'red'
+          x:     'centered'
+          y:     0
+          text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
+
+        screen.add intro_ui_pane
+        screen.onUpdate = =>
+          if @click
+            @restart()
+            @bg_song.restart()
+            @showScreen @screens.game
+
+        screen
 
     $em.listen 'alien::death', this, (data) ->
       $logger.game.info "Alien killed at #{data.alien.s_coords()}"
