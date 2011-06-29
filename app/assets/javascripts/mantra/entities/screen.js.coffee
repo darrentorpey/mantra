@@ -1,5 +1,5 @@
 class Screen extends EntitySet
-  constructor: (@game, @name) ->
+  constructor: (@game, @name, @options) ->
     @key_map = {}
     super @game
 
@@ -16,8 +16,17 @@ class Screen extends EntitySet
     @pause()
 
   turnOn: ->
+    if @been_shown
+      @onResume()
+    else
+      @been_shown = true
+      @onStart()
+
     @show()
     @unpause()
+
+  onStart:  -> null
+  onResume: -> null
 
   onKeys: (@key_map) -> null
 

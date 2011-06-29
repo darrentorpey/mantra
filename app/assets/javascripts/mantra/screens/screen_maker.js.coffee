@@ -45,6 +45,7 @@ class ScreenMaker
           onKeys: {
             P: =>
               game.showScreen options.gameScreen || 'game'
+              game.bg_song.resume() if game.bg_song
           }
         }
       else {}

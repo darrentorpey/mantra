@@ -1,16 +1,13 @@
 class EightByFive extends Mantra.Game
   constructor: (@options = {}) ->
-    @canvas = @options.canvas
-    @assets
-      sounds:
-        'bullet_shot' : 'simple_shot.mp3'
-
-    super @options
+    super _.defaults @options,
+      defaultScreens: ['loading', 'pause']
+      assets:
+        sounds:
+          'bullet_shot' : 'simple_shot.mp3'
 
     @addScreen ScreenMaker.create @, 'intro'
       text: 'Click anywhere to start!'
-
-    @addScreen ScreenMaker.create @, 'pause'
 
     @setScreens
       game: (screen) =>

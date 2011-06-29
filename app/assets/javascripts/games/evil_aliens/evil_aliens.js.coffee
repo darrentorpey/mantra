@@ -1,9 +1,5 @@
 class EvilAliens extends Mantra.Game
-  @starting_lives = 10
-
   constructor: (@options = {}) ->
-    @canvas = @options.canvas
-
     super _.defaults @options,
       center_coordinates: true
 
@@ -32,7 +28,8 @@ class EvilAliens extends Mantra.Game
           'bullet'      : 'bullet.mp3'
 
         music:
-          'bulldozer' : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
+          # 'bulldozer' : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
+          'chaos' : 'countdown_to_chaos-freesoundtrackmusic.mp3'
 
     @resetStats()
 
@@ -40,9 +37,9 @@ class EvilAliens extends Mantra.Game
     @ui_pane = new UIPane this
 
     @ui_pane.addTextItem
-      x:    @canvas.width/2 - 125
+      x:    @canvas.width/2 - 150
       y:    @canvas.height/2 - 25
-      text: -> "Lives: #{@game.lives}"
+      text: -> "Health: #{@game.lives}"
 
     @ui_pane.addTextItem
       color: 'orange'
@@ -64,6 +61,8 @@ class EvilAliens extends Mantra.Game
         @mothership  = new Mothership @
         screen.add new EntitySet @, @background, @sentry, @earth, @mothership
 
+        @bg_song = AssetManager.getBackgroundSong('chaos')
+
         screen.onKeys
           P: =>
             @showScreen 'pause'
@@ -71,8 +70,7 @@ class EvilAliens extends Mantra.Game
 
         screen.add @guiPane()
         screen.add new GameWidget @, x: 100, y: -100
-
-        @bg_song = AssetManager.getBackgroundSong('bulldozer')
+        screen.onStart = => @bg_song.play()
 
         screen
 
@@ -89,7 +87,24 @@ class EvilAliens extends Mantra.Game
           if @click
             @restart()
             @bg_song.restart()
-            @showScreen @screens.game
+            @showScreen 'game'
+
+        screen
+
+      game_lost: (screen) =>
+        intro_ui_pane = new UIPane this
+        intro_ui_pane.addTextItem
+          color: 'red'
+          x:     'centered'
+          y:     0
+          text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
+
+        screen.add intro_ui_pane
+        screen.onUpdate = =>
+          if @click
+            @restart()
+            @bg_song.restart()
+            @showScreen 'game'
 
         screen
 
@@ -111,7 +126,7 @@ class EvilAliens extends Mantra.Game
     @resetStats()
 
   resetStats: ->
-    @lives = EvilAliens.starting_lives
+    @lives = 20
     @score = 0
 
   getAliens:           -> ent for ent in @screens.game.entities when ent instanceof Alien

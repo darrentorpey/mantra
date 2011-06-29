@@ -1,6 +1,6 @@
 class Mantra.Game
   constructor: (@options) ->
-    @canvas  ?= Canvas.create_canvas()
+    @canvas  ?= @options.canvas || Canvas.create_canvas()
     @context  = @canvas.getContext '2d'
     @entities = []
     @timer    = new Timer
@@ -33,8 +33,9 @@ class Mantra.Game
 
   setScreens: (screens) ->
     for screen_name, creator of screens
-      screen = new Screen this, screen_name
-      @addScreen creator(screen)
+      switch typeof creator
+        when 'function' then @addScreen creator(new Screen this, screen_name)
+        when 'object'   then @addScreen new Screen this, screen_name, creator
 
   init: ->
     @surfaceWidth      = @canvas.width

@@ -89,4 +89,4 @@ class AssetManager
     soundManager.flashVersion          = 9
     soundManager.debugFlash            = false
     soundManager.debugMode             = false
-    soundManager.defaultOptions.volume = 5
+    soundManager.defaultOptions.volume = 15
