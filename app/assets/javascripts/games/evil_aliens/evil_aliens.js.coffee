@@ -74,39 +74,20 @@ class EvilAliens extends Mantra.Game
 
         screen
 
-      game_lost: (screen) =>
-        intro_ui_pane = new UIPane this
-        intro_ui_pane.addTextItem
-          color: 'red'
-          x:     'centered'
-          y:     0
-          text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
-
-        screen.add intro_ui_pane
-        screen.onUpdate = =>
+      game_lost:
+        elements: =>
+          intro_ui_pane = new UIPane this
+          intro_ui_pane.addTextItem
+            color: 'red'
+            x:     'centered'
+            y:     0
+            text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
+          [intro_ui_pane]
+        update: =>
           if @click
             @restart()
             @bg_song.restart()
             @showScreen 'game'
-
-        screen
-
-      game_lost: (screen) =>
-        intro_ui_pane = new UIPane this
-        intro_ui_pane.addTextItem
-          color: 'red'
-          x:     'centered'
-          y:     0
-          text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
-
-        screen.add intro_ui_pane
-        screen.onUpdate = =>
-          if @click
-            @restart()
-            @bg_song.restart()
-            @showScreen 'game'
-
-        screen
 
     $em.listen 'alien::death', this, (data) ->
       $logger.game.info "Alien killed at #{data.alien.s_coords()}"
@@ -126,7 +107,7 @@ class EvilAliens extends Mantra.Game
     @resetStats()
 
   resetStats: ->
-    @lives = 20
+    @lives = 3
     @score = 0
 
   getAliens:           -> ent for ent in @screens.game.entities when ent instanceof Alien
