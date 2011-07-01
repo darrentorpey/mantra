@@ -28,8 +28,7 @@ class EvilAliens extends Mantra.Game
           'bullet'      : 'bullet.mp3'
 
         music:
-          # 'bulldozer' : 'rampaging_bulldozer-freesoundtrackmusic.mp3'
-          'chaos' : 'countdown_to_chaos-freesoundtrackmusic.mp3'
+          'chaos' : 'countdown_to_chaos.mp3'
 
     @resetStats()
 
@@ -107,7 +106,7 @@ class EvilAliens extends Mantra.Game
     @resetStats()
 
   resetStats: ->
-    @lives = 3
+    @lives = 10
     @score = 0
 
   getAliens:           -> ent for ent in @screens.game.entities when ent instanceof Alien
