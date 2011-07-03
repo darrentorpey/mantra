@@ -35,7 +35,7 @@ class Mantra.Game
     for screen_name, creator of screens
       switch typeof creator
         when 'function' then @addScreen creator(new Screen this, screen_name)
-        when 'object'   then @addScreen new Screen this, screen_name, creator
+        when 'object'   then @addScreen Screen.makeScreen(screen_name, creator)
 
   init: ->
     @surfaceWidth      = @canvas.width

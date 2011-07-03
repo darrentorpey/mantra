@@ -6,7 +6,7 @@ class EvilAliens extends Mantra.Game
       on_keypress:
         M: -> $audio_manager.toggle_mute()
 
-      process_game_over: ->
+      process_game_over: =>
         @showScreen 'game_lost'
         @bg_song.stop()
 
@@ -58,7 +58,7 @@ class EvilAliens extends Mantra.Game
         @sentry      = new Sentry     @
         @earth       = new Earth      @
         @mothership  = new Mothership @
-        screen.add new EntitySet @, @background, @sentry, @earth, @mothership
+        screen.add @background, @sentry, @earth, @mothership
 
         @bg_song = AssetManager.getBackgroundSong('chaos')
 

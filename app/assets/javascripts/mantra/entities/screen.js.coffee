@@ -1,3 +1,8 @@
+# Mantra • Screen
+# ---------------
+#
+# Screens are one of Mantra's most important core utilities...
+
 class Screen extends EntitySet
   constructor: (@game, @name, @options = {}) ->
     @key_map = {}
@@ -35,3 +40,5 @@ class Screen extends EntitySet
 
   onKey: (key) ->
     @key_map[key]() if @key_map[key]
+
+  @makeScreen: (screen_name, creator) -> new Screen this, screen_name, creator
