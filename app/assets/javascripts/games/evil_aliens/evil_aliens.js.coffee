@@ -49,7 +49,7 @@ class EvilAliens extends Mantra.Game
     @ui_pane
 
   start: ->
-    @addScreen ScreenMaker.create @, 'intro'
+    @addScreen Screen.create @, 'intro'
       text: 'Defend Earth from the alien invasion!'
 
     @setScreens

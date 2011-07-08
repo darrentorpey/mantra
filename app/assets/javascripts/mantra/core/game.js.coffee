@@ -31,11 +31,7 @@ class Mantra.Game
 
   assets: (@assets) -> null
 
-  setScreens: (screens) ->
-    for screen_name, creator of screens
-      switch typeof creator
-        when 'function' then @addScreen creator(new Screen this, screen_name)
-        when 'object'   then @addScreen Screen.makeScreen(screen_name, creator)
+  setScreens: (screens) -> @addScreen Screen.makeScreen(screen_name, creator) for screen_name, creator of screens
 
   init: ->
     @surfaceWidth      = @canvas.width
@@ -130,7 +126,7 @@ class Mantra.Game
     , false)
 
   addScreen: (screen) =>
-    screen = ScreenMaker.create @, screen if typeof screen is 'string'
+    screen = Screen.create @, screen if typeof screen is 'string'
 
     @screens[screen.name] = screen
     @addEntity screen

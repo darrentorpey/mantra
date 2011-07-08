@@ -6,22 +6,22 @@ class EightByFive extends Mantra.Game
         sounds:
           'bullet_shot' : 'simple_shot.mp3'
 
-    @addScreen ScreenMaker.create @, 'intro'
+    @addScreen Screen.create @, 'intro'
       text: 'Click anywhere to start!'
 
-    @setScreens
-      game: (screen) =>
+    @addScreen Screen.makeScreen 'game',
+      elements: =>
         @defender = new Defender @
         @defender.setCoords x: 332, y: 182
-        screen.add @defender
 
         @map = @loadMap()
-        screen.add new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj.color } for ent in @map.objectMap()
+        map_enities = []
+        map_enities.push new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj.color } for ent in @map.objectMap()
 
-        screen.onKeys
-          P: => @showScreen 'pause'
+        map_enities.concat @defender
 
-        screen
+      on_keys:
+        P: => @showScreen 'pause'
 
   loadMap: -> new Map
     map_width:    22
