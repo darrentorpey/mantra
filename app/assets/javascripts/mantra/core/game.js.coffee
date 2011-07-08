@@ -125,6 +125,11 @@ class Mantra.Game
       @mouse = getXandY(e)
     , false)
 
+  defineScreen: (name, definition = {}) ->
+    screen = new Screen @, name, definition
+    @screens[screen.name] = screen
+    @addEntity screen
+
   addScreen: (screen) =>
     screen = Screen.create @, screen if typeof screen is 'string'
 

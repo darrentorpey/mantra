@@ -6,8 +6,9 @@ class EightByFive extends Mantra.Game
         sounds:
           'bullet_shot' : 'simple_shot.mp3'
 
-    @addScreen Screen.create @, 'intro'
-      text: 'Click anywhere to start!'
+    @defineScreen 'intro'
+      preset: 'intro'
+      text:   'Click anywhere to start!'
 
     @addScreen Screen.makeScreen 'game',
       elements: =>
