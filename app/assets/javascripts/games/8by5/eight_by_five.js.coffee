@@ -1,27 +1,27 @@
 class EightByFive extends Mantra.Game
   constructor: (@options = {}) ->
     super _.defaults @options,
-      defaultScreens: ['loading', 'pause']
       assets:
         sounds:
           'bullet_shot' : 'simple_shot.mp3'
+      screens:
+        loading: 'preset'
+        pause:   'preset'
+        intro:
+          preset: 'intro'
+          text:   'Click anywhere to start!'
+        game:
+          elements: =>
+            @defender = new Defender @
+            @defender.setCoords x: 332, y: 182
 
-    @defineScreen 'intro'
-      preset: 'intro'
-      text:   'Click anywhere to start!'
+            @map = @loadMap()
+            map_enities = []
+            map_enities.push new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj.color } for ent in @map.objectMap()
 
-    @defineScreen 'game'
-      elements: =>
-        @defender = new Defender @
-        @defender.setCoords x: 332, y: 182
-
-        @map = @loadMap()
-        map_enities = []
-        map_enities.push new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj.color } for ent in @map.objectMap()
-
-        map_enities.concat @defender
-      on_keys:
-        P: => @showScreen 'pause'
+            [@defender, map_enities...]
+          on_keys:
+            P: -> @game.showScreen 'pause'
 
   loadMap: -> new Map
     map_width:    22

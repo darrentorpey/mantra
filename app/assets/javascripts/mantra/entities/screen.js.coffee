@@ -14,46 +14,50 @@ class Screen extends EntitySet
           y:     'centered'
           text:  -> options.text || 'Click to start!'
         [intro_ui_pane]
-      onUpdate: =>
-        game.showScreen 'game' if game.click
+      onUpdate: ->
+        @game.showScreen 'game' if @game.click
+
     'loading':
-      panes: ->
-        ui_pane = new UIPane game
+      panes: (options) ->
+        ui_pane = new UIPane @game
         ui_pane.addTextItem
           color: 'orange'
           x:     'centered'
           y:     'centered'
           text:  -> "Loading... #{AssetManager.getProgress()}%"
         [ui_pane]
-      onUpdate: =>
-        game.showScreen 'intro' if game.state.current_state != 'initialized' && AssetManager.isDone()
+      onUpdate: ->
+        @game.showScreen 'intro' if @game.state.current_state != 'initialized' && AssetManager.isDone()
+
     'pause':
-      panes: ->
-        ui_pane = new UIPane game
+      panes: (options) ->
+        ui_pane = new UIPane @game
         ui_pane.addTextItem
           color: 'white'
           x:     'centered'
           y:     'centered'
           text:  -> ':: paused ::'
         [ui_pane]
-      onKeys:
-        P: =>
-          game.showScreen options.gameScreen || 'game'
-          game.bg_song.resume() if game.bg_song
+      on_keys:
+        P: ->
+          @game.showScreen @options.gameScreen || 'game'
+          @game.bg_song.resume() if @game.bg_song
 
   constructor: (@game, @name, @options = {}) ->
     @key_map = {}
     super @game
 
-    preset = Screen.presets[options.preset] if @options.preset
-    if preset
+    # If a preset is specified, we'll first load the preset's settings for this screen
+    if @options.preset and preset = Screen.presets[@options.preset]
       @add pane for pane in preset.panes.apply(@, [@options]) if preset.panes
-      @onUpdate = preset.onUpdate
+      @onUpdate = preset.onUpdate if preset.onUpdate
+      @addKeyMappings preset.on_keys if preset.on_keys
+      # @onKeys preset.on_keys if preset.on_keys
 
     @add (@options.elements())... if @options.elements
-    console.log 'done adding elements', @name
     @onUpdate = @options.update if @options.update
-    @onKeys @options.on_keys if @options.on_keys
+    @addKeyMappings @options.on_keys if @options.on_keys
+    # @onKeys @options.on_keys if @options.on_keys
 
   add: (new_entities...) ->
     entity.screen = @ for entity in new_entities
@@ -80,10 +84,12 @@ class Screen extends EntitySet
   onStart:  -> null
   onResume: -> null
 
+  addKeyMappings: (key_mappings) -> _.extend @key_map, key_mappings
+
   onKeys: (@key_map) -> null
 
   onKey: (key) ->
-    @key_map[key]() if @key_map[key]
+    @key_map[key].apply @ if @key_map[key]
 
   @makeScreen: (screen_name, creator) ->
     switch typeof creator

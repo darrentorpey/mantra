@@ -11,7 +11,8 @@ class Mantra.Game
     _.defaults @options,
       assets:
         images: []
-      defaultScreens:     ['loading']
+      screens:
+        loading: 'preset'
       center_coordinates: false
       process_game_over:  -> null
 
@@ -24,7 +25,11 @@ class Mantra.Game
 
     [@surfaceWidth, @surfaceHeight, @halfSurfaceWidth, @halfSurfaceHeight] = [null, null, null, null]
 
-    @addScreen screen for screen in @options.defaultScreens if @options.defaultScreens
+    for screen_name, definition of @options.screens
+      definition = { preset: screen_name } if typeof definition is 'string' and definition == 'preset'
+      @defineScreen screen_name, definition
+
+    # @currentScreen = @screens.loading
 
     @onKeys @options.on_keypress if @options.on_keypress
     @assets @options.assets      if @options.assets
