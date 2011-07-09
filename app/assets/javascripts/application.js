@@ -1,9 +1,7 @@
 //= require      jquery
-//= require      jquery_ujs
 //= require      lib/underscore
 //= require_tree ./lib
 //= require      mantra
-//= require      mantra/config
 //= require_tree ./games
 
 var game_launcher, game;

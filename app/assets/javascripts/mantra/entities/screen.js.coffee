@@ -12,7 +12,7 @@ class Screen extends EntitySet
           color: 'orange'
           x:     'centered'
           y:     'centered'
-          text:  -> options.text || 'Click to start!'
+          text:  -> (if (typeof options.text is 'function') then options.text.call(@game) else options.text) || 'Click to start!'
         [intro_ui_pane]
       onUpdate: ->
         @showScreen 'game' if @click
@@ -24,7 +24,7 @@ class Screen extends EntitySet
           color: 'orange'
           x:     'centered'
           y:     'centered'
-          text:  -> "Loading... #{AssetManager.getProgress()}%"
+          text:  -> "Loading!... #{AssetManager.getProgress()}%"
         [ui_pane]
       onUpdate: ->
         @showScreen 'intro' if @state.current_state != 'initialized' && AssetManager.isDone()
@@ -101,8 +101,6 @@ class Screen extends EntitySet
       firstScreen: 'game'
       name:        preset_name
     }
-
-    options.text = options.text.call(@) if options.text and typeof options.text is 'function'
     presets = switch preset_name
       when 'intro'
         {

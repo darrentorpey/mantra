@@ -1,5 +1,7 @@
 class EightByFive extends Mantra.Game
   constructor: (@options = {}) ->
+    @player_name = 'Player 1'
+
     super _.defaults @options,
       assets:
         sounds:
@@ -10,7 +12,7 @@ class EightByFive extends Mantra.Game
         pause:   'preset'
         intro:
           preset: 'intro'
-          text:   "Click anywhere to start!"
+          text:   -> "#{@player_name}, click anywhere to start!"
         game:
           elements: ->
             @defender = new Defender @
@@ -23,8 +25,6 @@ class EightByFive extends Mantra.Game
             [@defender, map_enities...]
           on_keys:
             P: -> @game.showScreen 'pause'
-
-    @player_name = 'Player 1'
 
   loadMap: -> new Map
     map_width:    22
