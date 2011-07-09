@@ -1,7 +1,6 @@
 class SpriteEntity extends Entity
   constructor: (@game, @sprite, coords = { x: 0, y: 0 }) ->
-    @x = coords.x
-    @y = coords.y
+    @setCoords coords
     @remove_from_world = false
 
   draw: (context) ->
