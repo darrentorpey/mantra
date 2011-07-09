@@ -1,7 +1,7 @@
 class Sentry extends SpriteEntity
   constructor: (game) ->
     @distanceFromEarthCenter = 85
-    super game, AssetManager.getAsset("#{root.asset_path}sentry.png"), { x: 0, y: @distanceFromEarthCenter }
+    super game, AssetManager.getAsset("#{game.image_path}sentry.png"), { x: 0, y: @distanceFromEarthCenter }
     @radius = @sprite.width / 2
     @angle = 0
 
@@ -28,6 +28,6 @@ class Sentry extends SpriteEntity
   shoot: ->
     console.log @game.click
     @game.screens.game.add new EarthBullet @game, @x, @y, @angle, @game.click
-    # AssetManager.getSound("#{root.asset_path}bullet.mp3").play()
+    AssetManager.getSound("#{game.audio_path}bullet.mp3").play()
 
 root.Sentry = Sentry

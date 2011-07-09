@@ -1,6 +1,6 @@
 class Alien extends SpriteEntity
   constructor: (game, @radial_distance, @angle) ->
-    super game, Sprite.rotateAndCache(AssetManager.getAsset("#{root.asset_path}alien.png"), @angle)
+    super game, Sprite.rotateAndCache(AssetManager.getAsset("#{game.image_path}alien.png"), @angle)
     @radius = @sprite.height/2
     @speed = 150
     @setCoords()
@@ -26,7 +26,7 @@ class Alien extends SpriteEntity
   explode: ->
     @remove_from_world = true
     @game.screens.game.add new AlienExplosion @game, @x, @y
-    AssetManager.getSound("#{root.asset_path}alien_boom.mp3").play()
+    AssetManager.getSound("#{game.audio_path}alien_boom.mp3").play()
     $em.trigger 'alien::death', alien: this
 
   hitPlanet: ->

@@ -1,5 +1,7 @@
 class EvilAliens extends Mantra.Game
   constructor: (@options = {}) ->
+    @image_path = "#{root.asset_path}games/evil_aliens/images/"
+    @audio_path = "#{root.asset_path}games/evil_aliens/audio/"
     super _.defaults @options,
       center_coordinates: true
 
@@ -19,21 +21,21 @@ class EvilAliens extends Mantra.Game
 
       assets:
         images: [
-          'earth.png'
-          'alien.png'
-          'sentry.png'
-          'bullet-single.png'
-          'explosion.png'
-          'alien-explosion.png'
+          'games/evil_aliens/images/earth.png'
+          'games/evil_aliens/images/alien.png'
+          'games/evil_aliens/images/sentry.png'
+          'games/evil_aliens/images/bullet-single.png'
+          'games/evil_aliens/images/explosion.png'
+          'games/evil_aliens/images/alien-explosion.png'
         ]
 
         sounds:
-          'alien-boom'  : 'alien_boom.mp3'
-          'bullet-boom' : 'bullet_boom.mp3'
-          'bullet'      : 'bullet.mp3'
+          'alien-boom'  : 'games/evil_aliens/audio/alien_boom.mp3'
+          'bullet-boom' : 'games/evil_aliens/audio/bullet_boom.mp3'
+          'bullet'      : 'games/evil_aliens/audio/bullet.mp3'
 
         music:
-          'chaos' : 'countdown_to_chaos.mp3'
+          'chaos' : 'games/evil_aliens/audio/countdown_to_chaos.mp3'
 
     @resetStats()
 

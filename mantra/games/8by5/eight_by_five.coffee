@@ -5,7 +5,7 @@ class EightByFive extends Mantra.Game
     super _.defaults @options,
       assets:
         sounds:
-          'bullet_shot' : 'simple_shot.mp3'
+          'bullet_shot' : 'games/8by5/audio/simple_shot.mp3'
 
       screens:
         loading: 'preset'

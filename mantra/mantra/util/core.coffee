@@ -2,7 +2,7 @@
 # It will be equivalent to 'window' for browser-land, and 'global' for Node.js
 root = global ? window
 root.root = root
-root.asset_path = '/assets/'
+root.asset_path = '/mantra/'
 root.Mantra = {}
 root.EBF = {}
 

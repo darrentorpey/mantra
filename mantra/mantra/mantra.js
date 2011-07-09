@@ -1,7 +1,7 @@
 steal
   .plugins('steal/coffee')
   .plugins('lib/jquery')
-  .then('//lib/underscore', '//lib/base', function() {}, '//lib/machine', '//lib/shims', '//lib/soundmanager2', '//lib/js-finite-state-machine')
+  .then('//lib/underscore', '//lib/base', function() {}, '//lib/machine', '//lib/shims', '//lib/soundmanager2', '//lib/js-finite-state-machine', '//lib/helpers')
   .plugins('mantra/util')
   .then(function() {})
   .plugins('mantra/entities')
@@ -21,7 +21,6 @@ function launchGame(game_name) {
   game = game_launcher.game;
 }
 
-launchGame(EightByFive);
-// launchGame(EvilAliens);
+launchGame(eval(geturlparameter('game') ||'EightByFive'));
 
 });
