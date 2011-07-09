@@ -1,4 +1,4 @@
-class Background extends CustomDrawEntity
+class Background extends Mantra.CustomDrawEntity
   constructor: (@game, position) ->
     position ?= { x: 0, y: 0 }
     super @game, position

@@ -9,6 +9,7 @@ class Mantra.Screen extends EntitySet
     super @game
 
     @add (@options.elements())... if @options.elements
+    console.log '@name', @name
     console.log 'done adding elements', @name
     @onUpdate = @options.update if @options.update
 

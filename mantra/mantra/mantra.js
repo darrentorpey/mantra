@@ -21,6 +21,7 @@ function launchGame(game_name) {
   game = game_launcher.game;
 }
 
-launchGame(EightByFive);
+// launchGame(EightByFive);
+launchGame(EvilAliens);
 
 });

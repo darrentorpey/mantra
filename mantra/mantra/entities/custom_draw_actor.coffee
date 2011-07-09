@@ -1,3 +1,3 @@
-class CustomDrawEntity extends SpriteEntity
+class Mantra.CustomDrawEntity extends SpriteEntity
   constructor: (game, position) ->
     super game, null, position

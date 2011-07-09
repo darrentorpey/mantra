@@ -121,3 +121,5 @@ class EvilAliens extends Mantra.Game
       assets: 'warn'
       input:  'warn'
       game:   'info'
+
+root.EvilAliens = EvilAliens
