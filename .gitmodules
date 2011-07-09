@@ -1,0 +1,3 @@
+[submodule "mantra/steal"]
+	path = mantra/steal
+	url = http://github.com/jupiterjs/steal
