@@ -30,3 +30,7 @@ class Entity
     x = @x - @sprite.width/2
     y = @y - @sprite.height/2
     context.drawImage(@sprite, x, y)
+
+  setCoords: (coords) ->
+    @x = coords.x
+    @y = coords.y

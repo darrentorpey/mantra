@@ -7,7 +7,6 @@ class Mantra.Game
     @screens  = {}
     @key_map  = {}
 
-    console.log @options
     _.defaults @options,
       assets:
         images: []
@@ -28,8 +27,6 @@ class Mantra.Game
     for screen_name, definition of @options.screens
       definition = { preset: screen_name } if typeof definition is 'string' and definition == 'preset'
       @defineScreen screen_name, definition
-
-    # @currentScreen = @screens.loading
 
     @onKeys @options.on_keypress if @options.on_keypress
     @assets @options.assets      if @options.assets

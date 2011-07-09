@@ -15,7 +15,7 @@ class Screen extends EntitySet
           text:  -> options.text || 'Click to start!'
         [intro_ui_pane]
       onUpdate: ->
-        @game.showScreen 'game' if @game.click
+        @showScreen 'game' if @click
 
     'loading':
       panes: (options) ->
@@ -27,7 +27,7 @@ class Screen extends EntitySet
           text:  -> "Loading... #{AssetManager.getProgress()}%"
         [ui_pane]
       onUpdate: ->
-        @game.showScreen 'intro' if @game.state.current_state != 'initialized' && AssetManager.isDone()
+        @showScreen 'intro' if @state.current_state != 'initialized' && AssetManager.isDone()
 
     'pause':
       panes: (options) ->
@@ -54,7 +54,7 @@ class Screen extends EntitySet
       @addKeyMappings preset.on_keys if preset.on_keys
       # @onKeys preset.on_keys if preset.on_keys
 
-    @add (@options.elements())... if @options.elements
+    @add (@options.elements.call(@game))... if @options.elements
     @onUpdate = @options.update if @options.update
     @addKeyMappings @options.on_keys if @options.on_keys
     # @onKeys @options.on_keys if @options.on_keys
@@ -64,7 +64,7 @@ class Screen extends EntitySet
     super new_entities...
 
   update: ->
-    @onUpdate() if @onUpdate and !@paused
+    @onUpdate.call(@game) if @onUpdate and !@paused
     super()
 
   turnOff: ->
