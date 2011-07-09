@@ -28,12 +28,10 @@ class Mantra.Game
       definition = { preset: screen_name } if typeof definition is 'string' and definition == 'preset'
       @defineScreen screen_name, definition
 
-    @onKeys @options.on_keypress if @options.on_keypress
+    @key_map = @options.on_keypress if @options.on_keypress
     @assets @options.assets      if @options.assets
 
   assets: (@assets) -> null
-
-  setScreens: (screens) -> @addScreen Screen.makeScreen(screen_name, creator) for screen_name, creator of screens
 
   init: ->
     @surfaceWidth      = @canvas.width
@@ -94,8 +92,6 @@ class Mantra.Game
     @loop()
     requestAnimFrame @gameLoop, @canvas
 
-  onKeys: (@key_map) -> null
-
   onKey: (key) ->
     @key_map[key]() if @key_map[key]
     @currentScreen.onKey key if @currentScreen
@@ -131,10 +127,3 @@ class Mantra.Game
     screen = new Screen @, name, definition
     @screens[screen.name] = screen
     @addEntity screen
-
-  addScreen: (screen) =>
-    screen = Screen.create @, screen if typeof screen is 'string'
-
-    @screens[screen.name] = screen
-    @addEntity screen
-    @currentScreen ?= screen

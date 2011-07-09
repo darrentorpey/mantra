@@ -55,6 +55,7 @@ class EvilAliens extends Mantra.Game
 
   start: ->
     @defineScreen 'game'
+      init_on_start: true,
       elements: ->
         @background  = new Background @, { x: -@canvas.width/2, y: -@canvas.height/2 }
         @sentry      = new Sentry     @
@@ -71,6 +72,7 @@ class EvilAliens extends Mantra.Game
         P: ->
           @showScreen 'pause'
           @bg_song.pause()
+
       on_start: -> @bg_song.play()
 
     @defineScreen 'game_lost'
