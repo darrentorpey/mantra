@@ -4,14 +4,15 @@ class EightByFive extends Mantra.Game
       assets:
         sounds:
           'bullet_shot' : 'simple_shot.mp3'
+
       screens:
         loading: 'preset'
         pause:   'preset'
         intro:
           preset: 'intro'
-          text:   'Click anywhere to start!'
+          text:   "Click anywhere to start!"
         game:
-          elements: =>
+          elements: ->
             @defender = new Defender @
             @defender.setCoords x: 332, y: 182
 
@@ -22,6 +23,8 @@ class EightByFive extends Mantra.Game
             [@defender, map_enities...]
           on_keys:
             P: -> @game.showScreen 'pause'
+
+    @player_name = 'Player 1'
 
   loadMap: -> new Map
     map_width:    22

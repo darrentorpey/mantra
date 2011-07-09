@@ -102,6 +102,7 @@ class Screen extends EntitySet
       name:        preset_name
     }
 
+    options.text = options.text.call(@) if options.text and typeof options.text is 'function'
     presets = switch preset_name
       when 'intro'
         {
