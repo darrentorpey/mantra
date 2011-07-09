@@ -10,7 +10,7 @@ class EightByFive extends Mantra.Game
       preset: 'intro'
       text:   'Click anywhere to start!'
 
-    @addScreen Screen.makeScreen 'game',
+    @defineScreen 'game'
       elements: =>
         @defender = new Defender @
         @defender.setCoords x: 332, y: 182
@@ -20,7 +20,6 @@ class EightByFive extends Mantra.Game
         map_enities.push new MapEntity @, { x: ent.x, y: ent.y, w: 32, h: 32, style: ent.obj.color } for ent in @map.objectMap()
 
         map_enities.concat @defender
-
       on_keys:
         P: => @showScreen 'pause'
 

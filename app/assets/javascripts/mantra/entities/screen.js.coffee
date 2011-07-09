@@ -53,6 +53,7 @@ class Screen extends EntitySet
     @add (@options.elements())... if @options.elements
     console.log 'done adding elements', @name
     @onUpdate = @options.update if @options.update
+    @onKeys @options.on_keys if @options.on_keys
 
   add: (new_entities...) ->
     entity.screen = @ for entity in new_entities
