@@ -90,3 +90,5 @@ class AssetManager
     soundManager.debugFlash            = false
     soundManager.debugMode             = false
     soundManager.defaultOptions.volume = 15
+
+root.AssetManager = AssetManager
