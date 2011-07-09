@@ -23,7 +23,7 @@ function SoundManager(smURL, smID) {
   this.debugMode = true;             // enable debugging output (div#soundmanager-debug, OR console if available+configured)
   this.debugFlash = false;           // enable debugging output inside SWF, troubleshoot Flash/browser issues
   this.useConsole = true;            // use firebug/safari console.log()-type debug console if available
-  this.consoleOnly = false;          // if console is being used, do not create/write to #soundmanager-debug
+  this.consoleOnly = true;          // if console is being used, do not create/write to #soundmanager-debug
   this.waitForWindowLoad = false;    // force SM2 to wait for window.onload() before trying to call soundManager.onload()
   this.nullURL = 'about:blank';      // path to "null" (empty) MP3 file, used to unload sounds (Flash 8 only)
   this.allowPolling = true;          // allow flash to poll for status update (required for whileplaying() events, peak, sound spectrum functions to work.)

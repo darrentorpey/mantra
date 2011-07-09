@@ -1,0 +1,53 @@
+body.games {
+  text-align: center;
+  background-color: #e4e9e4; }
+  body.games .intro {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    box-shadow: 0 1px 10px rgba(200, 200, 200, 0.95), 0 0 0 #d6fcff;
+    margin: 15px; }
+    body.games .intro:hover {
+      box-shadow: 0 1px 10px rgba(100, 100, 100, 0.95), 0 0 0 #d6fcff; }
+  body.games h1 {
+    text-align: center;
+    color: #333333;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 5px; }
+  body.games #game_holder {
+    padding: 15px;
+    border: 1px solid #cccccc;
+    display: inline-block;
+    text-align: center;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-image: -moz-linear-gradient(144deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+    background-image: -webkit-gradient(linear, right bottom, left top, from(rgba(255, 255, 255, 0.1)), to(rgba(0, 0, 0, 0.1)));
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.75), inset -1px 0 0 #d6fcff; }
+    body.games #game_holder canvas {
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+      background-color: black;
+      margin: 0px auto;
+      display: block;
+      padding: 16px 20px;
+        padding-bottom: 0px;
+        padding-right: 0px; }
+  body.games ::-moz-selection, body.games ::selection {
+    background: transparent;
+    color: white;
+    text-shadow: none; }
+  body.games a {
+    color: #2c55b9;
+    text-decoration: none; }
+    body.games a:hover {
+      text-decoration: underline; }
+
+#soundmanager-debug {
+  display: none;
+}
