@@ -33,3 +33,5 @@ class Alien extends SpriteEntity
     distance_squared = ((@x * @x) + (@y * @y))
     radii_squared = (@radius + @game.earth.radius) * (@radius + @game.earth.radius)
     distance_squared < radii_squared
+
+root.Alien = Alien  

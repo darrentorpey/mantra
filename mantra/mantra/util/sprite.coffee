@@ -9,3 +9,5 @@ class Sprite
     offscreenCtx.rotate angle + Math.PI/2
     offscreenCtx.drawImage image, -(image.width/2), -(image.height/2)
     offscreenCanvas
+
+root.Sprite = Sprite

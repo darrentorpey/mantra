@@ -14,14 +14,14 @@ steal
   .plugins('games')
   .then(function() {
 
-var game_launcher, game;
+var game_launcher;
 
 function launchGame(game_name) {
   game_launcher = GameLauncher.launchInto(game_name, Mantra.Canvas.j_createCanvas().appendTo('#game_holder').get(0))
   game = game_launcher.game;
 }
 
-// launchGame(EightByFive);
-launchGame(EvilAliens);
+launchGame(EightByFive);
+// launchGame(EvilAliens);
 
 });

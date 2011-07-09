@@ -48,3 +48,5 @@ class Mothership extends SpriteEntity
     @game.screens.game.add new_alien
     @last_alien_addded_at = @game.timer.time_passed
     $logger.game.info "Alien spawn: #{new_alien.radial_distance}km @ #{new_alien.angle}"
+
+root.Mothership = Mothership

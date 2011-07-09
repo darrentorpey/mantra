@@ -21,3 +21,5 @@ class EarthBullet extends Bullet
   draw: (context) ->
     @drawSpriteCentered context
     super context
+
+root.EarthBullet = EarthBullet

@@ -1,4 +1,4 @@
-class Animation
+class Mantra.Animation
   constructor: (@spriteSheet, @frameWidth, @frameDuration, @loop) ->
     @frameHeight = @spriteSheet.height
     @totalTime   = (@spriteSheet.width / @frameWidth) * @frameDuration

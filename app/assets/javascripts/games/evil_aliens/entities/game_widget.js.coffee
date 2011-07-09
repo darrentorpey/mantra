@@ -28,3 +28,7 @@ class GameWidget extends SpriteEntity
     distance_squared = ((@x - alien.x) * (@x - alien.x)) + ((@y - alien.y) * (@y - alien.y))
     radii_squared = (@radius + alien.radius) * (@radius + alien.radius)
     distance_squared < radii_squared
+
+  setCoords: (coords) ->
+    @x = coords.x
+    @y = coords.y

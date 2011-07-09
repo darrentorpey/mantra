@@ -10,7 +10,12 @@ class EvilAliens extends Mantra.Game
         @showScreen 'game_lost'
         @bg_song.stop()
 
-      defaultScreens: ['loading', 'pause']
+      screens:
+        loading: 'preset'
+        pause:   'preset'
+        intro:
+          preset: 'intro'
+          text:   'Defend Earth from the alien invasion!'
 
       assets:
         images: [
@@ -33,7 +38,7 @@ class EvilAliens extends Mantra.Game
     @resetStats()
 
   guiPane: ->
-    @ui_pane = new UIPane this
+    @ui_pane = new Mantra.UIPane this
 
     @ui_pane.addTextItem
       x:    @canvas.width/2 - 150
@@ -49,44 +54,45 @@ class EvilAliens extends Mantra.Game
     @ui_pane
 
   start: ->
-    @addScreen Mantra.Screen.create @, 'intro'
-      text: 'Defend Earth from the alien invasion!'
+    console.log 'starting'
 
-    @setScreens
-      game: (screen) =>
-        @background  = new Background @, { x: -@canvas.width/2, y: -@canvas.height/2 }
+    @defineScreen 'game'
+      init_on_start: true,
+      elements: ->
+        @background  = new Mantra.Background @, { x: -@canvas.width/2, y: -@canvas.height/2 }
         @sentry      = new Sentry     @
         @earth       = new Earth      @
         @mothership  = new Mothership @
-        screen.add @background, @sentry, @earth, @mothership
 
         @bg_song = AssetManager.getBackgroundSong('chaos')
 
-        screen.onKeys
-          P: =>
-            @showScreen 'pause'
-            @bg_song.pause()
+        @game_widget = new GameWidget @, x: 100, y: -100
 
-        screen.add @guiPane()
-        screen.add new GameWidget @, x: 100, y: -100
-        screen.onStart = => @bg_song.play()
+        [@background, @sentry, @earth, @mothership, @guiPane(), @game_widget]
 
-        screen
+      on_keys:
+        P: ->
+          @showScreen 'pause'
+          @bg_song.pause()
 
-      game_lost:
-        elements: =>
-          intro_ui_pane = new UIPane this
-          intro_ui_pane.addTextItem
-            color: 'red'
-            x:     'centered'
-            y:     0
-            text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
-          [intro_ui_pane]
-        update: =>
-          if @click
-            @restart()
-            @bg_song.restart()
-            @showScreen 'game'
+      on_start: -> @bg_song.play()
+
+    console.log 'and now'
+
+    @defineScreen 'game_lost'
+      elements: ->
+        intro_ui_pane = new Mantra.UIPane this
+        intro_ui_pane.addTextItem
+          color: 'red'
+          x:     'centered'
+          y:     0
+          text:  => "Game over!\nYour score was #{@score}.\nClick to restart."
+        [intro_ui_pane]
+      update: ->
+        if @click
+          @restart()
+          @bg_song.restart()
+          @showScreen 'game'
 
     $em.listen 'alien::death', this, (data) ->
       $logger.game.info "Alien killed at #{data.alien.s_coords()}"
@@ -96,6 +102,8 @@ class EvilAliens extends Mantra.Game
       @lives -= 1
       @state.send_event 'lose' if @lives == 0
 
+    # @showScreen 'game'
+    console.log 'kjlkj'
     super()
 
   restart: ->

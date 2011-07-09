@@ -6,3 +6,5 @@ class Earth extends SpriteEntity
   draw: (context) ->
     context.drawImage @sprite, @x - @sprite.width/2, @y - @sprite.height/2
     super context
+
+root.Earth = Earth

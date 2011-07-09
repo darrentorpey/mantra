@@ -33,6 +33,8 @@ class Mantra.Game
 
   assets: (@assets) -> null
 
+  setScreens: (screens) -> @addScreen Screen.makeScreen(screen_name, creator) for screen_name, creator of screens
+
   init: ->
     @surfaceWidth      = @canvas.width
     @surfaceHeight     = @canvas.height

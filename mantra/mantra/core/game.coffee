@@ -7,11 +7,11 @@ class Mantra.Game
     @screens  = {}
     @key_map  = {}
 
-    console.log @options
     _.defaults @options,
       assets:
         images: []
-      defaultScreens:     ['loading']
+      screens:
+        loading: 'preset'
       center_coordinates: false
       process_game_over:  -> null
 
@@ -24,14 +24,14 @@ class Mantra.Game
 
     [@surfaceWidth, @surfaceHeight, @halfSurfaceWidth, @halfSurfaceHeight] = [null, null, null, null]
 
-    @addScreen screen for screen in @options.defaultScreens if @options.defaultScreens
+    for screen_name, definition of @options.screens
+      definition = { preset: screen_name } if typeof definition is 'string' and definition == 'preset'
+      @defineScreen screen_name, definition
 
-    @onKeys @options.on_keypress if @options.on_keypress
+    @key_map = @options.on_keypress if @options.on_keypress
     @assets @options.assets      if @options.assets
 
   assets: (@assets) -> null
-
-  setScreens: (screens) -> @addScreen Screen.makeScreen(screen_name, creator) for screen_name, creator of screens
 
   init: ->
     @surfaceWidth      = @canvas.width
@@ -44,8 +44,10 @@ class Mantra.Game
     @startInput()
 
   start: ->
+    console.log 'staaat?'
     @showScreen @currentScreen
 
+    console.log 'staaat'
     @state.send_event 'start'
 
     $logger.game.info 'Game started'
@@ -92,8 +94,6 @@ class Mantra.Game
     @loop()
     requestAnimFrame @gameLoop, @canvas
 
-  onKeys: (@key_map) -> null
-
   onKey: (key) ->
     @key_map[key]() if @key_map[key]
     @currentScreen.onKey key if @currentScreen
@@ -125,9 +125,7 @@ class Mantra.Game
       @mouse = getXandY(e)
     , false)
 
-  addScreen: (screen) =>
-    screen = Mantra.Screen.create @, screen if typeof screen is 'string'
-
+  defineScreen: (name, definition = {}) ->
+    screen = new Mantra.Screen @, name, definition
     @screens[screen.name] = screen
     @addEntity screen
-    @currentScreen ?= screen

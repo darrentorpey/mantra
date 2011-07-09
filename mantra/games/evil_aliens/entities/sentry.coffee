@@ -28,4 +28,6 @@ class Sentry extends SpriteEntity
   shoot: ->
     console.log @game.click
     @game.screens.game.add new EarthBullet @game, @x, @y, @angle, @game.click
-    AssetManager.getSound("#{root.asset_path}bullet.mp3").play()
+    # AssetManager.getSound("#{root.asset_path}bullet.mp3").play()
+
+root.Sentry = Sentry

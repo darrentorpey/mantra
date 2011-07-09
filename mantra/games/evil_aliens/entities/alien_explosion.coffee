@@ -1,7 +1,7 @@
 class AlienExplosion extends SpriteEntity
   constructor: (game, x, y) ->
     super game, null, { x: x, y: y }
-    @animation = new Animation AssetManager.getAsset("#{root.asset_path}alien-explosion.png"), 69, 0.1
+    @animation = new Mantra.Animation AssetManager.getAsset("#{root.asset_path}alien-explosion.png"), 69, 0.1
     @radius = @animation.frameWidth/2
 
   update: ->
@@ -11,3 +11,5 @@ class AlienExplosion extends SpriteEntity
   draw: (context) ->
     @animation.drawFrame @game.clock_tick, context, @x, @y
     super context
+
+root.AlienExplosion = AlienExplosion

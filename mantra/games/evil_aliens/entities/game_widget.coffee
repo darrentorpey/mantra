@@ -1,7 +1,8 @@
 class GameWidget extends SpriteEntity
-  constructor: (game, @radius = 30) ->
+  constructor: (game, coords, @radius = 30) ->
     super game, null, 0
     @speed = 5
+    @setCoords coords
 
   update: ->
     @x -= @speed if keydown.left
@@ -31,3 +32,5 @@ class GameWidget extends SpriteEntity
   setCoords: (coords) ->
     @x = coords.x
     @y = coords.y
+
+root.GameWidget = GameWidget
