@@ -26,7 +26,6 @@ class Sentry extends SpriteEntity
     super context
 
   shoot: ->
-    console.log @game.click
     @game.screens.game.add new EarthBullet @game, @x, @y, @angle, @game.click
     AssetManager.getSound("#{game.audio_path}bullet.mp3").play()
 

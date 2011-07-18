@@ -28,7 +28,6 @@ class Mantra.Defender extends Mantra.Entity
     @y = coords.y
 
   shoot: ->
-    console.log @x
     @game.screens.game.add new EBF.DefenderBullet @game,
       x:             @x
       y:             @y

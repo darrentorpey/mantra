@@ -15,7 +15,6 @@ class Mantra.Screen extends EntitySet
           text:  -> (if (typeof options.text is 'function') then options.text.call(@game) else options.text) || 'Click to start!'
         [intro_ui_pane]
       onUpdate: ->
-        console.log 'u'
         @showScreen 'game' if @click
 
     'loading':

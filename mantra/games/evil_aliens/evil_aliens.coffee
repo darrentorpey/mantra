@@ -56,8 +56,6 @@ class EvilAliens extends Mantra.Game
     @ui_pane
 
   start: ->
-    console.log 'starting'
-
     @defineScreen 'game'
       init_on_start: true,
       elements: ->
@@ -78,8 +76,6 @@ class EvilAliens extends Mantra.Game
           @bg_song.pause()
 
       on_start: -> @bg_song.play()
-
-    console.log 'and now'
 
     @defineScreen 'game_lost'
       elements: ->
@@ -104,8 +100,6 @@ class EvilAliens extends Mantra.Game
       @lives -= 1
       @state.send_event 'lose' if @lives == 0
 
-    # @showScreen 'game'
-    console.log 'kjlkj'
     super()
 
   restart: ->

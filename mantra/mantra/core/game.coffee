@@ -44,10 +44,8 @@ class Mantra.Game
     @startInput()
 
   start: ->
-    console.log 'staaat?'
     @showScreen @currentScreen
 
-    console.log 'staaat'
     @state.send_event 'start'
 
     $logger.game.info 'Game started'
