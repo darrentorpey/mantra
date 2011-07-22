@@ -1,7 +1,7 @@
 class BulletExplosion extends SpriteEntity
   constructor: (game, x, y) ->
     super game, null, { x: x, y: y }
-    @animation = new Mantra.Animation AssetManager.getAsset("#{game.image_path}explosion.png"), 34, 0.1
+    @animation = new Mantra.Animation AssetManager.getImage('explosion'), 34, 0.1
     @radius = @animation.frameWidth/2
 
   update: ->

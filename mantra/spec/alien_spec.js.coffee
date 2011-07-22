@@ -5,7 +5,7 @@ stub_canvas = ->
 
 stub_asset_manager = ->
   sinon.stub AssetManager, 'getSound', -> { play: -> no_op }
-  sinon.stub AssetManager, 'getAsset', -> { height: 10, width: 10 }
+  sinon.stub AssetManager, 'getImage', -> { height: 10, width: 10 }
 
 stub_entity_sprites = ->
   sinon.stub Entity.prototype, 'rotateAndCache', -> { height: 10, width: 10 }

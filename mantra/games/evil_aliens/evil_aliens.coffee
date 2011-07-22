@@ -20,19 +20,19 @@ class EvilAliens extends Mantra.Game
           text:   'Defend Earth from the alien invasion!'
 
       assets:
-        images: [
-          'games/evil_aliens/images/earth.png'
-          'games/evil_aliens/images/alien.png'
-          'games/evil_aliens/images/sentry.png'
-          'games/evil_aliens/images/bullet-single.png'
-          'games/evil_aliens/images/explosion.png'
-          'games/evil_aliens/images/alien-explosion.png'
-        ]
+        root_path: 'games/evil_aliens/'
+        images:
+          'earth'           : 'earth.png'
+          'alien'           : 'alien.png'
+          'sentry'          : 'sentry.png'
+          'bullet'          : 'bullet-single.png'
+          'explosion'       : 'explosion.png'
+          'alien_explosion' : 'alien-explosion.png'
 
         sounds:
-          'alien-boom'  : 'games/evil_aliens/audio/alien_boom.mp3'
-          'bullet-boom' : 'games/evil_aliens/audio/bullet_boom.mp3'
-          'bullet'      : 'games/evil_aliens/audio/bullet.mp3'
+          'alien-boom'  : 'alien_boom.mp3'
+          'bullet-boom' : 'bullet_boom.mp3'
+          's_bullet'    : 'bullet.mp3'
 
         music:
           'chaos' : 'games/evil_aliens/audio/countdown_to_chaos.mp3'

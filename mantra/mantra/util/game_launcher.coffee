@@ -19,9 +19,10 @@ class GameLauncher
 
     @game.init()
 
-    @addImage image     for image in assets.images
-    @addSound id, sound for id, sound of assets.sounds
-    @addSound id, music for id, music of assets.music
+    root_asset_path = assets.root_path
+    @addImage id, "#{root_asset_path}images/#{path}" for id, path of assets.images
+    @addSound id, "#{root_asset_path}audio/#{path}"  for id, path of assets.sounds
+    @addSound id, "#{root_asset_path}audio/#{path}"  for id, path of assets.music
 
   configureEngine: ->
     root.$em            = Mantra.EventManager.instance()
@@ -40,7 +41,7 @@ class GameLauncher
     console.log @game.state.current_state
     @game.start() if @game.state.current_state == 'initialized'
 
-  addImage: (name)     -> AssetManager.queueImage     "#{root.asset_path}#{name}"
+  addImage: (id, name) -> AssetManager.queueImage id, "#{root.asset_path}#{name}"
   addSound: (id, name) -> AssetManager.queueSound id, "#{root.asset_path}#{name}"
 
   @launchInto: (game_klass, canvas) ->

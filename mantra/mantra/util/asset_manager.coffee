@@ -4,19 +4,16 @@ class AssetManager
   @cache         = {}
   @downloadQueue = []
   @soundsQueue   = []
+  @images        = {}
   @asset_lookup  = {}
 
-  @queueImage: (path) ->
-    @downloadQueue.push path
+  @queueImage: (id, path) -> @downloadQueue.push { id: id, path: path }
 
-  @queueSound: (id, path) ->
-    @soundsQueue.push { id: id, path: path }
+  @queueSound: (id, path) -> @soundsQueue.push { id: id, path: path }
 
-  @totalAssets: ->
-    @downloadQueue.length + @soundsQueue.length
+  @totalAssets: -> @downloadQueue.length + @soundsQueue.length
 
-  @numFinished: ->
-    @successCount + @errorCount
+  @numFinished: -> @successCount + @errorCount
 
   @getProgress: ->
     if @totalAssets() == 0 then '0' else ((@numFinished() / @totalAssets()) * 100).toString()[0..3]
@@ -30,7 +27,7 @@ class AssetManager
     @downloadSounds callback
 
     for i in [0...@downloadQueue.length]
-      @path = this.downloadQueue[i]
+      image = @downloadQueue[i]
       @img = new Image()
       @img.addEventListener('load', =>
         @successCount += 1
@@ -43,20 +40,15 @@ class AssetManager
         if @isDone()
           callback()
 
-      @img.src = @path
-      @cache[@path] = @img
+      @img.src = image.path
+      @cache[image.path] = @img
+      @asset_lookup[image.id] = @cache[image.path]
 
-  @getAsset: (name) ->
-    @cache[name]
+  @getImage: (id) -> @asset_lookup[id]
+  @getSound: (id) -> @asset_lookup[id]
+  @getBackgroundSong: (id) -> @asset_lookup[id]
 
-  @getSound: (path) ->
-    @cache[path]
-
-  @getBackgroundSong: (id) ->
-    @asset_lookup[id]
-
-  @playSound: (id) ->
-    @asset_lookup[id].play()
+  @playSound: (id) -> @asset_lookup[id].play()
 
   @downloadSounds: (callback) ->
     return unless soundManager
