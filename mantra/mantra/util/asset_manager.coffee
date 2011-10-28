@@ -51,7 +51,7 @@ class AssetManager
   @playSound: (id) -> @asset_lookup[id].play()
 
   @downloadSounds: (callback) ->
-    return unless soundManager
+    return unless soundManager?
     soundManager.onready =>
       $logger.sound.info 'SoundManager ready'
       @downloadSound sound.id, sound.path, callback for sound in @soundsQueue

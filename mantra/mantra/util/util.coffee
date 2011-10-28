@@ -1,0 +1,15 @@
+define [  
+  'cs!/mantra/mantra/util/core'
+  'cs!/mantra/mantra/util/asset_manager'
+  'cs!/mantra/mantra/util/audio_manager'
+  'cs!/mantra/mantra/util/canvas'
+  'cs!/mantra/mantra/util/core'
+  'cs!/mantra/mantra/util/entity_set'
+  'cs!/mantra/mantra/util/game_launcher'
+  'cs!/mantra/mantra/util/geometry'
+  'cs!/mantra/mantra/util/key_manager'
+  'cs!/mantra/mantra/util/logger'
+  'cs!/mantra/mantra/util/sprite'
+  'cs!/mantra/mantra/util/timer'
+], (util) ->
+  console.log 'Util is loaded!'
