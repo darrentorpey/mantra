@@ -11,5 +11,37 @@
   <script>
     window.game = null;
   </script>
-  <script src="steal/steal.js?mantra" type="text/javascript"></script>
+  <script src="../dist/mantra_all.js" type="text/javascript"></script>
+  <script type="text/javascript" charset="utf-8">
+
+  var game_launcher;
+
+  /**
+  * Reads the value of a query parameter from the URL of the web page.
+  * @param {String} name The name of the URL parameter.
+  * @returns The value of the URL parameter, as a string.
+  * @example
+  * // If the URL is http://example.com/game.html?lives=3
+  * player.lives = help.geturlparameter("lives");
+  * player.lives; // => 3
+  */
+  window.geturlparameter = function(name) {
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( window.location.href );
+    if( results == null )
+    return "";
+    else
+    return results[1];
+  }
+
+  function launchGame(game_name) {
+    game_launcher = GameLauncher.launchInto(game_name, Mantra.Canvas.j_createCanvas().appendTo('#game_holder').get(0))
+    game = game_launcher.game;
+  }
+  // launchGame(EightByFive);
+  launchGame(EvilAliens);
+
+  </script>
 </body>

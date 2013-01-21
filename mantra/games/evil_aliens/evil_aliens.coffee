@@ -35,7 +35,7 @@ class EvilAliens extends Mantra.Game
           's_bullet'    : 'bullet.mp3'
 
         music:
-          'chaos' : 'games/evil_aliens/audio/countdown_to_chaos.mp3'
+          'chaos' : "countdown_to_chaos.mp3"
 
     @resetStats()
 
