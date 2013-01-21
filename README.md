@@ -1,8 +1,8 @@
-# Mantra: A simple game prototyping engine written in CoffeeScript ##
+# Mantra: An HTML5 2D game prototyping engine ##
 
 ## Overview
 
-Mantra is a simple game prototyping engine that I started writing a few years ago so that I could jam out games more easily at events like the [Global Game Jam](http://globalgamejam.org/) and at [Boston Game Jams](http://bostongamejams.com/).
+Mantra is an HTML5 2D game prototyping engine written in CoffeeScript that I started writing a few years ago so that I could jam out games more easily at events like the [Global Game Jam](http://globalgamejam.org/) and at [Boston Game Jams](http://bostongamejams.com/).
 
 ## Tech
 
