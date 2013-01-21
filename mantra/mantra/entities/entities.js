@@ -1,1 +1,0 @@
-steal('entity.coffee').then(function() {}, 'sprite_entity.coffee', function() {}, 'map_entity.coffee', 'screen.coffee', 'custom_draw_actor.coffee', 'ui_pane.coffee');
