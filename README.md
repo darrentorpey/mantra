@@ -8,6 +8,7 @@ Mantra is an HTML5 2D game prototyping engine written in CoffeeScript that I sta
 ## Tech
 
 * Canvas-based graphics
+* Written in [CoffeeScript](http://coffeescript.org/) and compiled and concatenated into _dist/mantra\_all.js_ by [Interleave](https://github.com/buildjs/interleave).
 * Audio support is (temporarily) provided by the Sound Manager 2 Javascript library
 
 
