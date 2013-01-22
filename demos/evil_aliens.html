@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+  <title>Mantra Game Demo - Evil Aliens</title>
+  <link href="../mantra/mantra.css" media="screen" rel="stylesheet" type="text/css" /> 
+</head>
+<body id="mantra" class="games" onload="">
+  <h1>Mantra Game Demo - Evil Aliens</h1>
+
+  <article id="game_holder"></article>
+
+  <p>Controls: Use mouse to aim and fire. Use arrow keys to move your defensive "moon".</p>
+
+  <script src="../dist/mantra_all.js" type="text/javascript"></script>
+  <script type="text/javascript" charset="utf-8">
+    GameLauncher.launchInto(EvilAliens, Mantra.Canvas.j_createCanvas().appendTo('#game_holder').get(0));
+  </script>
+</body>
