@@ -24,3 +24,6 @@ error 400..510 do
     'Boom'
   end
 end
+
+# Arbitrary edit here to test GitHub
+# Another arbitrary edit here to test GitHub
